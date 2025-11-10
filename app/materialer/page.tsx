@@ -3,11 +3,13 @@ import React from 'react'
 import { getAllMaterials, filterMaterials  } from '@/lib/database/db'
 import type { Material } from '@/lib/types'
 import RenderDatabase from '@/lib/components/renderDatabase'
+import {useMaterials} from "@/lib/context/MaterialsProvider"
 
 export default function Materialer() {
     const [materials, setMaterials] = React.useState<Material[] | null>(null)
     const [error, setError] = React.useState<string | null>(null)
-
+    const {loading} = useMaterials()
+    
     React.useEffect(() => {
         async function fetchData() {
             const {data, error} = await getAllMaterials()
@@ -75,7 +77,7 @@ export default function Materialer() {
                 <button type="submit" className='bg-gray-100 px-2 border'>Søg</button>
             </form>
 
-            <RenderDatabase materials={materials} error={error} />
+            <RenderDatabase materials={materials} error={error} loading={loading} query={null}/>
 
         </main>
 
