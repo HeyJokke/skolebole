@@ -30,10 +30,11 @@ export default function Materialer() {
         const formData = new FormData(e.currentTarget)
         const name = formData.get('name') as string
         const description = formData.get('description') as string
+        const category = formData.get('category') as string
 
-        if (name || description) {
+        if (name || description || category) {
             try {
-                const {data, error} = await filterMaterials(name, description)
+                const {data, error} = await filterMaterials(name, description, category)
     
                 if (error) {
                     throw new Error(error)
@@ -46,7 +47,7 @@ export default function Materialer() {
             }
         }
         
-        if (!name && !description) {
+        if (!name && !description && !category) {
             try {
                 const { data, error } = await getAllMaterials()
 
@@ -65,10 +66,12 @@ export default function Materialer() {
     return (
         <main>
             <form onSubmit={onSubmit} className="mb-20">
-                <label htmlFor='input-name'>Navn:</label>
+                <label htmlFor='name'>Navn:</label>
                 <input className='bg-gray-100 mr-10 px-2 ml-2' name="name"/>
-                <label htmlFor='input-description'>Beskrivelse:</label>
+                <label htmlFor='description'>Beskrivelse:</label>
                 <input className='bg-gray-100 mr-10 px-2 ml-2' name="description"/>
+                <label htmlFor='category'>Kategori:</label>
+                <input className='bg-gray-100 mr-10 px-2 ml-2' name="category"/>
                 <button type="submit" className='bg-gray-100 px-2 border'>Søg</button>
             </form>
 

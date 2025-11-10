@@ -3,7 +3,7 @@ import type {Material, MaterialsResponse} from '@/lib/types'
 
 export async function getAllMaterials():Promise<MaterialsResponse> {
     try {
-        const {data, error} = await supabase.from("materialer").select("*")
+        const {data, error} = await supabase.from("materialer").select("*").order('created_at', {ascending: false,})
     
         if (error) throw new Error(error.message)
 
@@ -15,12 +15,32 @@ export async function getAllMaterials():Promise<MaterialsResponse> {
     }
 }
 
-export async function filterMaterials(name: string, description: string):Promise<MaterialsResponse> {
-
+export async function filterMaterials(name: string, description: string, category: string):Promise<MaterialsResponse> {
     try {
         const { data, error } = await supabase.from('materialer')
             .select('*')
-            .or(`name.ilike.${name}, description.ilike.${description}`)
+            .ilike("name", `%${name}%`)
+            .ilike("description", `%${description}%`)
+            .contains('categories_array', [`${category}`])
+        
+        if ( error ) {
+            throw new Error(error.message)
+        }
+
+        return {data: data as Material[], error: null}
+    } catch(error) {
+        console.error(`Error fetching data from the database`)
+
+        return {data: null, error: error.message ?? 'Unknown error'}
+    }
+    
+}
+
+export async function searchMaterials(search: string):Promise<MaterialsResponse> {
+    try {
+        const { data, error } = await supabase.from('materialer')
+            .select('*')
+            .ilike("name", `%${search}%`)
         
         if ( error ) {
             throw new Error(error.message)

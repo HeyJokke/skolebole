@@ -3,10 +3,12 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Image from "next/image"
 import Link from "next/link"
+import SearchForm from "@/lib/components/searchForm"
+import { MaterialsProvider } from "@/lib/context/MaterialsProvider";
 
 export const metadata: Metadata = {
   title: 'Skolebole - Læringsmaterialer til danske skoler',
-  description: 'Find læringsmaterialer til dansk, matematik og engelsk',
+  description: 'Find gratis opgavesæt til dansk, matematik og engelsk',
 };
 
 const geistSans = Geist({
@@ -24,12 +26,14 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gradient-to-b from-blue-50 to-white min-h-screen`}>
+        <MaterialsProvider>
         <header className="bg-white shadow-md">
           <div className="max-w-6xl mx-auto px-4">
-            <div className="flex items-center py-6">
+            <div className="flex justify-between items-center py-6">
               <Link href="/"><Image alt="Skolebole logo" src="/logo.png" width={1024} height={1024} style={{width: "160px"}}/></Link>
               <nav className="w-full max-w-2xl">
                 <ul className="flex justify-center space-x-6">
@@ -39,6 +43,7 @@ export default function RootLayout({
                   <li className="px-6 py-2 rounded-full bg-yellow-100 hover:bg-yellow-200 transition-colors duration-300 cursor-pointer font-medium text-yellow-800"><Link href="/naturteknik">Natur & Teknik</Link></li>
                 </ul>
               </nav>
+              <SearchForm />
             </div>
           </div>
         </header>
@@ -48,13 +53,14 @@ export default function RootLayout({
             {children}
           </div>
         </main>
-
         <footer className="mt-12 bg-white border-t border-gray-100 py-6">
           <div className="max-w-6xl mx-auto px-4 text-center text-gray-600">
             <p>© {new Date().getFullYear()} Skolebole - Læringsmaterialer til danske skoler</p>
           </div>
         </footer>
+        </MaterialsProvider>
       </body>
+      
     </html>
   );
 }
