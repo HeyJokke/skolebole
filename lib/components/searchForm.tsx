@@ -15,7 +15,9 @@ export default function SearchForm() {
             params.delete('query')
         }
         
-        replace(`${pathname}?${params.toString()}`)
+        if (pathname.startsWith('/search')) {
+            replace(`${pathname}?${params.toString()}`)
+        }
     }
 
     function onSubmit(e: React.FormEvent<HTMLFormElement>) {

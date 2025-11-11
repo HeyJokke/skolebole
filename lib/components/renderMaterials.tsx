@@ -15,22 +15,20 @@ const Spinner = () => (
     </div>
 )
 
-export default function RenderDatabase({materials, error, query, loading}: Props) {
+export default function RenderMaterials({materials, error, query, loading}: Props) {
     const [showContent, setShowContent] = React.useState(false)
     console.log(materials)
     React.useEffect(() => {
         setShowContent(false)
         const timer = setTimeout(() => {
             setShowContent(true)
-        }, 400)
+        }, 500)
         return () => clearTimeout(timer)
     }, [materials])
 
     if (!showContent) return <Spinner />
     
     if (!materials && !error || loading) return <p>Loading database...</p>
-
-    if (!query) return <h1 className="text-2xl font-bold">Søg efter et materiale...</h1>
 
     if (error) return <p className="text-white bg-red-500 rounded-md p-2"> An error occured, the database may be down or connection has been lost </p>
 
@@ -40,12 +38,9 @@ export default function RenderDatabase({materials, error, query, loading}: Props
         const html = materials.map((m:Material) => <MaterialCard key={m.id} m={m}/>)
 
         return (
-            <main>
-            <h1 className="text-2xl font-bold mb-10">Søgeresultater... </h1>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {html}
             </div>
-            </main>
         )
     }
 

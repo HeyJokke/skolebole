@@ -2,7 +2,7 @@
 import React from 'react'
 import { getAllMaterials, filterMaterials  } from '@/lib/database/db'
 import type { Material } from '@/lib/types'
-import RenderDatabase from '@/lib/components/renderDatabase'
+import RenderMaterials from '@/lib/components/renderMaterials'
 import {useMaterials} from "@/lib/context/MaterialsProvider"
 
 export default function Materialer() {
@@ -77,7 +77,7 @@ export default function Materialer() {
                 <button type="submit" className='bg-gray-100 px-2 border'>Søg</button>
             </form>
 
-            <RenderDatabase materials={materials} error={error} loading={loading} query={null}/>
+            <RenderMaterials materials={materials} error={error} loading={loading} query={null}/>
 
         </main>
 
