@@ -34,7 +34,7 @@ export default function RootLayout({
         <header className="bg-white shadow-md">
           <div className="max-w-6xl mx-auto px-4">
             <div className="flex justify-between items-center py-6">
-              <Link href="/"><Image alt="Skolebole logo" src="/logo.png" width={1024} height={1024} style={{width: "160px"}}/></Link>
+              <Link href="/"><Image alt="Skolebole logo" src="/images/logo.png" width={973} height={160} style={{width: "160px"}}/></Link>
               <nav className="w-full max-w-2xl">
                 <ul className="flex justify-center space-x-6">
                   <Link href="/dansk"><li className="px-6 py-2 rounded-full bg-blue-100 hover:bg-blue-200 transition-colors duration-300 cursor-pointer font-medium text-blue-800">Dansk</li></Link>

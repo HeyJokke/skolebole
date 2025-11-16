@@ -5,7 +5,6 @@ import React from 'react'
 type Props = {
     materials: Material[] | null
     error: string | null
-    query: string | null
     loading: boolean
 }
 
@@ -15,9 +14,9 @@ const Spinner = () => (
     </div>
 )
 
-export default function RenderMaterials({materials, error, query, loading}: Props) {
+export default function RenderMaterials({materials, error, loading}: Props) {
     const [showContent, setShowContent] = React.useState(false)
-    console.log(materials)
+    
     React.useEffect(() => {
         setShowContent(false)
         const timer = setTimeout(() => {

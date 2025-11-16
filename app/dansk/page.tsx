@@ -12,8 +12,8 @@ export default function DanskPage():React.ReactElement {
 
     return (
         <main className="h-screen">
-            <h1 className="text-blue-800">Dansk page</h1>
-            <RenderMaterials materials={fileteredMaterials} error={error} query={null} loading={loading} />
+            <h1 className="text-3xl font-bold mb-10">Dansk page</h1>
+            <RenderMaterials materials={fileteredMaterials} error={error} loading={loading} />
         </main>
     )
 }

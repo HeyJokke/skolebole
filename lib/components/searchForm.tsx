@@ -10,12 +10,16 @@ export default function SearchForm() {
 
     function handleSearch(searchTerm: string) {
         if (searchTerm) {
-            params.set('query', searchTerm)
+            params.set('q', searchTerm)
         } else {
-            params.delete('query')
+            params.delete('q')
+        }
+
+        if (searchTerm.length === 0 && pathname.startsWith('/materialer/search')) {
+            redirect(`/materialer`)
         }
         
-        if (pathname.startsWith('/search')) {
+        if (pathname.startsWith('/materialer/search')) {
             replace(`${pathname}?${params.toString()}`)
         }
     }
@@ -26,13 +30,13 @@ export default function SearchForm() {
         const searchTerm = data.get("search")
 
         if (searchTerm) {
-            params.set('query', searchTerm.toString())
+            params.set('q', searchTerm.toString())
         } else {
-            params.delete('query')
+            params.delete('q')
         }
 
-        if (!pathname.startsWith('/search')) {
-            redirect(`/search?${params.toString()}`)
+        if (!pathname.startsWith('/materialer/search')) {
+            redirect(`/materialer/search?${params.toString()}`)
         }
     }
 
@@ -41,7 +45,7 @@ export default function SearchForm() {
             <input 
                 className="border pl-2 text-black" 
                 placeholder="Søg..."
-                defaultValue={searchParams.get('query')?.toString()}
+                defaultValue={searchParams.get('q')?.toString()}
                 name="search"
                 onChange={(e) => {
                     handleSearch(e.target.value)
