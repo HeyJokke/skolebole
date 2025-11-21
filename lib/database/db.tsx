@@ -54,3 +54,20 @@ export async function searchMaterials(search: string):Promise<MaterialsResponse>
     }
     
 }
+
+export async function insertMaterial(name:FormDataEntryValue, cats:FormDataEntryValue, tags:FormDataEntryValue, desc:FormDataEntryValue) {
+    try {
+        const { data, error } = await supabase.from('materialer').insert({name: name, categories_array: cats, meta_tags: tags, description: desc})
+
+        if (error) {
+            throw new Error(error.message)
+        }
+
+        return {data: data as Material, error: null}
+
+    } catch(error) {
+        console.error(`Error inserting data to the database`)
+
+        return {data: null, error: error.message ?? 'Unknown error'}
+    }
+}
