@@ -1,5 +1,5 @@
 import { supabase } from '@/lib/database/supabaseClient'
-import type {Material, MaterialsResponse} from '@/lib/types'
+import type {Material, MaterialsResponse, MaterialResponse} from '@/lib/types'
 
 export async function getAllMaterials():Promise<MaterialsResponse> {
     try {
@@ -55,15 +55,15 @@ export async function searchMaterials(search: string):Promise<MaterialsResponse>
     
 }
 
-export async function insertMaterial(name:FormDataEntryValue, cats:FormDataEntryValue, tags:FormDataEntryValue, desc:FormDataEntryValue) {
+export async function insertMaterial(name:FormDataEntryValue, cats:FormDataEntryValue, tags:FormDataEntryValue, desc:FormDataEntryValue):Promise<MaterialResponse> {    
     try {
-        const { data, error } = await supabase.from('materialer').insert({name: name, categories_array: cats, meta_tags: tags, description: desc})
+        const { data, error } = await supabase.from('materialer').insert({name: name ? name : null, categories_array: cats ? cats.toString().split(' ') : null, meta_tags: tags ? tags.toString().split(' ') : null, description: desc ? desc : null}).select()
 
         if (error) {
             throw new Error(error.message)
         }
 
-        return {data: data as Material, error: null}
+        return {data: data[0] as Material, error: null}
 
     } catch(error) {
         console.error(`Error inserting data to the database`)

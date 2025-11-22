@@ -12,3 +12,8 @@ export type MaterialsResponse = {
     data: Material[] | null
     error: string | null
 }
+
+export type MaterialResponse = {
+    data: Material | null
+    error: string | null
+}
