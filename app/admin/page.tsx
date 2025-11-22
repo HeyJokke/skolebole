@@ -11,16 +11,14 @@ export default function AdminPage() {
     async function uploadMaterial(e:FormEvent<HTMLFormElement>) {
         e.preventDefault()
         const formData = new FormData(e.currentTarget)
-        const name = formData.get('input-name')
-        const cats = formData.get('input-cats')
-        const tags = formData.get('input-tags')
-        const desc = formData.get('input-desc')
-        const imageUrl = (formData.get('input-img') as File).name
-
-        console.log(imageUrl)
+        const name = formData.get('input-name') as FormDataEntryValue
+        const cats = formData.get('input-cats') as FormDataEntryValue
+        const tags = formData.get('input-tags') as FormDataEntryValue | null
+        const desc = formData.get('input-desc') as FormDataEntryValue
+        const imagePath = (formData.get('input-img') as File).name as string
 
         try {
-            const {data , error} = await insertMaterial(name!, cats!, tags!, desc!)
+            const {data , error} = await insertMaterial(name, cats, tags, desc, imagePath)
 
             if (error) {
                 throw new Error(error)
@@ -68,7 +66,7 @@ export default function AdminPage() {
 
                 <div className="flex w-1/2">
                     <div className="m-auto">
-                        {(!material && !error) && <MaterialCard m={{id: 1, created_at: new Date, name: "Preview", description: "Beskrivelse står her", image: "", categories_array: ["Kategori 1", "Kategori 2"], meta_tags: []}} /> }
+                        {(!material && !error) && <MaterialCard m={{id: 1, created_at: new Date, name: "Preview", description: "Beskrivelse står her", image_path: "", pdf_path: "", categories_array: ["Kategori 1", "Kategori 2"], meta_tags: []}} /> }
                         {(material && !error) && <MaterialCard m={material} /> }
                         {error && <p className="text-white bg-red-500 rounded-md p-2"> An error occured, the database may be down or connection has been lost </p>}
                     </div>

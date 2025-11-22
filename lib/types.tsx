@@ -3,7 +3,8 @@ export type Material = {
     created_at: Date
     name: string
     description: string
-    image: string
+    image_path: string
+    pdf_path: string
     categories_array: string[]
     meta_tags: string[] | null
 }

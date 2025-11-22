@@ -11,7 +11,7 @@ export async function getAllMaterials():Promise<MaterialsResponse> {
 
     } catch(error) {
         console.error(`Error fetching from db: `, error)
-        return {data: null, error: error.message ?? 'Unspecified error'}
+        return {data: null, error: (error as Error).message ?? 'Unknown error'}
     }
 }
 
@@ -31,7 +31,7 @@ export async function filterMaterials(name: string, description: string, categor
     } catch(error) {
         console.error(`Error fetching data from the database`)
 
-        return {data: null, error: error.message ?? 'Unknown error'}
+        return {data: null, error: (error as Error).message ?? 'Unknown error'}
     }
     
 }
@@ -46,18 +46,27 @@ export async function searchMaterials(search: string):Promise<MaterialsResponse>
             throw new Error(error.message)
         }
 
-        return {data: data as Material[], error: null}
+        return { data: data as Material[], error: null }
     } catch(error) {
         console.error(`Error fetching data from the database`)
 
-        return {data: null, error: error.message ?? 'Unknown error'}
+        return { data: null, error: (error as Error).message ?? 'Unknown error' }
     }
-    
 }
 
-export async function insertMaterial(name:FormDataEntryValue, cats:FormDataEntryValue, tags:FormDataEntryValue, desc:FormDataEntryValue):Promise<MaterialResponse> {    
+export async function insertMaterial(name:FormDataEntryValue, cats:FormDataEntryValue, tags:FormDataEntryValue | null, desc:FormDataEntryValue, imagePath:string):Promise<MaterialResponse> {    
     try {
-        const { data, error } = await supabase.from('materialer').insert({name: name ? name : null, categories_array: cats ? cats.toString().split(' ') : null, meta_tags: tags ? tags.toString().split(' ') : null, description: desc ? desc : null}).select()
+        const { data, error } = await supabase.from('materialer')
+            .insert(
+                {
+                    name: name, 
+                    categories_array: cats.toString().split(' '), 
+                    meta_tags: tags ? tags.toString().split(' ') : null, 
+                    description: desc, 
+                    image_path: imagePath
+                }
+            )
+            .select()
 
         if (error) {
             throw new Error(error.message)
@@ -69,5 +78,22 @@ export async function insertMaterial(name:FormDataEntryValue, cats:FormDataEntry
         console.error(`Error inserting data to the database`)
 
         return {data: null, error: error.message ?? 'Unknown error'}
+    }
+}
+
+export function getMaterialImageUrl(imagePath:string):string | null {
+    try {
+        const {data} = supabase.storage.from('materials-images').getPublicUrl(imagePath)
+
+        if (!data.publicUrl) {
+            throw new Error('Image could not be retrieved from the database')
+        }
+
+        return data.publicUrl
+
+    } catch(error) {
+        console.error((error as Error).message)
+        
+        return null
     }
 }

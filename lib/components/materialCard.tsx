@@ -1,23 +1,41 @@
+"use client"
 import Image from 'next/image'
 import Link from 'next/link'
 import type {Material} from '@/lib/types'
+import React from 'react'
+import {getMaterialImageUrl} from '@/lib/database/db'
 
 type CardProps = {
     m: Material
 }
 
 export default function MaterialCard({m}: CardProps) {
+    const [imagePath, setImagePath] = React.useState<string | null>(null)
+
+    React.useEffect(() => {
+        setImagePath(getMaterialImageUrl(`materiale_${m.id}`))
+    },[m.id])
+
     return (
         <Link href={`/materiale/${m.id}`}>
             <div className="bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden hover:scale-105 transform transition-transform">
                 <div className="relative w-full h-48 bg-gray-200">
+                    {imagePath ? 
                     <Image 
-                        alt={m.name} 
-                        src={`/images/materialer/materiale_${m.id}.jpeg`} 
+                        alt={`Produkt billede til ${m.name}`} 
+                        src={imagePath} 
+                        width={250} 
+                        height={200}
+                        className="w-full h-full object-cover"
+                    /> :
+                    <Image 
+                        alt={`Produkt billede til ${m.name}`} 
+                        src={'/images/logo.png'} 
                         width={250} 
                         height={200}
                         className="w-full h-full object-cover"
                     />
+                    } 
                 </div>
                 <div className="p-4">
                     <h3 className="text-lg font-semibold text-gray-800 mb-2">{m.name}</h3>
