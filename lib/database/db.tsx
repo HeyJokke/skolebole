@@ -81,19 +81,26 @@ export async function insertMaterial(name:FormDataEntryValue, cats:FormDataEntry
     }
 }
 
-export function getMaterialImageUrl(imagePath:string):string | null {
-    try {
-        const {data} = supabase.storage.from('materials-images').getPublicUrl(imagePath)
-
-        if (!data.publicUrl) {
-            throw new Error('Image could not be retrieved from the database')
-        }
-
-        return data.publicUrl
-
-    } catch(error) {
-        console.error((error as Error).message)
-        
+export async function getMaterialImageUrl(imagePath:string):Promise<string | null> {
+    
+    if (imagePath === "" || null) {
         return null
+    } else {
+        try {
+            const {data: {publicUrl}} = supabase.storage.from('materials-images').getPublicUrl(imagePath)
+            
+            const res = await fetch(publicUrl, { method: "HEAD"})
+
+            if (res.ok) {
+                return publicUrl
+            } else {
+                throw new Error('Image could not be retrieved from the database')
+            }
+    
+        } catch(error) {
+            console.error((error as Error).message)
+            
+            return null
+        }
     }
 }

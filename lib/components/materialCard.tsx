@@ -13,8 +13,14 @@ export default function MaterialCard({m}: CardProps) {
     const [imagePath, setImagePath] = React.useState<string | null>(null)
 
     React.useEffect(() => {
-        setImagePath(getMaterialImageUrl(`materiale_${m.id}`))
-    },[m.id])
+        async function fetchImage() {
+            setImagePath(await getMaterialImageUrl(m.image_path))
+        }
+
+        fetchImage()
+    })
+
+    
 
     return (
         <Link href={`/materiale/${m.id}`}>
