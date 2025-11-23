@@ -77,24 +77,25 @@ export async function insertMaterial(name:FormDataEntryValue, cats:FormDataEntry
     } catch(error) {
         console.error(`Error inserting data to the database`)
 
-        return {data: null, error: error.message ?? 'Unknown error'}
+        return {data: null, error: (error as Error).message ?? 'Unknown error'}
     }
 }
 
-export async function getMaterialImageUrl(imagePath:string):Promise<string | null> {
-    
-    if (imagePath === "" || null) {
+export async function getMaterialImageUrl(m:Material):Promise<string | null> {
+    if (m.image_path === "" || null) {
         return null
     } else {
         try {
-            const {data: {publicUrl}} = supabase.storage.from('materials-images').getPublicUrl(imagePath)
+            const {data: {publicUrl}} = supabase.storage.from('materials-images').getPublicUrl(m.image_path)
             
             const res = await fetch(publicUrl, { method: "HEAD"})
 
             if (res.ok) {
                 return publicUrl
             } else {
-                throw new Error('Image could not be retrieved from the database')
+                throw new Error(
+                    `Image for ${m.name} (ID: ${m.id}, IMAGE_PATH: ${m.image_path}) could not be retrieved from the database`
+                )
             }
     
         } catch(error) {
