@@ -23,7 +23,7 @@ export default function MaterialCard({m}: CardProps) {
     
 
     return (
-        <Link href={`/materiale/${m.id}`}>
+        <Link href={`/materialer/${m.id}`}>
             <div className="bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden hover:scale-105 transform transition-transform">
                 <div className="relative w-full h-48 bg-gray-200">
                     {imagePath ? 

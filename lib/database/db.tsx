@@ -55,6 +55,7 @@ export async function searchMaterials(search: string):Promise<MaterialsResponse>
 }
 
 export async function insertMaterial(name:FormDataEntryValue, cats:FormDataEntryValue, tags:FormDataEntryValue | null, desc:FormDataEntryValue, imagePath:string, pdfPath:string):Promise<MaterialResponse> {    
+    // muligvis pass file og image
     try {
         const { data, error } = await supabase.from('materialer')
             .insert(
@@ -72,6 +73,12 @@ export async function insertMaterial(name:FormDataEntryValue, cats:FormDataEntry
         if (error) {
             throw new Error(error.message)
         }
+
+        // indsæt pdf og billede ind i bucket
+
+        // check for error
+            // if error slet forrige insert
+            // throw error
 
         return {data: data[0] as Material, error: null}
 
