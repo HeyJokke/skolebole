@@ -16,9 +16,10 @@ export default function AdminPage() {
         const tags = formData.get('input-tags') as FormDataEntryValue | null
         const desc = formData.get('input-desc') as FormDataEntryValue
         const imagePath = (formData.get('input-img') as File).name as string
+        const pdfPath = (formData.get('input-pdf') as File).name as string
 
         try {
-            const {data , error} = await insertMaterial(name, cats, tags, desc, imagePath)
+            const {data , error} = await insertMaterial(name, cats, tags, desc, imagePath, pdfPath)
 
             if (error) {
                 throw new Error(error)
@@ -49,7 +50,7 @@ export default function AdminPage() {
                         file:border-0 file:text-sm file:font-semibold
                         file:bg-pink-100 file:text-pink-700
                         hover:file:bg-pink-200" 
-                        type="file" multiple={false} name="input-pdf" accept=".pdf" /><br/>
+                        type="file" multiple={false} name="input-pdf" accept=".pdf" required /><br/>
                     <label className="font-semibold" htmlFor="input-img">Upload billede: </label>
                     <input 
                         className="  
@@ -64,7 +65,7 @@ export default function AdminPage() {
                 
                 <span className="border-1"></span>
 
-                <div className="flex w-1/2">
+                <div className="flex w-1/2 w-60 m-auto">
                     <div className="m-auto">
                         {(!material && !error) && <MaterialCard m={{id: 1, created_at: new Date, name: "Preview", description: "Beskrivelse står her", image_path: "", pdf_path: "", categories_array: ["Kategori 1", "Kategori 2"], meta_tags: []}} /> }
                         {(material && !error) && <MaterialCard m={material} /> }

@@ -54,7 +54,7 @@ export async function searchMaterials(search: string):Promise<MaterialsResponse>
     }
 }
 
-export async function insertMaterial(name:FormDataEntryValue, cats:FormDataEntryValue, tags:FormDataEntryValue | null, desc:FormDataEntryValue, imagePath:string):Promise<MaterialResponse> {    
+export async function insertMaterial(name:FormDataEntryValue, cats:FormDataEntryValue, tags:FormDataEntryValue | null, desc:FormDataEntryValue, imagePath:string, pdfPath:string):Promise<MaterialResponse> {    
     try {
         const { data, error } = await supabase.from('materialer')
             .insert(
@@ -63,7 +63,8 @@ export async function insertMaterial(name:FormDataEntryValue, cats:FormDataEntry
                     categories_array: cats.toString().split(' '), 
                     meta_tags: tags ? tags.toString().split(' ') : null, 
                     description: desc, 
-                    image_path: imagePath
+                    image_path: imagePath,
+                    pdf_path: pdfPath
                 }
             )
             .select()
