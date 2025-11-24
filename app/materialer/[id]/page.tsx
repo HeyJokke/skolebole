@@ -27,7 +27,7 @@ export default function ProductPage({ params }:
 
     return (
         <main className="h-screen">
-            {!m ? 
+            {m ? 
                 <>
                     <Link href="." className="hover:underline">{'<-- '}Tilbage til katalog</Link>
                     <h1 className="text-3xl font-bold mt-5">Dette er produktsiden for {m.name}</h1>
