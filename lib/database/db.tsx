@@ -54,8 +54,7 @@ export async function searchMaterials(search: string):Promise<MaterialsResponse>
     }
 }
 
-export async function insertMaterial(name:FormDataEntryValue, cats:FormDataEntryValue, tags:FormDataEntryValue | null, desc:FormDataEntryValue, imagePath:string, pdfPath:string):Promise<MaterialResponse> {    
-    // muligvis pass file og image
+export async function insertMaterial(name:FormDataEntryValue, cats:FormDataEntryValue, tags:FormDataEntryValue | null, desc:FormDataEntryValue, imageFile:File, pdfFile:File, ):Promise<MaterialResponse> {    
     try {
         const { data, error } = await supabase.from('materialer')
             .insert(
@@ -64,26 +63,40 @@ export async function insertMaterial(name:FormDataEntryValue, cats:FormDataEntry
                     categories_array: cats.toString().split(' '), 
                     meta_tags: tags ? tags.toString().split(' ') : null, 
                     description: desc, 
-                    image_path: imagePath,
-                    pdf_path: pdfPath
+                    image_path: imageFile.name,
+                    pdf_path: pdfFile.name
                 }
             )
             .select()
+            .single()
 
         if (error) {
             throw new Error(error.message)
         }
 
-        // indsæt pdf og billede ind i bucket
+        const { error: imageUploadError } = await uploadFileToBucket('materials-images', imageFile)
 
-        // check for error
-            // if error slet forrige insert
-            // throw error
+        if (imageUploadError) {
+            await removeRowFromDatabase('materialer', data.id)
 
-        return {data: data[0] as Material, error: null}
+            throw new Error(imageUploadError.message)
+            
+        }
+
+        const { error: pdfUploadError } = await uploadFileToBucket('materials-pdfs', pdfFile)
+
+        if (pdfUploadError) {
+            await removeRowFromDatabase('materialer', data.id)
+
+            await removeFileFromBucket('materials-images', imageFile.name)
+
+            throw new Error(pdfUploadError.message)
+        }
+
+        return {data: data as Material, error: null}
 
     } catch(error) {
-        console.error(`Error inserting data to the database`)
+        console.error((error as Error).message)
 
         return {data: null, error: (error as Error).message ?? 'Unknown error'}
     }
@@ -112,4 +125,34 @@ export async function getMaterialImageUrl(m:Material):Promise<string | null> {
             return null
         }
     }
+}
+
+export async function removeRowFromDatabase(dbName:string, id:number):Promise<void> {
+    await supabase
+        .from(dbName)
+        .delete()
+        .eq("id", id)
+}
+
+export async function removeFileFromBucket(bucketName:string, fileName: string):Promise<void> {
+    await supabase
+            .storage
+            .from(bucketName)
+            .remove([fileName])
+}
+
+export async function uploadFileToBucket(bucketName:string, file:File):Promise<{error: Error | null}> {
+    const {error} = await supabase.storage
+        .from(bucketName)
+        .upload(
+            file.name, 
+            file,
+            {
+                contentType: file.type,
+                cacheControl: "3600",
+                upsert: false
+            }
+        )
+
+    return { error } 
 }

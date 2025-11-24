@@ -10,26 +10,32 @@ export default function AdminPage() {
 
     async function uploadMaterial(e:FormEvent<HTMLFormElement>) {
         e.preventDefault()
+        const form = e.currentTarget
         const formData = new FormData(e.currentTarget)
         const name = formData.get('input-name') as FormDataEntryValue
         const cats = formData.get('input-cats') as FormDataEntryValue
         const tags = formData.get('input-tags') as FormDataEntryValue | null
         const desc = formData.get('input-desc') as FormDataEntryValue
-        const imagePath = (formData.get('input-img') as File).name as string
-        const pdfPath = (formData.get('input-pdf') as File).name as string
-
+        const imageFile = (formData.get('input-img') as File)
+        const pdfFile = (formData.get('input-pdf') as File)
+        
         try {
-            const {data , error} = await insertMaterial(name, cats, tags, desc, imagePath, pdfPath)
+            const {data , error} = await insertMaterial(name, cats, tags, desc, imageFile, pdfFile)
 
             if (error) {
                 throw new Error(error)
             }
+
             setError(null)
             setMaterial(data)
+            form.reset()
 
         } catch(error) {
+
             setMaterial(null)
             setError(error instanceof Error ? error.message : null)
+            form.reset()
+            
         }
 
     }

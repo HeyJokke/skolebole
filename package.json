@@ -2,7 +2,7 @@
   "name": "skolebole",
   "version": "0.1.0",
   "private": true,
-  "type":"module",
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.79.0",
+    "base64-arraybuffer": "^1.0.2",
     "next": "16.0.1",
     "react": "19.2.0",
     "react-dom": "19.2.0"
