@@ -16,8 +16,8 @@ export default function AdminPage() {
         const cats = formData.get('input-cats') as FormDataEntryValue
         const tags = formData.get('input-tags') as FormDataEntryValue | null
         const desc = formData.get('input-desc') as FormDataEntryValue
-        const imageFile = (formData.get('input-img') as File)
-        const pdfFile = (formData.get('input-pdf') as File)
+        const imageFile = formData.get('input-img') as File
+        const pdfFile = formData.get('input-pdf') as File
         
         try {
             const {data , error} = await insertMaterial(name, cats, tags, desc, imageFile, pdfFile)
@@ -35,7 +35,7 @@ export default function AdminPage() {
             setMaterial(null)
             setError(error instanceof Error ? error.message : null)
             form.reset()
-            
+
         }
 
     }
@@ -75,7 +75,7 @@ export default function AdminPage() {
                     <div className="m-auto">
                         {(!material && !error) && <MaterialCard m={{id: 1, created_at: new Date, name: "Preview", description: "Beskrivelse står her", image_path: "", pdf_path: "", categories_array: ["Kategori 1", "Kategori 2"], meta_tags: []}} /> }
                         {(material && !error) && <MaterialCard m={material} /> }
-                        {error && <p className="text-white bg-red-500 rounded-md p-2"> An error occured, the database may be down or connection has been lost </p>}
+                        {error && <p className="text-white bg-red-500 rounded-md p-2"> {error} </p>}
                     </div>
                 </div>
             </div>

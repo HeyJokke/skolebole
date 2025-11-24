@@ -18,6 +18,10 @@ export default function SearchForm() {
         if (searchTerm.length === 0 && pathname.startsWith('/materialer/search')) {
             redirect(`/materialer`)
         }
+
+        if (pathname.startsWith('/materialer')) {
+            replace(`${pathname}/search?${params.toString()}`)
+        }
         
         if (pathname.startsWith('/materialer/search')) {
             replace(`${pathname}?${params.toString()}`)
