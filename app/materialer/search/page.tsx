@@ -35,7 +35,7 @@ export default function SearchPage({ searchParams }: { searchParams: Promise<{ q
     if (!query) return <h1 className="text-2xl font-bold">Søg efter et materiale...</h1>
 
     return (
-        <main>
+        <main className="h-screen">
             {
                 (filteredMaterials ?? []).length > 0 && 
                 <h1 className="text-2xl font-bold mb-10">Søgeresultater for {`'${query}'`} </h1>
