@@ -127,6 +127,34 @@ export async function getMaterialImageUrl(m:Material):Promise<string | null> {
     }
 }
 
+export async function getMaterialDownloadUrl(m:Material):Promise<string | null> {
+    if (m.pdf_path === "" || null) {
+        return null
+    } else {
+        try {
+            const {data: {publicUrl}} = supabase
+                .storage
+                .from('materials-pdfs')
+                .getPublicUrl(m.pdf_path)
+            
+            const res = await fetch(publicUrl, { method: "HEAD"})
+            
+            if (res.ok) {
+                return publicUrl
+            } else {
+                throw new Error(
+                    `PDF for ${m.name} (ID: ${m.id}, PDF_PATH: ${m.pdf_path}) could not be retrieved from the database`
+                )
+            }
+    
+        } catch(error) {
+            console.error((error as Error).message)
+            
+            return null
+        }
+    }
+}
+
 export async function removeRowFromDatabase(dbName:string, id:number):Promise<void> {
     await supabase
         .from(dbName)
