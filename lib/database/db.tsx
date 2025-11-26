@@ -54,15 +54,16 @@ export async function searchMaterials(search: string):Promise<MaterialsResponse>
     }
 }
 
-export async function insertMaterial(name:FormDataEntryValue, cats:FormDataEntryValue, tags:FormDataEntryValue | null, desc:FormDataEntryValue, imageFile:File, pdfFile:File, ):Promise<MaterialResponse> {    
+export async function insertMaterial(name:FormDataEntryValue, shortdesc:FormDataEntryValue, cats:FormDataEntryValue, tags:FormDataEntryValue | null, longdesc:FormDataEntryValue, imageFile:File, pdfFile:File, ):Promise<MaterialResponse> {    
     try {
         const { data, error } = await supabase.from('materialer')
             .insert(
                 {
                     name: name, 
+                    short_description: shortdesc,
                     categories_array: cats.toString().split(' '), 
                     meta_tags: tags ? tags.toString().split(' ') : null, 
-                    description: desc, 
+                    long_description: longdesc, 
                     image_path: imageFile.name,
                     pdf_path: pdfFile.name
                 }

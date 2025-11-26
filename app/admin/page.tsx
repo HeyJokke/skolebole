@@ -13,15 +13,16 @@ export default function AdminPage() {
         const form = e.currentTarget
         const formData = new FormData(e.currentTarget)
         const name = formData.get('input-name') as FormDataEntryValue
+        const shortdesc = formData.get('input-shortdesc') as FormDataEntryValue
         const cats = formData.get('input-cats') as FormDataEntryValue
         const tags = formData.get('input-tags') as FormDataEntryValue | null
-        const desc = formData.get('input-desc') as FormDataEntryValue
+        const longdesc = formData.get('input-longdesc') as FormDataEntryValue
         const imageFile = formData.get('input-img') as File
         const pdfFile = formData.get('input-pdf') as File
         
         try {
-            const {data , error} = await insertMaterial(name, cats, tags, desc, imageFile, pdfFile)
-
+            
+            const {data , error} = await insertMaterial(name, shortdesc, cats, tags, longdesc, imageFile, pdfFile)
             if (error) {
                 throw new Error(error)
             }
@@ -45,9 +46,10 @@ export default function AdminPage() {
             <div className="flex">
                 <form className="w-1/2" onSubmit={uploadMaterial}>
                     <input className="rounded-md bg-slate-200 font-semibold mb-3 py-1 px-3" type="text" placeholder="Navn" name="input-name"  required /><br/>
+                    <input className="rounded-md bg-slate-200 font-semibold mb-3 py-1 px-3" type="text" placeholder="Kort beskrivelse (65)" name="input-shortdesc" maxLength={65} required /><br/>
                     <input className="rounded-md bg-slate-200 font-semibold mb-3 py-1 px-3" type="text" placeholder="Kategorier" name="input-cats"  required /><br/>
-                    <input className="rounded-md bg-slate-200 font-semibold mb-3 py-1 px-3" type="text" placeholder="Tags" name="input-tags" /><br/>
-                    <textarea className="rounded-md bg-slate-200 font-semibold mb-3 py-1 px-3 resize-none w-100 h-100" placeholder="Beskrivelse" name="input-desc" required></textarea><br/>
+                    <input className="rounded-md bg-slate-200 font-semibold mb-3 py-1 px-3" type="text" placeholder="Skjulte tags" name="input-tags" /><br/>
+                    <textarea className="rounded-md bg-slate-200 font-semibold mb-3 py-1 px-3 resize-none w-100 h-100" placeholder="Lang beskrivelse (1800)" name="input-longdesc" maxLength={1800} required></textarea><br/>
                     <label className="font-semibold" htmlFor="input-pdf">Upload PDF: </label>
                     <input 
                         className="  
@@ -73,7 +75,7 @@ export default function AdminPage() {
 
                 <div className="flex w-1/2 w-60 m-auto">
                     <div className="m-auto">
-                        {(!material && !error) && <MaterialCard m={{id: 1, created_at: new Date, name: "Preview", description: "Beskrivelse står her", image_path: "", pdf_path: "", categories_array: ["Kategori 1", "Kategori 2"], meta_tags: []}} /> }
+                        {(!material && !error) && <MaterialCard m={{id: 1, created_at: new Date, name: "Navn", short_description: "Kort beskrivelse står her og er max. 65 karakterer ligesom her.", long_description: "", image_path: "", pdf_path: "", categories_array: ["Kategori 1", "Kategori 2"], meta_tags: []}} /> }
                         {(material && !error) && <MaterialCard m={material} /> }
                         {error && <p className="text-white bg-red-500 rounded-md p-2"> {error} </p>}
                     </div>

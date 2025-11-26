@@ -19,9 +19,6 @@ export default function MaterialCard({m}: CardProps) {
         naturteknik: "bg-yellow-100 text-yellow-700"
     }
 
-    console.log(categoryClasses["category" as keyof typeof categoryClasses])
-    console.log(categoryClasses["dansk" as keyof typeof categoryClasses])
-
     React.useEffect(() => {
         async function fetchImage() {
             setImagePath(await getMaterialImageUrl(m))
@@ -29,8 +26,6 @@ export default function MaterialCard({m}: CardProps) {
 
         fetchImage()
     })
-
-    
 
     return (
         <Link href={`/materialer/${m.id}`}>
@@ -55,7 +50,7 @@ export default function MaterialCard({m}: CardProps) {
                 </div>
                 <div className="p-4">
                     <h3 className="text-lg font-semibold text-gray-800 mb-2">{m.name}</h3>
-                    <p className="text-sm text-gray-600 line-clamp-2 mb-3">{m.description}</p>
+                    <p className="text-sm text-gray-600 line-clamp-2 mb-3 min-h-[40px]">{m.short_description}</p>
                     {m.categories_array && (
                         <div className="flex flex-wrap gap-2">
                             {m.categories_array.map((category:string) => (

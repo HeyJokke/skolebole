@@ -2,7 +2,8 @@ export type Material = {
     id: number
     created_at: Date
     name: string
-    description: string
+    short_description: string
+    long_description: string
     image_path: string
     pdf_path: string
     categories_array: string[]
