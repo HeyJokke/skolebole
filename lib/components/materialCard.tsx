@@ -12,6 +12,16 @@ type CardProps = {
 export default function MaterialCard({m}: CardProps) {
     const [imagePath, setImagePath] = React.useState<string | null>(null)
 
+    const categoryClasses = {
+        dansk: "bg-blue-100 text-blue-700",
+        matematik: "bg-green-100 text-green-700",
+        engelsk: "bg-purple-100 text-purple-700",
+        naturteknik: "bg-yellow-100 text-yellow-700"
+    }
+
+    console.log(categoryClasses["category" as keyof typeof categoryClasses])
+    console.log(categoryClasses["dansk" as keyof typeof categoryClasses])
+
     React.useEffect(() => {
         async function fetchImage() {
             setImagePath(await getMaterialImageUrl(m))
@@ -48,10 +58,10 @@ export default function MaterialCard({m}: CardProps) {
                     <p className="text-sm text-gray-600 line-clamp-2 mb-3">{m.description}</p>
                     {m.categories_array && (
                         <div className="flex flex-wrap gap-2">
-                            {m.categories_array.map((category) => (
+                            {m.categories_array.map((category:string) => (
                                 <span 
                                     key={category} 
-                                    className="px-2 py-1 bg-blue-100 text-blue-700 text-xs font-medium rounded-full"
+                                    className={`px-2 py-1 text-xs font-medium rounded-full ${categoryClasses[category as keyof typeof categoryClasses] ?? 'bg-orange-100 text-orange-700'}`}
                                 >
                                     {category}
                                 </span>
