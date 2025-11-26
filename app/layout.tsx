@@ -33,15 +33,15 @@ export default function RootLayout({
         <MaterialsProvider>
         <header className="bg-white shadow-md">
           <div className="max-w-6xl mx-auto px-4">
-            <div className="flex justify-between items-center py-6">
-              <Link href="/"><Image alt="Skolebole logo" src="/images/skolebole_logo_lrg.png" width={1421} height={747} style={{width: "160px"}}/></Link>
-              <nav className="w-full max-w-2xl">
-                <ul className="flex justify-center space-x-6">
-                  <Link href="/materialer"><li className="px-6 py-2 rounded-full bg-red-100 hover:bg-red-200 transition-colors duration-300 cursor-pointer font-medium text-red-800">Katalog</li></Link>
-                  <Link href="/dansk"><li className="px-6 py-2 rounded-full bg-blue-100 hover:bg-blue-200 transition-colors duration-300 cursor-pointer font-medium text-blue-800">Dansk</li></Link>
-                  <Link href="/matematik"><li className="px-6 py-2 rounded-full bg-green-100 hover:bg-green-200 transition-colors duration-300 cursor-pointer font-medium text-green-800">Matematik</li></Link>
-                  <Link href="/engelsk"><li className="px-6 py-2 rounded-full bg-purple-100 hover:bg-purple-200 transition-colors duration-300 cursor-pointer font-medium text-purple-800">Engelsk</li></Link>
-                  <Link href="/naturteknik"><li className="px-6 py-2 rounded-full bg-yellow-100 hover:bg-yellow-200 transition-colors duration-300 cursor-pointer font-medium text-yellow-800">Natur & Teknik</li></Link>
+            <div className="lg:flex sm:block justify-between items-center py-6">
+              <Link href="/"><Image className="m-auto" alt="Skolebole logo" src="/images/skolebole_logo_lrg.png" width={1421} height={747} style={{width: "160px"}}/></Link>
+              <nav className="flex justify-center w-full m-auto max-w-2xl">
+                <ul className="md:flex sm:block justify-center space-x-6">
+                  <Link href="/materialer"><li className="px-6 py-2 m-auto text-center rounded-full bg-red-100 hover:bg-red-200 transition-colors duration-300 cursor-pointer font-medium text-red-800">Katalog</li></Link>
+                  <Link href="/matematik"><li className="px-6 py-2 m-auto text-center rounded-full bg-green-100 hover:bg-green-200 transition-colors duration-300 cursor-pointer font-medium text-green-800">Matematik</li></Link>
+                  <Link href="/dansk"><li className="px-6 py-2 m-auto text-center rounded-full bg-blue-100 hover:bg-blue-200 transition-colors duration-300 cursor-pointer font-medium text-blue-800">Dansk</li></Link>
+                  <Link href="/engelsk"><li className="px-6 py-2 m-auto text-center rounded-full bg-purple-100 hover:bg-purple-200 transition-colors duration-300 cursor-pointer font-medium text-purple-800">Engelsk</li></Link>
+                  <Link href="/naturteknik"><li className="px-6 py-2 m-auto text-center rounded-full bg-yellow-100 hover:bg-yellow-200 transition-colors duration-300 cursor-pointer font-medium text-yellow-800">Natur & Teknik</li></Link>
                 </ul>
               </nav>
               <SearchForm />

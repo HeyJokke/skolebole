@@ -45,7 +45,7 @@ export default function SearchForm() {
     }
 
     return (
-        <form onSubmit={onSubmit}>
+        <form className="flex justify-center lg:mt-0 mt-5" onSubmit={onSubmit}>
             <input 
                 className="border pl-2 text-black" 
                 placeholder="Søg..."
