@@ -13,7 +13,8 @@ export default function SearchPage({ searchParams }: { searchParams: Promise<{ q
     if ( query && materials ) {
         filteredMaterials = materials.filter(m => {
             return m.name.toLowerCase().includes(query.toLowerCase()) || 
-            m.description.toLowerCase().includes(query.toLowerCase()) ||
+            m.short_description.toLowerCase().includes(query.toLowerCase()) ||
+            m.long_description.toLowerCase().includes(query.toLowerCase()) ||
             m.categories_array.some(cat => cat.toLowerCase().includes(query.toLowerCase())) ||
             m.meta_tags?.some(tag => tag.toLowerCase().includes(query.toLowerCase()))
         })

@@ -185,3 +185,63 @@ export async function uploadFileToBucket(bucketName:string, file:File):Promise<{
 
     return { error } 
 }
+
+export async function incrementDownload(m:Material) {
+    try {
+
+        const { data, error: selectDownloadsError } = await supabase
+            .from('materialer')
+            .select('nDownloads')
+            .eq('id', m.id)
+
+        if (selectDownloadsError) {
+            throw new Error(selectDownloadsError.message)
+        }
+
+        const downloadCount = data[0].nDownloads
+
+        const { error: updateDownloadsError } = await supabase
+            .from('materialer')
+            .update({ nDownloads: downloadCount + 1})
+            .eq('id', m.id)
+
+        if (updateDownloadsError) {
+            throw new Error(updateDownloadsError.message)
+        }
+
+        return null
+    } catch(error) {
+        console.error((error as Error).message)
+        return null
+    }
+}
+
+export async function incrementVisited(m:Material) {
+    try {
+
+        const { data, error: selectDownloadsError } = await supabase
+            .from('materialer')
+            .select('nVisited')
+            .eq('id', m.id)
+
+        if (selectDownloadsError) {
+            throw new Error(selectDownloadsError.message)
+        }
+
+        const visitsCont = data[0].nVisited
+
+        const { error: updateDownloadsError } = await supabase
+            .from('materialer')
+            .update({ nVisited: visitsCont + 1})
+            .eq('id', m.id)
+
+        if (updateDownloadsError) {
+            throw new Error(updateDownloadsError.message)
+        }
+
+        return null
+    } catch(error) {
+        console.error((error as Error).message)
+        return null
+    }
+}
