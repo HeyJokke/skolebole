@@ -1,6 +1,6 @@
 "use client"
 import { useMaterials } from '@/lib/context/MaterialsProvider'
-import { getMaterialImageUrl, getMaterialDownloadUrl, incrementDownload, incrementVisited } from '@/lib/database/db'
+import { getMaterialImageUrl, getMaterialDownloadUrl, incrementDownload } from '@/lib/database/db'
 import type { Material } from '@/lib/types'
 import React from 'react'
 import Link from 'next/link'
