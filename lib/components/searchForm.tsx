@@ -1,11 +1,10 @@
 "use client"
 import React from "react"
-import {useSearchParams, usePathname, useRouter, redirect} from "next/navigation"
+import {useSearchParams, usePathname, redirect} from "next/navigation"
 
 export default function SearchForm() {
     const searchParams = useSearchParams()
     const pathname = usePathname()
-    const { replace } = useRouter()
     const params = new URLSearchParams(searchParams)
 
     function handleSearch(searchTerm: string) {
