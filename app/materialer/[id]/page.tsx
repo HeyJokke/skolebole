@@ -58,12 +58,12 @@ export default function ProductPage({ params }:
                         <div className='flex'>
                             <p className="italic mr-2">{m.short_description}</p>
 
-                            {m.categories_array.map((category:string) => (
+                            {m.categories_array.map((cat:string) => (
                                     <span 
-                                        key={category} 
-                                        className={`mr-1 px-2 py-1 text-xs font-medium rounded-full ${categoryClasses[category as keyof typeof categoryClasses] ?? 'bg-orange-100 text-orange-700'}`}
+                                        key={cat} 
+                                        className={`mr-1 px-2 py-1 text-xs font-medium rounded-full ${categoryClasses[cat as keyof typeof categoryClasses] ?? 'bg-orange-100 text-orange-700'}`}
                                     >
-                                        {category}
+                                        {cat[0].toUpperCase() + cat.slice(1)}
                                     </span>
                                 ))}
                         </div>

@@ -1,6 +1,7 @@
 import type { Material } from '@/lib/types'
 import MaterialCard from '@/lib/components/materialCard'
 import React from 'react'
+import Filters from './filters'
 
 type Props = {
     materials: Material[] | null
@@ -37,9 +38,12 @@ export default function RenderMaterials({materials, error, loading}: Props) {
         const html = materials.map((m:Material) => <MaterialCard key={m.id} m={m}/>)
 
         return (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                {html}
-            </div>
+            <main className="flex">
+                <Filters filteredMaterials={materials}/>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {html}
+                </div>
+            </main>
         )
     }
 

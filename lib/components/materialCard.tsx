@@ -53,12 +53,12 @@ export default function MaterialCard({m}: CardProps) {
                     <p className="text-sm text-gray-600 line-clamp-2 mb-3 min-h-[40px]">{m.short_description}</p>
                     {m.categories_array && (
                         <div className="flex flex-wrap gap-2">
-                            {m.categories_array.map((category:string) => (
+                            {m.categories_array.map((cat:string) => (
                                 <span 
-                                    key={category} 
-                                    className={`px-2 py-1 text-xs font-medium rounded-full ${categoryClasses[category as keyof typeof categoryClasses] ?? 'bg-orange-100 text-orange-700'}`}
+                                    key={cat} 
+                                    className={`px-2 py-1 text-xs font-medium rounded-full ${categoryClasses[cat as keyof typeof categoryClasses] ?? 'bg-orange-100 text-orange-700'}`}
                                 >
-                                    {category}
+                                    {cat[0].toUpperCase() + cat.slice(1)}
                                 </span>
                             ))}
                         </div>
