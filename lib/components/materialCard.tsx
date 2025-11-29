@@ -48,21 +48,23 @@ export default function MaterialCard({m}: CardProps) {
                     />
                     } 
                 </div>
-                <div className="p-4">
+                <div className="p-4 flex flex-col">
                     <h3 className="text-lg font-semibold text-gray-800 mb-2">{m.name}</h3>
-                    <p className="text-sm text-gray-600 line-clamp-2 mb-3 min-h-[40px]">{m.short_description}</p>
-                    {m.categories_array && (
-                        <div className="flex flex-wrap gap-2 min-h-[56px]">
-                            {m.categories_array.map((cat:string) => (
-                                <span 
-                                    key={cat} 
-                                    className={`h-fit px-2 py-1 text-xs font-medium rounded-full ${categoryClasses[cat as keyof typeof categoryClasses] ?? 'bg-orange-100 text-orange-700'}`}
-                                >
-                                    {cat[0].toUpperCase() + cat.slice(1)}
-                                </span>
-                            ))}
-                        </div>
-                    )}
+                    <div className="overflow-y-auto max-h-28 pr-2">
+                        <p className="text-sm text-gray-600 mb-3 min-h-[40]">{m.short_description}</p>
+                        {m.categories_array && (
+                            <div className="flex flex-wrap gap-2 min-h-[56]">
+                                {m.categories_array.map((cat:string) => (
+                                    <span 
+                                        key={cat} 
+                                        className={`h-fit px-2 py-1 text-xs font-medium rounded-full ${categoryClasses[cat as keyof typeof categoryClasses] ?? 'bg-orange-100 text-orange-700'}`}
+                                    >
+                                        {cat[0].toUpperCase() + cat.slice(1)}
+                                    </span>
+                                ))}
+                            </div>
+                        )}
+                    </div>
                 </div>
             </div>
         </Link>

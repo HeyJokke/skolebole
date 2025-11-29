@@ -11,7 +11,7 @@ export default function DanskPage():React.ReactElement {
     const filteredMaterials = filterMaterialsByCategory({materials, category})
 
     return (
-        <main className="h-full">
+        <main className="h-full min-h-screen">
             <h1 className="text-3xl font-bold mb-10">Dansk page</h1>
             <RenderMaterials materials={filteredMaterials} error={error} loading={loading} />
         </main>
