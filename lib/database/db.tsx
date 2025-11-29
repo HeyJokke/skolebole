@@ -245,3 +245,17 @@ export async function incrementVisited(m:Material) {
         return null
     }
 }
+
+export async function orderMaterialsByDate(limit:number):Promise<MaterialsResponse> {
+    try {
+        const {data, error} = await supabase.from('materialer').select('*').order('created_at', {ascending: false}).limit(limit)
+
+        if (error) {
+            throw new Error(error.message)
+        }
+
+        return {data: data as Material[], error: null}
+    } catch(error) {
+        return {data: null, error: (error as Error).message}
+    }
+}

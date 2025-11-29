@@ -3,7 +3,6 @@
 import {useMaterials} from '@/lib/context/MaterialsProvider'
 import filterMaterialsByCategory from '@/lib/hooks/filterMaterialsByCategory'
 import RenderMaterials from '@/lib/components/renderMaterials'
-import Filters from '@/lib/components/filters'
 
 export default function DanskPage():React.ReactElement {
     const {materials, error, loading} = useMaterials()
