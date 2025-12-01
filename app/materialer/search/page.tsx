@@ -5,8 +5,8 @@ import React from 'react'
 import RenderMaterials from "@/lib/components/renderMaterials"
 import type { Material } from '@/lib/types'
 
-export default function SearchPage({ searchParams }: { searchParams: Promise<{ q?: string }> }): React.ReactElement {
-    const [query, setQuery] = React.useState("")
+export default function SearchPage({ searchParams }: { searchParams:Promise<{ q?: string }> }):React.ReactElement {
+    const [query, setQuery] = React.useState<string>("")
     const {materials,error,loading} = useMaterials()
     let filteredMaterials:Material[] | null = []
 
@@ -36,7 +36,7 @@ export default function SearchPage({ searchParams }: { searchParams: Promise<{ q
     if (!query) return <h1 className="text-2xl font-bold">Søg efter et materiale...</h1>
 
     return (
-        <main className="h-screen">
+        <main>
             {
                 (filteredMaterials ?? []).length > 0 && 
                 <h1 className="text-2xl font-bold mb-10">Søgeresultater for {`'${query}'`} </h1>

@@ -1,33 +1,39 @@
 "use client"
 import React from 'react'
-import { getAllMaterials  } from '@/lib/database/db'
 import type { Material } from '@/lib/types'
 import RenderMaterials from '@/lib/components/renderMaterials'
 import {useMaterials} from "@/lib/context/MaterialsProvider"
+import Filters from '@/lib/components/filters'
 
-export default function Materialer() {
-    const [materials, setMaterials] = React.useState<Material[] | null>(null)
-    const [error, setError] = React.useState<string | null>(null)
-    const {loading} = useMaterials()
-    
+export default function Materialer({ searchParams }: { searchParams:Promise<{ kategori?: string }> }):React.ReactElement {
+    const [query, setQuery] = React.useState<string>("")
+    const {materials, error, loading} = useMaterials()
+    let filteredMaterials:Material[] | null = []
+
     React.useEffect(() => {
-        async function fetchData() {
-            const {data, error} = await getAllMaterials()
+        async function getQuery() {
+            const params = await searchParams
+            const query = params.kategori ? params.kategori : ""
 
-            if (error) {
-                setError(error)
-            } else {
-                setMaterials(data)
-            }
-        }
+            setQuery(query)
+        } 
+        
+        getQuery()
+    },[searchParams])
 
-        fetchData()
-    },[])
+    if (query && materials) {
+        filteredMaterials = materials.filter(m => m.categories_array.some(cat => cat.toLowerCase().includes(query.toLowerCase())))
+    } else {
+        filteredMaterials = materials
+    }
 
     return (
-        <main className="h-full min-h-screen">
+        <main>
             <h1 className="text-3xl font-bold mb-10">Alle materialer</h1>
-            <RenderMaterials materials={materials} error={error} loading={loading} />
+            <div className="flex">
+                <Filters filteredMaterials={null} />
+                <RenderMaterials materials={filteredMaterials} error={error} loading={loading} />
+            </div>
         </main>
 
     )

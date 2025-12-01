@@ -1,7 +1,6 @@
 import type { Material } from '@/lib/types'
 import MaterialCard from '@/lib/components/materialCard'
 import React from 'react'
-import Filters from './filters'
 
 type Props = {
     materials: Material[] | null
@@ -26,7 +25,7 @@ export default function RenderMaterials({materials, error, loading}: Props) {
         return () => clearTimeout(timer)
     }, [materials])
 
-    if (!showContent) return <Spinner />
+    if (!showContent) return <main className="m-auto"><Spinner /></main>
     
     if (!materials && !error || loading) return <p>Loading database...</p>
 
@@ -39,7 +38,6 @@ export default function RenderMaterials({materials, error, loading}: Props) {
 
         return (
             <main className="flex">
-                <Filters filteredMaterials={materials}/>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {html}
                 </div>

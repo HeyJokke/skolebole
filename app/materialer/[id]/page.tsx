@@ -49,7 +49,7 @@ export default function ProductPage({ params }:
     }
 
     return (
-        <main className="h-full pl-3 pr-3">
+        <main className="pl-3 pr-3">
             {m ? 
                 <>  
                     <header>
@@ -68,7 +68,7 @@ export default function ProductPage({ params }:
                                 ))}
                         </div>
                     </header>
-                    <div className="lg:flex sm:block">
+                    <div className="lg:flex sm:block mt-8">
                         <div className="block lg:w-1/2 sm:w-full m-auto">
                             <Image 
                                 alt={`Produktbillede for ${m.name}`} 
