@@ -53,7 +53,7 @@ export default function RootLayout({
         </main>
         <footer className="mt-12 bg-white border-t border-gray-100 py-6">
           <div className="max-w-6xl mx-auto px-4 text-center text-gray-600">
-            <p>© {new Date().getFullYear()} Skolebole - Læringsmaterialer til danske skoler</p>
+            <p>© {new Date().getFullYear()} Skolebole - Danske læringsmaterialer til danske skoler</p>
           </div>
         </footer>
         </MaterialsProvider>
