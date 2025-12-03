@@ -72,7 +72,7 @@ export default function ProductPage({ params }:
                         <div className="block lg:w-1/2 sm:w-full m-auto">
                             <Image 
                                 alt={`Produktbillede for ${m.name}`} 
-                                src={imagePath ?? '/images/logo.png'}
+                                src={imagePath ?? '/images/skolebole_fallback.png'}
                                 width={600}
                                 height={600}
                                 className="w-full"

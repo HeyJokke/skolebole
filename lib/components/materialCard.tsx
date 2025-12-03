@@ -42,7 +42,7 @@ export default function MaterialCard({m}: CardProps) {
                     /> :
                     <Image 
                         alt={`Produkt billede til ${m.name}`} 
-                        src={'/images/logo.png'} 
+                        src={'/images/skolebole_fallback.png'} 
                         width={250} 
                         height={200}
                         className="w-full h-full object-cover"
