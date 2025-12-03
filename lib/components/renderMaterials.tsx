@@ -1,3 +1,4 @@
+"use client"
 import type { Material } from '@/lib/types'
 import MaterialCard from '@/lib/components/materialCard'
 import React from 'react'
@@ -15,35 +16,19 @@ const Spinner = () => (
 )
 
 export default function RenderMaterials({materials, error, loading}: Props) {
-    const [showContent, setShowContent] = React.useState(false)
-    
-    React.useEffect(() => {
-        setShowContent(false)
-        const timer = setTimeout(() => {
-            setShowContent(true)
-        }, 500)
-        return () => clearTimeout(timer)
-    }, [materials])
+    if (loading || !materials) return <main className="m-auto"><Spinner /></main>
 
-    if (!showContent) return <main className="m-auto"><Spinner /></main>
-    
-    if (!materials && !error || loading) return <p>Loading database...</p>
+    if (error) return <p className="mx-auto text-white bg-red-500 rounded-md p-2 h-full"> Der skete en fejl </p>
 
-    if (error) return <p className="text-white bg-red-500 rounded-md p-2"> An error occured, the database may be down or connection has been lost </p>
+    if (materials.length === 0) return <h1 className="text-2xl font-bold"> Ingen resultater... </h1>
 
-    if (materials?.length === 0) return <h1 className="text-2xl font-bold"> Ingen resultater... </h1>
+    const html = materials.map((m:Material) => <MaterialCard key={m.id} m={m}/>)
 
-    if (materials) {
-        const html = materials.map((m:Material) => <MaterialCard key={m.id} m={m}/>)
-
-        return (
-            <main className="flex">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {html}
-                </div>
-            </main>
-        )
-    }
-
-    return null
+    return (
+        <main className="flex">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {html}
+            </div>
+        </main>
+    )
 }

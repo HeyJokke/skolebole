@@ -1,3 +1,4 @@
+"use client"
 import type {Material} from '@/lib/types'
 import {useSearchParams, redirect} from 'next/navigation'
 import {useMaterials} from '@/lib/context/MaterialsProvider'
