@@ -4,6 +4,7 @@ import { useMaterials } from "@/lib/context/MaterialsProvider"
 import React from 'react'
 import RenderMaterials from "@/lib/components/renderMaterials"
 import type { Material } from '@/lib/types'
+import Link from 'next/link'
 
 export default function SearchPage({ searchParams }: { searchParams:Promise<{ q?: string }> }):React.ReactElement {
     const [query, setQuery] = React.useState<string>("")
@@ -36,7 +37,8 @@ export default function SearchPage({ searchParams }: { searchParams:Promise<{ q?
     if (!query) return <h1 className="text-2xl font-bold">Søg efter et materiale...</h1>
 
     return (
-        <main>
+        <main className="pl-3 pr-3">
+            <Link href="." className="inline-block mb-5 hover:underline">{'<-- '}Tilbage til katalog</Link>
             {
                 (filteredMaterials ?? []).length > 0 && 
                 <h1 className="text-2xl font-bold mb-10">Søgeresultater for {`'${query}'`} </h1>

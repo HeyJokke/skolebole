@@ -53,8 +53,8 @@ export default function ProductPage({ params }:
             {m ? 
                 <>  
                     <header>
-                        <Link href="." className="hover:underline">{'<-- '}Tilbage til katalog</Link>
-                        <h1 className="text-3xl font-bold mt-5">{m.name}</h1>
+                        <Link href="." className="inline-block mb-5 hover:underline">{'<-- '}Tilbage til katalog</Link>
+                        <h1 className="text-3xl font-bold">{m.name}</h1>
                         <div className='flex'>
                             <p className="italic mr-2">{m.short_description}</p>
 

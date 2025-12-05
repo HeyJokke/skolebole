@@ -11,7 +11,7 @@ type CardProps = {
 
 export default function MaterialCard({m}: CardProps) {
     const [imagePath, setImagePath] = React.useState<string | null>(null)
-
+    
     const categoryClasses = {
         dansk: "bg-blue-100 text-blue-700",
         matematik: "bg-green-100 text-green-700",
