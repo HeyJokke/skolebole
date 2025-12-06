@@ -49,7 +49,7 @@ export default function ProductPage({ params }:
                     <header>
                         <Link href="." className="inline-block mb-5 hover:underline">{'<-- '}Tilbage til katalog</Link>
                         <h1 className="text-3xl font-bold">{m.name}</h1>
-                        <div className='flex'>
+                        <div className='lg:flex sm:block'>
                             <p className="italic mr-2">{m.short_description}</p>
 
                             {m.categories_array.map((cat:string) => (
