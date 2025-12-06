@@ -30,7 +30,7 @@ export default function Materialer({ searchParams }: { searchParams:Promise<{ ka
     return (
         <main>
             <h1 className="text-3xl font-bold mb-10">Alle materialer</h1>
-            <div className="flex">
+            <div className="block md:flex">
                 <React.Suspense fallback={<div />}> 
                     <Filters filteredMaterials={null} />
                 </React.Suspense>

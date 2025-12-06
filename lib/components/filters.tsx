@@ -41,7 +41,7 @@ export default function Filters({filteredMaterials}: FilterProps):React.ReactEle
     }
 
     return (
-        <main className="mr-10 min-w-[200]">
+        <main className='mb-10 md:mr-5 min-w-[200]'>
             <h2 className="text-xl font-bold">Sortér efter:</h2>
             {(!loading && !error) && <ul className="min-w-[150px]">
                 <li onClick={() => handleClick(null)} className={`text-xl lg:text-base cursor-pointer ml-3 mt-1 hover:underline`}>

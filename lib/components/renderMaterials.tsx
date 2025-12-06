@@ -25,7 +25,7 @@ export default function RenderMaterials({materials, error, loading}: Props) {
     const html = materials.map((m:Material) => <MaterialCard key={m.id} m={m}/>)
 
     return (
-        <main className="flex">
+        <main className="md:flex">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {html}
             </div>
