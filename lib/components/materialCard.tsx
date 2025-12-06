@@ -19,7 +19,7 @@ export default function MaterialCard({m}: CardProps) {
     return (
         <Link href={`/materialer/${m.id}`}>
             <div className="bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden hover:scale-105 transform transition-transform">
-                <div className="relative w-full h-48 bg-gray-200">
+                <div className="relative w-full h-36 bg-gray-200">
                     <Image 
                         alt={`Produkt billede til ${m.name}`} 
                         src={m.image_path ? m.image_path : '/images/skolebole_fallback.png'} 
@@ -30,7 +30,7 @@ export default function MaterialCard({m}: CardProps) {
                 </div>
                 <div className="p-4 flex flex-col">
                     <h3 className="text-lg font-semibold text-gray-800 mb-2">{m.name}</h3>
-                    <div className="overflow-y-auto max-h-28 pr-2">
+                    <div className="overflow-y-auto max-h-48 pr-2">
                         <p className="text-sm text-gray-600 mb-3 min-h-[40]">{m.short_description}</p>
                         {m.categories_array && (
                             <div className="flex flex-wrap gap-2 min-h-[56]">
