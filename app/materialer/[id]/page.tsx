@@ -63,7 +63,7 @@ export default function ProductPage({ params }:
                         </div>
                     </header>
                     <div className="lg:flex sm:block mt-8">
-                        <div className="block lg:w-1/2 sm:w-full m-auto">
+                        <div className="block lg:w-2/5 sm:w-full m-auto">
                             <Image 
                                 alt={`Produktbillede for ${m.name}`} 
                                 src={m.image_path ? m.image_path : '/images/skolebole_fallback.png'}
@@ -73,7 +73,7 @@ export default function ProductPage({ params }:
                             />
                             <button onClick={pdfRedirect} className="w-full h-15 bg-green-300 text-green-900 font-bold hover:cursor-pointer hover:text-white hover:bg-green-500">Download</button>
                         </div>
-                        <p className="lg:w-1/2 sm:w-full lg:ml-10 text-base/6 text-clip mt-3">{m.long_description}</p>
+                        <p className="lg:w-3/5 sm:w-full lg:ml-10 text-base/6 text-clip mt-3">{m.long_description}</p>
                     </div>
                 </>
             : null}
