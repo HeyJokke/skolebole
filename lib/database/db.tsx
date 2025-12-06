@@ -56,6 +56,43 @@ export async function searchMaterials(search: string):Promise<MaterialsResponse>
 
 export async function insertMaterial(name:FormDataEntryValue, shortdesc:FormDataEntryValue, cats:FormDataEntryValue, tags:FormDataEntryValue | null, longdesc:FormDataEntryValue, imageFile:File, pdfFile:File, ):Promise<MaterialResponse> {    
     try {
+        // Upload image
+        const { error: imageUploadError } = await uploadFileToBucket('materials-images', imageFile)
+
+        if (imageUploadError) {
+            throw new Error(imageUploadError.message)
+        }
+
+        // Upload pdf
+        const { error: pdfUploadError } = await uploadFileToBucket('materials-pdfs', pdfFile)
+
+        if (pdfUploadError) {
+            await removeFileFromBucket('materials-images', imageFile.name)
+
+            throw new Error(pdfUploadError.message)
+        }
+
+        // Get image URL
+        const {data: imageUrl, error: imageError} = await getMaterialImageUrl(imageFile.name)
+
+        if (imageError) {
+            await removeFileFromBucket('materials-images', imageFile.name)
+            await removeFileFromBucket('materials-pdfs', pdfFile.name)
+
+            throw new Error(imageError.message)
+        }
+
+        // Get pdf download URL
+        const {data: pdfDownloadUrl, error: pdfError} = await getMaterialDownloadUrl(pdfFile.name)
+
+        if (pdfError) {
+            await removeFileFromBucket('materials-images', imageFile.name)
+            await removeFileFromBucket('materials-pdfs', pdfFile.name)
+
+            throw new Error(pdfError.message)
+        }
+
+        // Insert material with image url and pdf download url
         const { data, error } = await supabase.from('materialer')
             .insert(
                 {
@@ -64,8 +101,8 @@ export async function insertMaterial(name:FormDataEntryValue, shortdesc:FormData
                     categories_array: cats.toString().split(' '), 
                     meta_tags: tags ? tags.toString().split(' ') : null, 
                     long_description: longdesc, 
-                    image_path: imageFile.name,
-                    pdf_path: pdfFile.name
+                    image_path: imageUrl,
+                    pdf_path: pdfDownloadUrl
                 }
             )
             .select()
@@ -73,25 +110,6 @@ export async function insertMaterial(name:FormDataEntryValue, shortdesc:FormData
 
         if (error) {
             throw new Error(error.message)
-        }
-
-        const { error: imageUploadError } = await uploadFileToBucket('materials-images', imageFile)
-
-        if (imageUploadError) {
-            await removeRowFromDatabase('materialer', data.id)
-
-            throw new Error(imageUploadError.message)
-            
-        }
-
-        const { error: pdfUploadError } = await uploadFileToBucket('materials-pdfs', pdfFile)
-
-        if (pdfUploadError) {
-            await removeRowFromDatabase('materialer', data.id)
-
-            await removeFileFromBucket('materials-images', imageFile.name)
-
-            throw new Error(pdfUploadError.message)
         }
 
         return {data: data as Material, error: null}
@@ -103,58 +121,50 @@ export async function insertMaterial(name:FormDataEntryValue, shortdesc:FormData
     }
 }
 
-export async function getMaterialImageUrl(m:Material):Promise<string | null> {
-    if (m.image_path === "" || null) {
-        return null
-    } else {
-        try {
-            const {data: {publicUrl}} = supabase.storage.from('materials-images').getPublicUrl(m.image_path)
-            
-            const res = await fetch(publicUrl, { method: "HEAD"})
+export async function getMaterialImageUrl(imageFileName:string):Promise<{data: string | null, error: Error | null}> {
+    try {
+        const {data: {publicUrl}} = supabase.storage.from('materials-images').getPublicUrl(imageFileName)
+        
+        const res = await fetch(publicUrl, { method: "HEAD"})
 
-            if (res.ok) {
-                return publicUrl
-            } else {
-                throw new Error(
-                    `Image for ${m.name} (ID: ${m.id}, IMAGE_PATH: ${m.image_path}) could not be retrieved from the database`
-                )
-            }
-    
-        } catch(error) {
-            console.error((error as Error).message)
-            
-            return null
+        if (res.ok) {
+            return {data: publicUrl, error: null}
+        } else {
+            throw new Error(
+                `Image for IMAGE_PATH: ${imageFileName}) could not be retrieved from the database`
+            )
         }
+
+    } catch(error) {
+        console.error((error as Error).message)
+        return {data: null, error: (error as Error)}
     }
 }
 
-export async function getMaterialDownloadUrl(m:Material):Promise<string | null> {
-    if (m.pdf_path === "" || null) {
-        return null
-    } else {
-        try {
-            const {data: {publicUrl}} = supabase
-                .storage
-                .from('materials-pdfs')
-                .getPublicUrl(m.pdf_path)
-            
-            const res = await fetch(publicUrl, { method: "HEAD"})
-            
-            if (res.ok) {
-                return publicUrl
-            } else {
-                throw new Error(
-                    `PDF for ${m.name} (ID: ${m.id}, PDF_PATH: ${m.pdf_path}) could not be retrieved from the database`
-                )
-            }
-    
-        } catch(error) {
-            console.error((error as Error).message)
-            
-            return null
+export async function getMaterialDownloadUrl(pdfFileName:string):Promise<{data: string | null, error: Error | null}> {
+    try {
+        const {data: {publicUrl}} = supabase
+            .storage
+            .from('materials-pdfs')
+            .getPublicUrl(pdfFileName)
+        
+        const res = await fetch(publicUrl, { method: "HEAD"})
+        
+        if (res.ok) {
+            return {data: publicUrl, error: null}
+        } else {
+            throw new Error(
+                `PDF: ${pdfFileName} could not be retrieved from the database`
+            )
         }
+        
+    } catch(error) {
+        console.error((error as Error).message)
+        
+        return {data: null, error: (error as Error)}
     }
 }
+
 
 export async function removeRowFromDatabase(dbName:string, id:number):Promise<void> {
     await supabase

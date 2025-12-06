@@ -3,15 +3,12 @@ import Image from 'next/image'
 import Link from 'next/link'
 import type {Material} from '@/lib/types'
 import React from 'react'
-import {getMaterialImageUrl} from '@/lib/database/db'
 
 type CardProps = {
     m: Material
 }
 
-export default function MaterialCard({m}: CardProps) {
-    const [imagePath, setImagePath] = React.useState<string | null>(null)
-    
+export default function MaterialCard({m}: CardProps) { 
     const categoryClasses = {
         dansk: "bg-blue-100 text-blue-700",
         matematik: "bg-green-100 text-green-700",
@@ -20,34 +17,17 @@ export default function MaterialCard({m}: CardProps) {
         historie: "bg-red-100 text-red-700"
     }
 
-    React.useEffect(() => {
-        async function fetchImage() {
-            setImagePath(await getMaterialImageUrl(m))
-        }
-
-        fetchImage()
-    })
-
     return (
         <Link href={`/materialer/${m.id}`}>
             <div className="bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden hover:scale-105 transform transition-transform">
                 <div className="relative w-full h-48 bg-gray-200">
-                    {imagePath ? 
                     <Image 
                         alt={`Produkt billede til ${m.name}`} 
-                        src={imagePath} 
-                        width={250} 
-                        height={200}
-                        className="w-full h-full object-cover"
-                    /> :
-                    <Image 
-                        alt={`Produkt billede til ${m.name}`} 
-                        src={'/images/skolebole_fallback.png'} 
+                        src={m.image_path ? m.image_path : '/images/skolebole_fallback.png'} 
                         width={250} 
                         height={200}
                         className="w-full h-full object-cover"
                     />
-                    } 
                 </div>
                 <div className="p-4 flex flex-col">
                     <h3 className="text-lg font-semibold text-gray-800 mb-2">{m.name}</h3>

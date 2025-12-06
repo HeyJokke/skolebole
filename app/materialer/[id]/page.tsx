@@ -1,6 +1,6 @@
 "use client"
 import { useMaterials } from '@/lib/context/MaterialsProvider'
-import { getMaterialImageUrl, getMaterialDownloadUrl, incrementDownload } from '@/lib/database/db'
+import { incrementDownload } from '@/lib/database/db'
 import type { Material } from '@/lib/types'
 import React from 'react'
 import Link from 'next/link'
@@ -13,8 +13,6 @@ export default function ProductPage({ params }:
 
     const [m, setM] = React.useState<Material>()
     const [materialId, setMaterialId] = React.useState<number | null>(null)
-    const [imagePath, setImagePath] = React.useState<string | null>()
-    const [downloadUrl, setDownloadUrl] = React.useState<string | null>()
     
     const categoryClasses = {
         dansk: "bg-blue-100 text-blue-700",
@@ -30,22 +28,17 @@ export default function ProductPage({ params }:
 
             if (materials) {
                 setM(materials.filter((m) => m.id === materialId)[0])
-                if (m) {
-                    setImagePath(await getMaterialImageUrl(m))
-                    setDownloadUrl(await getMaterialDownloadUrl(m))
-                }
             }
         }
 
         identifyMaterial()
     })
 
-    function pdfRedirect() {
+    function pdfRedirect():void {
         if (m) {
             incrementDownload(m)
+            window.open(m?.pdf_path, '_blank', 'noopener,noreferrer')
         }
-
-        if (downloadUrl) window.open(downloadUrl, '_blank', 'noopener,noreferrer')
     }
 
     return (
@@ -72,7 +65,7 @@ export default function ProductPage({ params }:
                         <div className="block lg:w-1/2 sm:w-full m-auto">
                             <Image 
                                 alt={`Produktbillede for ${m.name}`} 
-                                src={imagePath ?? '/images/skolebole_fallback.png'}
+                                src={m.image_path ? m.image_path : '/images/skolebole_fallback.png'}
                                 width={600}
                                 height={600}
                                 className="w-full"
