@@ -41,14 +41,14 @@ export default function Filters({filteredMaterials}: FilterProps):React.ReactEle
     }
 
     return (
-        <main className="mr-10">
+        <main className="mr-10 min-w-[200]">
             <h2 className="text-xl font-bold">Sortér efter:</h2>
             {(!loading && !error) && <ul className="min-w-[150px]">
-                <li onClick={() => handleClick(null)} className={`sm:text-xl lg:text-base cursor-pointer ml-3 mt-1 hover:underline`}>
+                <li onClick={() => handleClick(null)} className={`text-xl lg:text-base cursor-pointer ml-3 mt-1 hover:underline`}>
                     Nulstil
                 </li>
                 {uniqueCategories.map(cat => (
-                        <li onClick={() => handleClick(cat)} className={`cursor-pointer ml-3 mt-1 hover:underline sm:text-xl lg:text-base ${params.get('kategori') === cat ? 'font-bold sm:text-2xl lg:text-xl' : null}`} key={cat}>
+                        <li onClick={() => handleClick(cat)} className={`cursor-pointer ml-3 mt-1 hover:underline text-xl lg:text-base ${params.get('kategori') === cat ? 'font-bold text-2xl lg:text-xl' : null}`} key={cat}>
                             {cat[0].toUpperCase() + cat.slice(1)}
                         </li>
                 ))}
