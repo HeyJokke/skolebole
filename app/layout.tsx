@@ -4,6 +4,7 @@ import "./globals.css";
 import Image from "next/image"
 import Link from "next/link"
 import SearchForm from "@/lib/components/searchForm"
+import React from 'react'
 import { MaterialsProvider } from "@/lib/context/MaterialsProvider";
 
 export const metadata: Metadata = {
@@ -41,7 +42,9 @@ export default function RootLayout({
                   <Link href="/materialer"><li className="px-6 py-2 m-auto text-center rounded-full bg-red-100 hover:bg-red-200 transition-colors duration-300 cursor-pointer font-medium text-red-800">Om os</li></Link>
                 </ul>
               </nav>
-              <SearchForm />
+              <React.Suspense>
+                <SearchForm />
+              </React.Suspense>
             </div>
           </div>
         </header>

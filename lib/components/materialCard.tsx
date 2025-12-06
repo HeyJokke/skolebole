@@ -2,7 +2,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import type {Material} from '@/lib/types'
-import React from 'react'
 
 type CardProps = {
     m: Material

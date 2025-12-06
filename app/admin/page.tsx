@@ -1,4 +1,5 @@
 "use client"
+
 import MaterialCard from "@/lib/components/materialCard"
 import type { Material } from '@/lib/types'
 import React, { FormEvent } from 'react'

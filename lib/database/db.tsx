@@ -165,7 +165,6 @@ export async function getMaterialDownloadUrl(pdfFileName:string):Promise<{data: 
     }
 }
 
-
 export async function removeRowFromDatabase(dbName:string, id:number):Promise<void> {
     await supabase
         .from(dbName)
