@@ -8,7 +8,7 @@ import Link from 'next/link'
 
 export default function SearchPage({ searchParams }: { searchParams:Promise<{ q?: string }> }):React.ReactElement {
     const [query, setQuery] = React.useState<string>("")
-    const {materials,error,loading} = useMaterials()
+    const {materials, error, loading} = useMaterials()
     let filteredMaterials:Material[] | null = []
 
     if ( query && materials ) {

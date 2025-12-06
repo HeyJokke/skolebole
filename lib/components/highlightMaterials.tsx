@@ -12,6 +12,7 @@ type Props = {
 
 export default function HighlightMaterials({title, vertical, amount}:Props) {
     const [materials, setMaterials] = React.useState<Material[] | null>(null)
+
     let html:React.ReactElement[] = []
 
     const mainClasses =  vertical ? `flex-col w-60` : `flex grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5`
@@ -26,7 +27,7 @@ export default function HighlightMaterials({title, vertical, amount}:Props) {
         }
 
         fetchMaterials()
-    })
+    }, [amount])
 
     if (materials) {
         html = materials.map(m => {
