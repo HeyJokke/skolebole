@@ -55,7 +55,7 @@ export default function ProductPage({ params }:
                             {m.categories_array.map((cat:string) => (
                                     <span 
                                         key={cat} 
-                                        className={`mr-1 px-2 py-1 text-xs font-medium rounded-full ${categoryClasses[cat as keyof typeof categoryClasses] ?? 'bg-orange-100 text-orange-700'}`}
+                                        className={`h-fit mr-1 px-2 py-1 text-xs font-medium rounded-full ${categoryClasses[cat as keyof typeof categoryClasses] ?? 'bg-orange-100 text-orange-700'}`}
                                     >
                                         {cat[0].toUpperCase() + cat.slice(1)}
                                     </span>
