@@ -45,7 +45,7 @@ export default function SearchForm() {
                 <input
                     className="ml-2 outline-none"  
                     placeholder="Søg..."
-                    defaultValue={inputValue}
+                    value={inputValue}
                     name="search"
                     onChange={(e) => {
                         onChange(e.target.value)
