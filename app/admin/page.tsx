@@ -1,9 +1,8 @@
 "use client"
-
 import MaterialCard from "@/lib/components/materialCard"
 import type { Material } from '@/lib/types'
 import React, { FormEvent } from 'react'
-import { insertMaterial } from '@/lib/database/db'
+import { insertMaterialAction } from "./action"
 
 export default function AdminPage() {
     const [material, setMaterial] = React.useState<Material | null>(null)
@@ -11,34 +10,19 @@ export default function AdminPage() {
 
     async function uploadMaterial(e:FormEvent<HTMLFormElement>) {
         e.preventDefault()
-        const form = e.currentTarget
         const formData = new FormData(e.currentTarget)
-        const name = formData.get('input-name') as FormDataEntryValue
-        const shortdesc = formData.get('input-shortdesc') as FormDataEntryValue
-        const cats = formData.get('input-cats') as FormDataEntryValue
-        const tags = formData.get('input-tags') as FormDataEntryValue | null
-        const longdesc = formData.get('input-longdesc') as FormDataEntryValue
-        const imageFile = formData.get('input-img') as File
-        const pdfFile = formData.get('input-pdf') as File
         
-        try {
-            
-            const {data , error} = await insertMaterial(name, shortdesc, cats, tags, longdesc, imageFile, pdfFile)
-            if (error) {
-                throw new Error(error)
-            }
+        const {data, error} = await insertMaterialAction(formData)
 
-            setError(null)
+        if (error) {
             setMaterial(data)
-            form.reset()
-
-        } catch(error) {
-
+            setError(null)
+        } else {
             setMaterial(null)
-            setError(error instanceof Error ? error.message : null)
-            form.reset()
-
+            setError(error)
         }
+
+        e.currentTarget.reset()
 
     }
 
