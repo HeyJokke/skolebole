@@ -6,15 +6,16 @@ import {useSearchParams, usePathname, useRouter} from "next/navigation"
 export default function SearchForm() {
     const searchParams = useSearchParams()
     const pathname = usePathname()
-    const params = new URLSearchParams(searchParams)
     const router = useRouter()
 
-    function handleSearch(searchTerm: string) {
-        if (searchTerm) {
-            params.set('q', searchTerm)
-        } else {
-            params.delete('q')
-        }
+    const [inputValue, setInputValue] = React.useState('')
+
+    React.useEffect(() => {
+        setInputValue(searchParams.get('q') ?? '')
+    },[searchParams])
+
+    function onChange(searchTerm: string) {
+        setInputValue(searchTerm)
 
         if (searchTerm.length === 0 && pathname.startsWith('/materialer/search')) {
             router.push(`/materialer`)
@@ -23,15 +24,15 @@ export default function SearchForm() {
 
     function onSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
-        const data = new FormData(e.currentTarget)
-        const searchTerm = data.get("search")
+        const searchTerm = inputValue.trim()
 
-        if (searchTerm) {
-            params.delete('kategori')
-            params.set('q', searchTerm.toString())
-            router.push(`/materialer/search?${params.toString()}`)
+        if (searchTerm.length > 0) {
+            const nextParams = new URLSearchParams(Array.from(searchParams.entries()))
+            nextParams.delete('kategori')
+            nextParams.set('q', searchTerm)
+            router.push(`/materialer/search?${nextParams.toString()}`)
         } else {
-            params.delete('q')
+            router.push('/materialer')
         }
 
         
@@ -44,10 +45,10 @@ export default function SearchForm() {
                 <input
                     className="ml-2 outline-none"  
                     placeholder="Søg..."
-                    defaultValue={searchParams.get('q')?.toString()}
+                    defaultValue={inputValue}
                     name="search"
                     onChange={(e) => {
-                        handleSearch(e.target.value)
+                        onChange(e.target.value)
                     }}
                 />
             </div>
