@@ -37,7 +37,7 @@ export default function MaterialCard({m}: CardProps) {
                                 {m.categories_array.map((cat:string) => (
                                     <span 
                                         key={cat} 
-                                        className={`h-fit px-2 py-1 text-xs font-medium rounded-full ${categoryClasses[cat as keyof typeof categoryClasses] ?? 'bg-orange-100 text-orange-700'}`}
+                                        className={`h-fit px-2 py-1 text-xs font-medium rounded-full ${categoryClasses[cat.toLowerCase() as keyof typeof categoryClasses] ?? 'bg-orange-100 text-orange-700'}`}
                                     >
                                         {cat[0].toUpperCase() + cat.slice(1)}
                                     </span>

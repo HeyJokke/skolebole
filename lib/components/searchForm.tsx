@@ -1,12 +1,13 @@
 "use client"
 
 import React from "react"
-import {useSearchParams, usePathname, redirect} from "next/navigation"
+import {useSearchParams, usePathname, useRouter} from "next/navigation"
 
 export default function SearchForm() {
     const searchParams = useSearchParams()
     const pathname = usePathname()
     const params = new URLSearchParams(searchParams)
+    const router = useRouter()
 
     function handleSearch(searchTerm: string) {
         if (searchTerm) {
@@ -16,7 +17,7 @@ export default function SearchForm() {
         }
 
         if (searchTerm.length === 0 && pathname.startsWith('/materialer/search')) {
-            redirect(`/materialer`)
+            router.push(`/materialer`)
         }
     }
 
@@ -28,7 +29,7 @@ export default function SearchForm() {
         if (searchTerm) {
             params.delete('kategori')
             params.set('q', searchTerm.toString())
-            redirect(`/materialer/search?${params.toString()}`)
+            router.push(`/materialer/search?${params.toString()}`)
         } else {
             params.delete('q')
         }
