@@ -1,11 +1,11 @@
 "use client"
 
 import { useMaterials } from '@/lib/context/MaterialsProvider'
-import { incrementDownload } from '@/lib/database/db'
 import type { Material } from '@/lib/types'
 import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { IncrementDownload } from './action'
 
 export default function ProductPage({ params }:
     {params: Promise<{id: number}>}
@@ -35,11 +35,9 @@ export default function ProductPage({ params }:
         identifyMaterial()
     })
 
-    function pdfRedirect():void {
-        if (m) {
-            incrementDownload(m)
-            window.open(m?.pdf_path, '_blank', 'noopener,noreferrer')
-        }
+    function pdfRedirect(m:Material) {
+        IncrementDownload(m)
+        window.open(m.pdf_path, '_blank', 'noopener,noreferrer')
     }
 
     return (
@@ -71,7 +69,7 @@ export default function ProductPage({ params }:
                                 height={600}
                                 className="w-full"
                             />
-                            <button onClick={pdfRedirect} className="w-full h-15 bg-green-300 text-green-900 font-bold hover:cursor-pointer hover:text-white hover:bg-green-500">Download</button>
+                            <button onClick={() => pdfRedirect(m)} className="w-full h-15 bg-green-300 text-green-900 font-bold hover:cursor-pointer hover:text-white hover:bg-green-500">Download</button>
                         </div>
                         <p className="lg:w-3/5 sm:w-full lg:ml-10 text-base/6 text-clip mt-3">{m.long_description}</p>
                     </div>
