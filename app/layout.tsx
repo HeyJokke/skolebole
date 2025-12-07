@@ -42,9 +42,7 @@ export default function RootLayout({
                   <Link href="/materialer"><li className="px-6 py-2 m-auto text-center rounded-full bg-red-100 hover:bg-red-200 transition-colors duration-300 cursor-pointer font-medium text-red-800">Om os</li></Link>
                 </ul>
               </nav>
-              <React.Suspense>
-                <SearchForm />
-              </React.Suspense>
+              <SearchForm />
             </div>
           </div>
         </header>
