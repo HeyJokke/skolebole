@@ -1,7 +1,6 @@
 "use client"
 import type { Material } from '@/lib/types'
 import MaterialCard from '@/lib/components/materialCard'
-import React from 'react'
 
 type Props = {
     materials: Material[] | null
