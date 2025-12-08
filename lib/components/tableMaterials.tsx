@@ -120,14 +120,22 @@ export default function TableMaterials() {
                     created: m.created_at.toString().split('.')[0].split('T').join(' '),
                     name: m.name,
                     image_path: m.image_path,
-                    categories: m.categories_array.join(' ')
+                    categories: m.categories_array
                 }
             })
+
+        const categoryClasses = {
+            dansk: "bg-blue-100 text-blue-700",
+            matematik: "bg-green-100 text-green-700",
+            engelsk: "bg-purple-100 text-purple-700",
+            naturteknik: "bg-yellow-100 text-yellow-700",
+            historie: "bg-red-100 text-red-700"
+        }  
     
         const columns = [
-            {name: "Materiale", uid: "materiale"},
-            {name: "Categories", uid: "categories"},
-            {name: "ACTIONS", uid: "actions"}
+            {name: "Materialer", uid: "materials"},
+            {name: "Kategorier", uid: "categories"},
+            {name: "Aktioner", uid: "actions"}
         ]
 
         type MaterialRow = (typeof rows)[0];
@@ -136,20 +144,30 @@ export default function TableMaterials() {
             const cellValue = material[columnKey as keyof MaterialRow];
 
             switch (columnKey) {
-            case "materiale":
+            case "materials":
                 return (
-                <User className="flex justify-start"
-                    avatarProps={{className: "w-24 h-24 border-1 rounded", src: material.image_path}}
-                    description={material.created}
-                    name={material.name + ' |  '}
-                >
-                </User>
+                  <div className="flex justify-start items-center">
+                    <User
+                        avatarProps={{className: "w-24 h-24 border-3 border-gray-400 rounded", src: material.image_path}}
+                        description={""}
+                        name={""}
+                    >
+                    </User>
+                      {<div className="flex-col ml-5">
+                        <p className="font-bold">{material.name}</p>
+                        <p className="text-gray-500 text-sm">{material.created}</p>
+                      </div>}
+                  </div>
                 );
             case "categories":
                 return (
-                <Chip className="capitalize text-center" size="sm" variant="flat">
-                    {cellValue}
-                </Chip>
+                  <div className="flex justify-center">
+                    {material.categories.map(cat => (
+                      <Chip className={`w-fit capitalize text-center h-fit px-2 py-1 text-xs font-medium rounded-full mr-2 ${categoryClasses[cat.toLowerCase() as keyof typeof categoryClasses] ?? 'bg-orange-100 text-orange-700'}`} size="sm" variant="flat" key={cat}>
+                        {cat}
+                      </Chip>
+                    ))}
+                  </div>
                 );
             case "actions":
                 return (
@@ -175,8 +193,8 @@ export default function TableMaterials() {
             <Table aria-label="Table of materials">
             <TableHeader columns={columns}>
                 {(column) => (
-                <TableColumn key={column.uid} align={column.uid === "actions" ? "center" : "start"}>
-                    {column.name}
+                <TableColumn className="bg-blue-300 text-blue-900 p-2" key={column.uid} align={column.uid === "actions" ? "center" : "start"}>
+                    {column.name.toUpperCase()}
                 </TableColumn>
                 )}
             </TableHeader>

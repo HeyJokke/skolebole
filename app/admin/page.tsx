@@ -41,22 +41,24 @@ export default function AdminPage() {
                     <label className="font-semibold" htmlFor="input-pdf">Upload PDF: </label>
                     <input 
                         className="  
-                        block w-full text-sm text-slate-500
+                        block w-auto text-sm text-slate-500
                         file:mr-4 file:py-2 file:px-4 file:rounded-md
                         file:border-0 file:text-sm file:font-semibold
                         file:bg-pink-100 file:text-pink-700
-                        hover:file:bg-pink-200" 
+                        hover:file:bg-pink-200 hover:file:cursor-pointer hover:cursor-pointer" 
                         type="file" multiple={false} name="input-pdf" accept=".pdf" required /><br/>
                     <label className="font-semibold" htmlFor="input-img">Upload billede: </label>
                     <input 
                         className="  
-                        block w-full text-sm text-slate-500
+                        block w-auto text-sm text-slate-500
                         file:mr-4 file:py-2 file:px-4 file:rounded-md
                         file:border-0 file:text-sm file:font-semibold
                         file:bg-blue-100 file:text-blue-700
-                        hover:file:bg-blue-200" 
+                        hover:file:bg-blue-200 hover:file:cursor-pointer hover:cursor-pointer" 
                         type="file" multiple={false} name="input-img" accept="image/*" required /><br/>
-                    <button className="bg-green-200 rounded-md px-5 py-2 hover:bg-green-300 text-green-800 font-semibold" type="submit">Upload</button>
+                    <div className="flex w-full justify-end pr-5">
+                        <button className="bg-green-200 rounded-md px-5 py-2 hover:bg-green-300 text-green-800 font-semibold hover:cursor-pointer" type="submit">Upload</button>
+                    </div>
                 </form>
                 
                 <span className="border-1"></span>
