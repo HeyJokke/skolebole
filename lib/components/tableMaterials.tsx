@@ -1,7 +1,7 @@
 "use client"
 
 import type {SVGProps} from "react";
-import React from 'react'
+import React, {FormEvent} from 'react'
 import {
   Table,
   TableHeader,
@@ -14,7 +14,8 @@ import {
   Tooltip
 } from "@heroui/react";
 import {useMaterials} from "@/lib/context/MaterialsProvider"
-import { removeFileFromBucket, removeRowFromDatabase } from "../database/db";
+import { removeFileFromBucket, removeRowFromDatabase, updateMaterial } from "../database/db";
+import type {Material} from '@/lib/types'
 
 export type IconSvgProps = SVGProps<SVGSVGElement> & {
   size?: number;
@@ -113,7 +114,21 @@ export const EditIcon = (props: IconSvgProps) => {
 
 export default function TableMaterials() {
     const {materials, refreshMaterials} = useMaterials()
-    
+    const [open, setOpen] = React.useState<boolean>(false)
+    const [selectedId, setSelectedId] = React.useState<number>(0)
+    const [selectedMaterial, setSelectedMaterial] = React.useState<Material | null>(null)
+
+    function selectMaterial(id:number) {
+      setSelectedId(id)
+
+      if (materials) {
+        const found = materials.find(m => m.id === id) ?? null
+        setSelectedMaterial(found)
+      }
+      
+      setOpen(true)
+    }
+
     if (materials) {
         const rows = materials.map(m => {
                 return {
@@ -153,6 +168,8 @@ export default function TableMaterials() {
               refreshMaterials()
             }
 
+            
+
             switch (columnKey) {
             case "materials":
                 return (
@@ -181,12 +198,14 @@ export default function TableMaterials() {
                 );
             case "actions":
                 return (
-                <div className="relative flex justify-center items-center gap-2">
+                <div className="relative flex justify-center items-center gap-5">
                     <Tooltip className="bg-blue-500 rounded-md text-white font-bold pl-1 pr-1 text-sm" content="Edit">
-                    <span className="hidden text-lg hover:text-blue-400 cursor-pointer active:opacity-50">
+                    <span onClick={() => selectMaterial(material.id)} 
+                      className="text-lg hover:text-blue-400 cursor-pointer active:opacity-50">
                         <EditIcon />
                     </span>
                     </Tooltip>
+                    <span className="border-1 h-5 border-gray-400"></span>
                     <Tooltip className="bg-red-500 rounded-md text-white font-bold pl-1 pr-1 text-sm" content="Delete">
                     <span onClick={() => handleDelete(material)} className="text-lg hover:text-red-500 cursor-pointer active:opacity-50">
                         <DeleteIcon />
@@ -199,7 +218,23 @@ export default function TableMaterials() {
             }
         }
 
+        async function uploadMaterial(e:FormEvent<HTMLFormElement>) {
+            e.preventDefault()
+            const form = e.currentTarget
+            const formData = new FormData(e.currentTarget)
+            const name = formData.get('input-name') as FormDataEntryValue
+
+            const error = await updateMaterial(selectedId, name)
+    
+            if (!error) {
+                refreshMaterials()
+                setOpen(false)
+                form.reset()
+            }
+        }
+
         return (
+          <>
             <Table aria-label="Table of materials">
             <TableHeader columns={columns}>
                 {(column) => (
@@ -216,6 +251,32 @@ export default function TableMaterials() {
                 )}
             </TableBody>
             </Table>
+
+            {open && (
+              <div className="fixed inset-0 bg-gray-500/50 flex items-center justify-center z-50">
+                <div className="bg-white rounded-lg p-6 w-200">
+                  
+                  <form onSubmit={uploadMaterial}>
+                    <input className="rounded-md bg-slate-200 font-semibold mb-3 py-1 px-3" type="text" placeholder="Navn" name="input-name" defaultValue={selectedMaterial?.name}  required /><br/>
+                    <input className="hidden rounded-md bg-slate-200 font-semibold mb-3 py-1 px-3" type="text" placeholder="Kort beskrivelse (65)" name="input-shortdesc" defaultValue={selectedMaterial?.short_description} maxLength={65} required /><br/>
+                    <input className="hidden rounded-md bg-slate-200 font-semibold mb-3 py-1 px-3" type="text" placeholder="Kategorier" name="input-cats" defaultValue={selectedMaterial?.categories_array.join(' ')}  required /><br/>
+                    <input className="hidden rounded-md bg-slate-200 font-semibold mb-3 py-1 px-3" type="text" placeholder="Skjulte tags" name="input-tags" defaultValue={selectedMaterial?.meta_tags?.join(' ')} /><br/>
+                    <textarea className="hidden rounded-md bg-slate-200 font-semibold mb-3 py-1 px-3 resize-none w-100 h-100" placeholder="Lang beskrivelse (1800)" name="input-longdesc" defaultValue={selectedMaterial?.long_description} maxLength={1800} required></textarea><br/>
+                    <div className="flex w-full justify-end pr-5">
+                        <button className="bg-green-200 rounded-md px-5 py-2 hover:bg-green-300 text-green-800 font-semibold hover:cursor-pointer" type="submit">Update</button>
+                    </div>
+                  </form>
+
+                  <button 
+                    onClick={() => setOpen(false)}
+                    className="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                  >
+                    Close
+                  </button>
+                </div>
+              </div>
+            )}
+          </>
         );
     } 
 }

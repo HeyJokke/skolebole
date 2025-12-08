@@ -270,3 +270,24 @@ export async function orderMaterialsByDate(limit:number):Promise<MaterialsRespon
         return {data: null, error: (error as Error).message}
     }
 }
+
+export async function updateMaterial(id:number, name:FormDataEntryValue) {
+    try {
+        const {error} = await supabase
+            .from('materialer')
+            .update({
+                name: name,
+            })
+            .eq('id', id)
+
+        if (error) {
+            throw new Error(error.message)
+        }
+
+        return null
+    } catch(error) {
+        console.error((error as Error).message)
+
+        return (error as Error).message
+    }
+}
