@@ -4,6 +4,7 @@ import type { Material } from '@/lib/types'
 import React, { FormEvent } from 'react'
 import { insertMaterialAction } from "./action"
 import {useMaterials} from "@/lib/context/MaterialsProvider"
+import TableMaterials from '@/lib/components/tableMaterials'
 
 export default function AdminPage() {
     const {refreshMaterials} = useMaterials()
@@ -26,7 +27,6 @@ export default function AdminPage() {
         }
 
         e.currentTarget.reset()
-
     }
 
     return (
@@ -68,6 +68,10 @@ export default function AdminPage() {
                         {error && <p className="text-white bg-red-500 rounded-md p-2"> {error} </p>}
                     </div>
                 </div>
+            </div>
+
+            <div className="border-1 border-gray-300 rounded-lg mt-10">
+                <TableMaterials />
             </div>
         </main>
     )
