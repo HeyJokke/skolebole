@@ -5,7 +5,9 @@ export type Material = {
     short_description: string
     long_description: string
     image_path: string
+    image_name: string
     pdf_path: string
+    pdf_name: string
     categories_array: string[]
     meta_tags: string[] | null
 }

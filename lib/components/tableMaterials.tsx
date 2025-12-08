@@ -14,6 +14,7 @@ import {
   Tooltip
 } from "@heroui/react";
 import {useMaterials} from "@/lib/context/MaterialsProvider"
+import { removeFileFromBucket, removeRowFromDatabase } from "../database/db";
 
 export type IconSvgProps = SVGProps<SVGSVGElement> & {
   size?: number;
@@ -111,7 +112,7 @@ export const EditIcon = (props: IconSvgProps) => {
 };
 
 export default function TableMaterials() {
-    const {materials} = useMaterials()
+    const {materials, refreshMaterials} = useMaterials()
     
     if (materials) {
         const rows = materials.map(m => {
@@ -120,7 +121,9 @@ export default function TableMaterials() {
                     created: m.created_at.toString().split('.')[0].split('T').join(' '),
                     name: m.name,
                     image_path: m.image_path,
-                    categories: m.categories_array
+                    categories: m.categories_array,
+                    image_name: m.image_name,
+                    pdf_name: m.pdf_name
                 }
             })
 
@@ -143,6 +146,13 @@ export default function TableMaterials() {
         const renderCell = (material: MaterialRow, columnKey: React.Key) => {
             const cellValue = material[columnKey as keyof MaterialRow];
 
+            async function handleDelete(m:MaterialRow):Promise<void> {
+              await removeFileFromBucket('materials-images', m.image_name)
+              await removeFileFromBucket('materials-pdfs', m.pdf_name)
+              await removeRowFromDatabase('materialer', m.id)
+              refreshMaterials()
+            }
+
             switch (columnKey) {
             case "materials":
                 return (
@@ -161,7 +171,7 @@ export default function TableMaterials() {
                 );
             case "categories":
                 return (
-                  <div className="flex justify-center">
+                  <div className="flex flex-wrap gap-1 justify-center">
                     {material.categories.map(cat => (
                       <Chip className={`w-fit capitalize text-center h-fit px-2 py-1 text-xs font-medium rounded-full mr-2 ${categoryClasses[cat.toLowerCase() as keyof typeof categoryClasses] ?? 'bg-orange-100 text-orange-700'}`} size="sm" variant="flat" key={cat}>
                         {cat}
@@ -178,7 +188,7 @@ export default function TableMaterials() {
                     </span>
                     </Tooltip>
                     <Tooltip className="bg-red-500 rounded-md text-white font-bold pl-1 pr-1 text-sm" content="Delete">
-                    <span className="hidden text-lg hover:text-red-500 cursor-pointer active:opacity-50">
+                    <span onClick={() => handleDelete(material)} className="text-lg hover:text-red-500 cursor-pointer active:opacity-50">
                         <DeleteIcon />
                     </span>
                     </Tooltip>
@@ -200,7 +210,7 @@ export default function TableMaterials() {
             </TableHeader>
             <TableBody items={rows}>
                 {(item) => (
-                <TableRow className="border-b-1" key={item.id}>
+                <TableRow className="border-b-1 border-gray-400" key={item.id}>
                     {(columnKey) => <TableCell>{renderCell(item, columnKey)}</TableCell>}
                 </TableRow>
                 )}

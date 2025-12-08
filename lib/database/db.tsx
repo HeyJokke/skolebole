@@ -102,7 +102,9 @@ export async function insertMaterial(name:FormDataEntryValue, shortdesc:FormData
                     meta_tags: tags ? tags.toString().split(' ') : null, 
                     long_description: longdesc, 
                     image_path: imageUrl,
-                    pdf_path: pdfDownloadUrl
+                    pdf_path: pdfDownloadUrl,
+                    image_name: imageFile.name,
+                    pdf_name: pdfFile.name,
                 }
             )
             .select()

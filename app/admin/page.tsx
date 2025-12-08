@@ -13,6 +13,7 @@ export default function AdminPage() {
 
     async function uploadMaterial(e:FormEvent<HTMLFormElement>) {
         e.preventDefault()
+        const form = e.currentTarget
         const formData = new FormData(e.currentTarget)
         
         const {data, error} = await insertMaterialAction(formData)
@@ -21,12 +22,11 @@ export default function AdminPage() {
             setMaterial(data)
             setError(null)
             refreshMaterials()
+            form.reset()
         } else {
             setMaterial(null)
             setError(error)
-        }
-
-        e.currentTarget.reset()
+        }        
     }
 
     return (
@@ -65,7 +65,7 @@ export default function AdminPage() {
 
                 <div className="flex w-1/2 w-60 m-auto">
                     <div className="m-auto">
-                        {(!material && !error) && <MaterialCard m={{id: 1, created_at: new Date, name: "Navn", short_description: "Kort beskrivelse står her og er max. 65 karakterer ligesom her.", long_description: "", image_path: "", pdf_path: "", categories_array: ["Kategori 1", "Kategori 2"], meta_tags: []}} /> }
+                        {(!material && !error) && <MaterialCard m={{id: 1, created_at: new Date, name: "Navn", short_description: "Kort beskrivelse står her og er max. 65 karakterer ligesom her.", long_description: "", image_path: "", image_name: "", pdf_path: "", pdf_name: "", categories_array: ["Kategori 1", "Kategori 2"], meta_tags: []}} /> }
                         {(material && !error) && <MaterialCard m={material} /> }
                         {error && <p className="text-white bg-red-500 rounded-md p-2"> {error} </p>}
                     </div>
