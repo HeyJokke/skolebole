@@ -47,17 +47,19 @@ export default function ProductPage({ params }:
                     <header>
                         <Link href="." className="inline-block mb-5 hover:underline">{'<-- '}Tilbage til katalog</Link>
                         <h1 className="text-3xl font-bold">{m.name}</h1>
-                        <div className='lg:flex sm:block'>
+                        <div className='lg:flex sm:overflow-wrap'>
                             <p className="italic mr-2">{m.short_description}</p>
 
-                            {m.categories_array.map((cat:string) => (
+                            <div className="flex flex-wrap gap-1 mt-3 lg:mt-0">
+                                {m.categories_array.map((cat:string) => (
                                     <span 
                                         key={cat} 
-                                        className={`h-fit mr-1 px-2 py-1 text-xs font-medium rounded-full ${categoryClasses[cat.toLowerCase() as keyof typeof categoryClasses] ?? 'bg-orange-100 text-orange-700'}`}
+                                        className={`w-fit h-fit mr-1 px-2 py-1 text-xs font-medium rounded-full ${categoryClasses[cat.toLowerCase() as keyof typeof categoryClasses] ?? 'bg-orange-100 text-orange-700'}`}
                                     >
                                         {cat[0].toUpperCase() + cat.slice(1)}
                                     </span>
                                 ))}
+                            </div>
                         </div>
                     </header>
                     <div className="lg:flex sm:block mt-8">
