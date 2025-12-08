@@ -17,7 +17,6 @@ export default function SearchPage():React.ReactElement {
         filteredMaterials = materials.filter(m => {
             return m.name.toLowerCase().includes(query.toLowerCase()) || 
             m.short_description.toLowerCase().includes(query.toLowerCase()) ||
-            m.long_description.toLowerCase().includes(query.toLowerCase()) ||
             m.categories_array.some(cat => cat.toLowerCase().includes(query.toLowerCase())) ||
             m.meta_tags?.some(tag => tag.toLowerCase().includes(query.toLowerCase()))
         })
