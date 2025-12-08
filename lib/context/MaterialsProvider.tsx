@@ -8,42 +8,44 @@ type MaterialsContextType = {
   materials: Material[] | null
   error: string | null
   loading: boolean
+  refreshMaterials: () => Promise<void>
 }
 
-const MaterialsContext = React.createContext<MaterialsContextType>({
-  materials: null,
-  error: null,
-  loading: true
-})
+const MaterialsContext = React.createContext<MaterialsContextType | null>(null)
 
 export function MaterialsProvider({ children }: { children: React.ReactNode }) {
   const [materials, setMaterials] = React.useState<Material[] | null>(null)
   const [error, setError] = React.useState<string | null>(null)
   const [loading, setLoading] = React.useState(true)
 
+  async function fetchData() {
+      try {
+          const {data, error} = await getAllMaterials()
+  
+          if (error) {
+              throw new Error(error)
+          }
+
+          setMaterials(data)
+
+      } catch(error) {
+          setError(error instanceof Error ? error.message : null)
+      } finally {
+          setLoading(false)
+      }
+  }
+
     React.useEffect(() => {
-        async function fetchData() {
-            try {
-                const {data, error} = await getAllMaterials()
-        
-                if (error) {
-                    throw new Error(error)
-                }
-
-                setMaterials(data)
-
-            } catch(error) {
-                setError(error instanceof Error ? error.message : null)
-            } finally {
-                setLoading(false)
-            }
-        }
-
         fetchData()
     }, [])
     
     return (
-        <MaterialsContext.Provider value={{materials, error, loading}}>
+        <MaterialsContext.Provider value={{
+            materials, 
+            error, 
+            loading, 
+            refreshMaterials: fetchData
+        }}>
             {children}
         </MaterialsContext.Provider>
     )

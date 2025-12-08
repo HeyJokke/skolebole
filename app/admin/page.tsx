@@ -3,8 +3,10 @@ import MaterialCard from "@/lib/components/materialCard"
 import type { Material } from '@/lib/types'
 import React, { FormEvent } from 'react'
 import { insertMaterialAction } from "./action"
+import {useMaterials} from "@/lib/context/MaterialsProvider"
 
 export default function AdminPage() {
+    const {refreshMaterials} = useMaterials()
     const [material, setMaterial] = React.useState<Material | null>(null)
     const [error, setError] = React.useState<string | null>(null)
 
@@ -14,9 +16,10 @@ export default function AdminPage() {
         
         const {data, error} = await insertMaterialAction(formData)
 
-        if (error) {
+        if (!error) {
             setMaterial(data)
             setError(null)
+            refreshMaterials()
         } else {
             setMaterial(null)
             setError(error)
