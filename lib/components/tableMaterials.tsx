@@ -14,7 +14,6 @@ import {
   Tooltip
 } from "@heroui/react";
 import {useMaterials} from "@/lib/context/MaterialsProvider"
-import { removeRowFromDatabase } from "../database/db";
 
 export type IconSvgProps = SVGProps<SVGSVGElement> & {
   size?: number;
@@ -113,7 +112,7 @@ export const EditIcon = (props: IconSvgProps) => {
 
 export default function TableMaterials() {
     const {materials} = useMaterials()
-
+    
     if (materials) {
         const rows = materials.map(m => {
                 return {
@@ -133,7 +132,7 @@ export default function TableMaterials() {
 
         type MaterialRow = (typeof rows)[0];
 
-        const renderCell = React.useCallback((material: MaterialRow, columnKey: React.Key) => {
+        const renderCell = (material: MaterialRow, columnKey: React.Key) => {
             const cellValue = material[columnKey as keyof MaterialRow];
 
             switch (columnKey) {
@@ -161,7 +160,7 @@ export default function TableMaterials() {
                     </span>
                     </Tooltip>
                     <Tooltip className="bg-red-500 rounded-md text-white font-bold pl-1 pr-1 text-sm" content="Delete">
-                    <span onClick={() => removeRowFromDatabase('materialer', material.id)} className="text-lg hover:text-red-500 cursor-pointer active:opacity-50">
+                    <span className="hidden text-lg hover:text-red-500 cursor-pointer active:opacity-50">
                         <DeleteIcon />
                     </span>
                     </Tooltip>
@@ -170,7 +169,7 @@ export default function TableMaterials() {
             default:
                 return cellValue;
             }
-        }, []);
+        }
 
         return (
             <Table aria-label="Table of materials">
