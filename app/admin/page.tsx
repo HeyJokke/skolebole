@@ -11,6 +11,21 @@ export default function AdminPage() {
     const [material, setMaterial] = React.useState<Material | null>(null)
     const [error, setError] = React.useState<string | null>(null)
 
+    const basicMaterial:Material = {
+        id: 1, 
+        created_at: new Date, 
+        name: "Navn", 
+        short_description: "Kort beskrivelse står her og er max. 65 karakterer ligesom her.", 
+        long_description: "", 
+        image_path: "", 
+        image_name: "", 
+        pdf_path: "", 
+        pdf_name: "", 
+        categories_array: ["Kategori 1", "Kategori 2"], 
+        meta_tags: [],
+        nDownloads: 0
+    }
+
     async function uploadMaterial(e:FormEvent<HTMLFormElement>) {
         e.preventDefault()
         const form = e.currentTarget
@@ -65,7 +80,7 @@ export default function AdminPage() {
 
                 <div className="flex w-1/2 w-60 m-auto">
                     <div className="m-auto">
-                        {(!material && !error) && <MaterialCard m={{id: 1, created_at: new Date, name: "Navn", short_description: "Kort beskrivelse står her og er max. 65 karakterer ligesom her.", long_description: "", image_path: "", image_name: "", pdf_path: "", pdf_name: "", categories_array: ["Kategori 1", "Kategori 2"], meta_tags: []}} /> }
+                        {(!material && !error) && <MaterialCard m={basicMaterial} /> }
                         {(material && !error) && <MaterialCard m={material} /> }
                         {error && <p className="text-white bg-red-500 rounded-md p-2"> {error} </p>}
                     </div>

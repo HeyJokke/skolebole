@@ -16,6 +16,7 @@ import {
 import {useMaterials} from "@/lib/context/MaterialsProvider"
 import { removeFileFromBucket, removeRowFromDatabase, updateMaterial } from "../database/db";
 import type {Material} from '@/lib/types'
+import Image from 'next/image'
 
 export type IconSvgProps = SVGProps<SVGSVGElement> & {
   size?: number;
@@ -138,7 +139,8 @@ export default function TableMaterials() {
                     image_path: m.image_path,
                     categories: m.categories_array,
                     image_name: m.image_name,
-                    pdf_name: m.pdf_name
+                    pdf_name: m.pdf_name,
+                    nDownloads: m.nDownloads
                 }
             })
 
@@ -182,7 +184,8 @@ export default function TableMaterials() {
                     </User>
                       {<div className="flex-col ml-5">
                         <p className="font-bold">{material.name}</p>
-                        <p className="text-gray-500 text-sm">{material.created}</p>
+                        <p className="text-gray-500 text-xs">{material.created}</p>
+                        <p className="text-gray-500 text-xs">Downloads: {material.nDownloads}</p>
                       </div>}
                   </div>
                 );
@@ -237,6 +240,10 @@ export default function TableMaterials() {
             }
         }
 
+        async function pdfRedirect(m:Material) {
+            window.open(m.pdf_path, '_blank', 'noopener,noreferrer')
+        }
+        
         return (
           <>
             <Table aria-label="Table of materials">
@@ -258,25 +265,30 @@ export default function TableMaterials() {
 
             {open && (
               <div className="fixed inset-0 bg-gray-500/50 flex items-center justify-center z-50">
-                <div className="bg-white rounded-lg p-6 w-200">
+                <div className="flex bg-white rounded-lg p-6 w-200">
                   
-                  <form onSubmit={uploadMaterial}>
+                  <form className="w1/2" onSubmit={uploadMaterial}>
                     <input className="rounded-md bg-slate-200 font-semibold mb-3 py-1 px-3" type="text" placeholder="Navn" name="input-name" defaultValue={selectedMaterial?.name}  required /><br/>
                     <input className="rounded-md bg-slate-200 font-semibold mb-3 py-1 px-3" type="text" placeholder="Kort beskrivelse (65)" name="input-shortdesc" defaultValue={selectedMaterial?.short_description} maxLength={65} required /><br/>
                     <input className="rounded-md bg-slate-200 font-semibold mb-3 py-1 px-3" type="text" placeholder="Kategorier" name="input-cats" defaultValue={selectedMaterial?.categories_array.join(' ')}  required /><br/>
                     <input className="rounded-md bg-slate-200 font-semibold mb-3 py-1 px-3" type="text" placeholder="Skjulte tags" name="input-tags" defaultValue={selectedMaterial?.meta_tags?.join(' ')} /><br/>
                     <textarea className="rounded-md bg-slate-200 font-semibold mb-3 py-1 px-3 resize-none w-100 h-100" placeholder="Lang beskrivelse (1800)" name="input-longdesc" defaultValue={selectedMaterial?.long_description} maxLength={1800} required></textarea><br/>
-                    <div className="flex w-full justify-end pr-5">
-                        <button className="bg-green-200 rounded-md px-5 py-2 hover:bg-green-300 text-green-800 font-semibold hover:cursor-pointer" type="submit">Update</button>
+                    
+                    <div className="flex justify-between w-full pr-5">
+                        <button 
+                          onClick={() => setOpen(false)}
+                          className="bg-blue-300 text-blue-800 px-4 py-2 rounded-md font-semibold hover:bg-blue-400 hover:cursor-pointer"
+                        >
+                          Close
+                        </button>
+                        <button className="bg-green-200 text-green-800 px-4 py-2 rounded-md font-semibold hover:bg-green-300 hover:cursor-pointer" type="submit">Update</button>
                     </div>
                   </form>
 
-                  <button 
-                    onClick={() => setOpen(false)}
-                    className="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-                  >
-                    Close
-                  </button>
+                  <div className="w1/2 m-auto">
+                    {selectedMaterial && <Image alt="Billede af materiale" width={300} height={300} src={selectedMaterial.image_path} />}
+                  </div>
+ 
                 </div>
               </div>
             )}
