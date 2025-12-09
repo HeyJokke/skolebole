@@ -271,12 +271,16 @@ export async function orderMaterialsByDate(limit:number):Promise<MaterialsRespon
     }
 }
 
-export async function updateMaterial(id:number, name:FormDataEntryValue) {
+export async function updateMaterial(id:number, name:FormDataEntryValue, shortDesc:FormDataEntryValue, categories:FormDataEntryValue, tags:FormDataEntryValue, longDesc:FormDataEntryValue) {
     try {
         const {error} = await supabase
             .from('materialer')
             .update({
                 name: name,
+                short_description: shortDesc,
+                categories_array: categories.toString().split(' '),
+                meta_tags: tags ? tags.toString().split('') : null,
+                long_description: longDesc
             })
             .eq('id', id)
 

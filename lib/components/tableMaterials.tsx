@@ -223,8 +223,12 @@ export default function TableMaterials() {
             const form = e.currentTarget
             const formData = new FormData(e.currentTarget)
             const name = formData.get('input-name') as FormDataEntryValue
+            const shortDesc = formData.get('input-shortdesc') as FormDataEntryValue
+            const categories = formData.get('input-cats') as FormDataEntryValue
+            const tags = formData.get('input-tags') as FormDataEntryValue
+            const longDesc = formData.get('input-longdesc') as FormDataEntryValue
 
-            const error = await updateMaterial(selectedId, name)
+            const error = await updateMaterial(selectedId, name, shortDesc, categories, tags, longDesc)
     
             if (!error) {
                 refreshMaterials()
@@ -258,10 +262,10 @@ export default function TableMaterials() {
                   
                   <form onSubmit={uploadMaterial}>
                     <input className="rounded-md bg-slate-200 font-semibold mb-3 py-1 px-3" type="text" placeholder="Navn" name="input-name" defaultValue={selectedMaterial?.name}  required /><br/>
-                    <input className="hidden rounded-md bg-slate-200 font-semibold mb-3 py-1 px-3" type="text" placeholder="Kort beskrivelse (65)" name="input-shortdesc" defaultValue={selectedMaterial?.short_description} maxLength={65} required /><br/>
-                    <input className="hidden rounded-md bg-slate-200 font-semibold mb-3 py-1 px-3" type="text" placeholder="Kategorier" name="input-cats" defaultValue={selectedMaterial?.categories_array.join(' ')}  required /><br/>
-                    <input className="hidden rounded-md bg-slate-200 font-semibold mb-3 py-1 px-3" type="text" placeholder="Skjulte tags" name="input-tags" defaultValue={selectedMaterial?.meta_tags?.join(' ')} /><br/>
-                    <textarea className="hidden rounded-md bg-slate-200 font-semibold mb-3 py-1 px-3 resize-none w-100 h-100" placeholder="Lang beskrivelse (1800)" name="input-longdesc" defaultValue={selectedMaterial?.long_description} maxLength={1800} required></textarea><br/>
+                    <input className="rounded-md bg-slate-200 font-semibold mb-3 py-1 px-3" type="text" placeholder="Kort beskrivelse (65)" name="input-shortdesc" defaultValue={selectedMaterial?.short_description} maxLength={65} required /><br/>
+                    <input className="rounded-md bg-slate-200 font-semibold mb-3 py-1 px-3" type="text" placeholder="Kategorier" name="input-cats" defaultValue={selectedMaterial?.categories_array.join(' ')}  required /><br/>
+                    <input className="rounded-md bg-slate-200 font-semibold mb-3 py-1 px-3" type="text" placeholder="Skjulte tags" name="input-tags" defaultValue={selectedMaterial?.meta_tags?.join(' ')} /><br/>
+                    <textarea className="rounded-md bg-slate-200 font-semibold mb-3 py-1 px-3 resize-none w-100 h-100" placeholder="Lang beskrivelse (1800)" name="input-longdesc" defaultValue={selectedMaterial?.long_description} maxLength={1800} required></textarea><br/>
                     <div className="flex w-full justify-end pr-5">
                         <button className="bg-green-200 rounded-md px-5 py-2 hover:bg-green-300 text-green-800 font-semibold hover:cursor-pointer" type="submit">Update</button>
                     </div>
