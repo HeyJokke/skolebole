@@ -279,7 +279,7 @@ export async function updateMaterial(id:number, name:FormDataEntryValue, shortDe
                 name: name,
                 short_description: shortDesc,
                 categories_array: categories.toString().split(' '),
-                meta_tags: tags ? tags.toString().split('') : null,
+                meta_tags: tags ? tags.toString().split(' ') : null,
                 long_description: longDesc
             })
             .eq('id', id)

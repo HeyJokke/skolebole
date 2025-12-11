@@ -170,8 +170,6 @@ export default function TableMaterials() {
               refreshMaterials()
             }
 
-            
-
             switch (columnKey) {
             case "materials":
                 return (
@@ -221,7 +219,7 @@ export default function TableMaterials() {
             }
         }
 
-        async function uploadMaterial(e:FormEvent<HTMLFormElement>) {
+        async function uploadMaterial(e:FormEvent<HTMLFormElement>):Promise<void> {
             e.preventDefault()
             const form = e.currentTarget
             const formData = new FormData(e.currentTarget)
@@ -238,10 +236,6 @@ export default function TableMaterials() {
                 setOpen(false)
                 form.reset()
             }
-        }
-
-        async function pdfRedirect(m:Material) {
-            window.open(m.pdf_path, '_blank', 'noopener,noreferrer')
         }
         
         return (
