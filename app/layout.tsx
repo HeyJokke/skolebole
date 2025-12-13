@@ -50,7 +50,7 @@ export default function RootLayout({
         </header>
 
         <main className="max-w-7xl mx-auto px-4 py-8">
-          <div className="h-full min-h-screen bg-white/90 rounded-2xl shadow-lg p-6">
+          <div className="h-full min-h-screen bg-white/80 rounded-2xl shadow-lg p-6">
             {children}
           </div>
         </main>
