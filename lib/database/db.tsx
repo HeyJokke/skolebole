@@ -111,6 +111,9 @@ export async function insertMaterial(name:FormDataEntryValue, shortdesc:FormData
             .single()
 
         if (error) {
+            await removeFileFromBucket('materials-images', imageFile.name)
+            await removeFileFromBucket('materials-pdfs', pdfFile.name)
+
             throw new Error(error.message)
         }
 
@@ -271,27 +274,125 @@ export async function orderMaterialsByDate(limit:number):Promise<MaterialsRespon
     }
 }
 
-export async function updateMaterial(id:number, name:FormDataEntryValue, shortDesc:FormDataEntryValue, categories:FormDataEntryValue, tags:FormDataEntryValue, longDesc:FormDataEntryValue) {
+export async function updateMaterialText(formData:FormData, material:Material) {
+    const name = formData.get('input-name') as FormDataEntryValue
+    const shortDesc = formData.get('input-shortdesc') as FormDataEntryValue
+    const categories = formData.get('input-cats') as FormDataEntryValue
+    const tags = formData.get('input-tags') as FormDataEntryValue
+    const longDesc = formData.get('input-longdesc') as FormDataEntryValue
+    
     try {
-        const {error} = await supabase
+        const {data, error} = await supabase
             .from('materialer')
             .update({
                 name: name,
                 short_description: shortDesc,
                 categories_array: categories.toString().split(' '),
                 meta_tags: tags ? tags.toString().split(' ') : null,
-                long_description: longDesc
+                long_description: longDesc,
             })
-            .eq('id', id)
+            .eq('id', material.id)
+            .select()
 
         if (error) {
             throw new Error(error.message)
         }
 
-        return null
+        return {data: data, error: null}
     } catch(error) {
         console.error((error as Error).message)
 
-        return (error as Error).message
+        return {data: null, error: (error as Error).message}
     }
+}
+
+export async function updateImage(formData:FormData, material:Material) {
+    const imageFile = formData.get('input-img') as File
+
+    try {
+        // Upload image
+        const { error: imageUploadError } = await uploadFileToBucket('materials-images', imageFile)
+    
+        if (imageUploadError) {
+            throw new Error(imageUploadError.message)
+        }
+    
+        // Get image URL
+        const {data: imageUrl, error: imageError} = await getMaterialImageUrl(imageFile.name)
+    
+        if (imageError) {
+            await removeFileFromBucket('materials-images', imageFile.name)
+    
+            throw new Error(imageError.message)
+        }
+    
+        const {error} = await supabase
+            .from('materialer')
+            .update({
+                image_path: imageUrl,
+                image_name: imageFile.name,
+            })
+            .eq('id', material.id)
+    
+        if (error) {
+            await removeFileFromBucket('materials-images', imageFile.name)
+    
+            throw new Error(error.message)
+        }
+    
+        removeFileFromBucket('materials-images', material.image_name)
+
+        return {data: imageUrl, error: null}
+    } catch(error) {
+        console.error((error as Error).message)
+
+        return {data: null, error: (error as Error).message}
+    }
+
+}
+
+export async function updatePDF(formData:FormData, material:Material) {
+    const pdfFile = formData.get('input-pdf') as File
+
+    try {
+        // Upload pdf
+        const { error: pdfUploadError } = await uploadFileToBucket('materials-pdfs', pdfFile)
+
+        if (pdfUploadError) {
+            throw new Error(pdfUploadError.message)
+        }
+
+        // Get pdf download URL
+        const {data: pdfDownloadUrl, error: pdfError} = await getMaterialDownloadUrl(pdfFile.name)
+
+        if (pdfError) {
+            await removeFileFromBucket('materials-pdfs', pdfFile.name)
+
+            throw new Error(pdfError.message)
+        }
+
+        const {error} = await supabase
+            .from('materialer')
+            .update({
+                pdf_path: pdfDownloadUrl,
+                pdf_name: pdfFile.name
+            })
+            .eq('id', material.id)
+
+        if (error) {
+            await removeFileFromBucket('materials-pdfs', pdfFile.name)
+
+            throw new Error(error.message)
+        }
+
+        await removeFileFromBucket('materials-pdfs', material.pdf_name)
+
+        return {data: pdfDownloadUrl, error: null}
+
+    } catch(error) {
+        console.error((error as Error).message)
+
+        return {data: null, error: (error as Error).message}
+    }
+
 }
