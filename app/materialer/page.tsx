@@ -1,40 +1,36 @@
 "use client"
-import React from 'react'
-import type { Material } from '@/lib/types'
-import RenderMaterials from '@/lib/components/renderMaterials'
-import {useMaterials} from "@/lib/context/MaterialsProvider"
-import Filters from '@/lib/components/filters'
 
-export default function Materialer({ searchParams }: { searchParams:Promise<{ kategori?: string }> }):React.ReactElement {
-    const [query, setQuery] = React.useState<string>("")
-    const {materials, error, loading} = useMaterials()
-    let filteredMaterials:Material[] | null = []
+import Link from 'next/link'
 
-    React.useEffect(() => {
-        async function getQuery() {
-            const params = await searchParams
-            const query = params.kategori ? params.kategori : ""
-
-            setQuery(query)
-        } 
-        
-        getQuery()
-    },[searchParams])
-
-    if (query && materials) {
-        filteredMaterials = materials.filter(m => m.categories_array.some(cat => cat.toLowerCase().includes(query.toLowerCase())))
-    } else {
-        filteredMaterials = materials
-    }
+export default function Materialer():React.ReactElement {
+    const linkClass = "bg-[url(/images/dansk_flag.jpg)] bg-cover overflow-hidden h-50 w-50 m-auto flex justify-center items-center border-2 border-red-500 rounded-full text-center font-bold hover:border-red-400 hover:bg-gray-100 transition duration-250 hover:scale-102"
+    const pFlagClass = "backdrop-blur-xs transition duration-100 hover:backdrop-blur-none flex w-full h-full justify-center items-center text-3xl"
+    
+    
 
     return (
-        <main>
-            <h1 className="text-3xl font-bold mb-10">Alle materialer</h1>
-            <div className="block md:flex">
-                <React.Suspense fallback={<div/>}>
-                    <Filters filteredMaterials={null} />
-                </React.Suspense>
-                <RenderMaterials materials={filteredMaterials} error={error} loading={loading} />
+        <main className="flex flex-col items-center">
+            <h1 className="text-3xl font-bold mb-10">Vælg et fag</h1>
+            <div className="m-auto grid lg:grid-cols-2 lg:grid-cols-1 gap-6 lg:w-130 sm:w-100">
+              <Link className={`bg-[url(/images/dansk_flag.jpg)] ${linkClass}`} href="materialer/dansk">
+                <p className={pFlagClass}>Dansk</p>
+              </Link>
+              
+              <Link className={`bg-[url(/images/matematik_flag.png)] ${linkClass}`} href="materialer/matematik">
+                <p className={pFlagClass}>Matematik</p>
+              </Link>
+
+              <Link className={`bg-[url(/images/engelsk_flag.png)] ${linkClass}`} href="materialer/engelsk">
+                <p className={pFlagClass}>Engelsk</p>
+              </Link>
+
+              <Link className={`bg-[url(/images/naturteknik_flag.png)] ${linkClass}`} href="materialer/naturteknik">
+                <p className={pFlagClass}>Natur & Teknik</p>
+              </Link>
+
+              <Link className={`bg-[url(/images/historie_flag.png)] ${linkClass}`} href="materialer/historie">
+                <p className={pFlagClass}>Historie</p>
+              </Link>
             </div>
         </main>
 

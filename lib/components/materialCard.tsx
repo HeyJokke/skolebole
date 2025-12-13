@@ -2,12 +2,14 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import type {Material} from '@/lib/types'
+import {usePathname} from 'next/navigation'
 
 type CardProps = {
     m: Material
 }
 
 export default function MaterialCard({m}: CardProps) { 
+    const pathName = usePathname()
     const categoryClasses = {
         dansk: "bg-blue-100 text-blue-700",
         matematik: "bg-green-100 text-green-700",
@@ -17,7 +19,7 @@ export default function MaterialCard({m}: CardProps) {
     }
 
     return (
-        <Link href={`/materialer/${m.id}`}>
+        <Link href={`${pathName}/${m.id}`}>
             <div className="bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden hover:scale-105 transform transition-transform">
                 <div className="relative w-full h-36 bg-gray-200">
                     <Image 
