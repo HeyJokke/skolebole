@@ -1,7 +1,7 @@
 "use client"
 
 import type {Material} from '@/lib/types'
-import {useSearchParams, useRouter} from 'next/navigation'
+import {useSearchParams, useRouter, usePathname} from 'next/navigation'
 import {useMaterials} from '@/lib/context/MaterialsProvider'
 
 type FilterProps = {
@@ -10,6 +10,7 @@ type FilterProps = {
 
 export default function Filters({filteredMaterials}: FilterProps):React.ReactElement | null {
     const searchParams = useSearchParams()
+    const pathName = usePathname()
     const params = new URLSearchParams(searchParams)
     const uniqueCategories: string[] = []
     const {materials, loading, error} = useMaterials()
@@ -17,11 +18,12 @@ export default function Filters({filteredMaterials}: FilterProps):React.ReactEle
 
     function handleClick(cat:string | null):void {
         if (cat) {
+            console.log(pathName)
             params.set('kategori', cat)
-            router.push(`/materialer?${params}`)
+            router.push(`${pathName}?${params}`)
         } else {
             params.set('kategori', '')
-            router.push(`/materialer`)
+            router.push(pathName)
         }
     }
 
