@@ -5,6 +5,7 @@ import React, { FormEvent } from 'react'
 import { insertMaterialAction } from "./action"
 import {useMaterials} from "@/lib/context/MaterialsProvider"
 import TableMaterials from '@/lib/components/tableMaterials'
+import { insertMaterialStorage, removeFileFromBucket } from '@/lib/database/client'
 
 export default function AdminPage() {
     const {refreshMaterials} = useMaterials()
@@ -30,18 +31,32 @@ export default function AdminPage() {
         e.preventDefault()
         const form = e.currentTarget
         const formData = new FormData(e.currentTarget)
-        
-        const {data, error} = await insertMaterialAction(formData)
 
-        if (!error) {
-            setMaterial(data)
-            setError(null)
-            refreshMaterials()
-            form.reset()
-        } else {
-            setMaterial(null)
-            setError(error)
-        }        
+        const {data: storageData, error: storageError} = await insertMaterialStorage(formData)
+
+        if (storageData && !storageError) {
+            const payload = {
+                name: formData.get('input-name') as string,
+                shortDesc: formData.get('input-shortdesc') as string,
+                cats: formData.get('input-cats') as string,
+                tags: formData.get('input-tags') as string | null,
+                longdesc: formData.get('input-longdesc') as string
+            }
+
+            const {data, error} = await insertMaterialAction(payload, storageData.image, storageData.pdf)
+            
+            if (!error) {
+                setMaterial(data)
+                setError(null)
+                refreshMaterials()
+                form.reset()
+            } else {
+                removeFileFromBucket('materials-images', storageData.image.image_name)
+                removeFileFromBucket('materials-pdfs', storageData.pdf.pdf_name)
+                setMaterial(null)
+                setError(error)
+            }        
+        }
     }
 
     return (

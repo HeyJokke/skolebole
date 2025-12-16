@@ -1,17 +1,17 @@
 "use server"
 
-import { insertMaterial } from "@/lib/database/db"
+import { insertMaterial } from "@/lib/database/server"
 import type {Material} from '@/lib/types'
 
-export async function insertMaterialAction(formData: FormData):Promise<{data: Material | null, error: string | null}> {
-    const name = formData.get('input-name') as FormDataEntryValue
-    const shortdesc = formData.get('input-shortdesc') as FormDataEntryValue
-    const cats = formData.get('input-cats') as FormDataEntryValue
-    const tags = formData.get('input-tags') as FormDataEntryValue | null
-    const longdesc = formData.get('input-longdesc') as FormDataEntryValue
-    const imageFile = formData.get('input-img') as File
-    const pdfFile = formData.get('input-pdf') as File
+type FormPayload = {
+    name: string,
+    shortDesc: string,
+    cats: string,
+    tags: string | null,
+    longdesc: string,
+}
 
-    const {data , error} = await insertMaterial(name, shortdesc, cats, tags, longdesc, imageFile, pdfFile)
+export async function insertMaterialAction(payload: FormPayload, image: {image_path:string, image_name:string}, pdf: {pdf_path:string, pdf_name:string}):Promise<{data: Material | null, error: string | null}> {
+    const {data , error} = await insertMaterial(payload.name, payload.shortDesc, payload.cats, payload.tags, payload.longdesc, image, pdf)
     return {data, error}
 }

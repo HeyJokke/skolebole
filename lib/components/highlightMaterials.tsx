@@ -1,5 +1,5 @@
 "use server"
-import { orderMaterialsByDate } from "../database/db"
+import { orderMaterialsByDate } from "../database/queries"
 import MaterialCard from '@/lib/components/materialCard'
 import type {Material} from '@/lib/types'
 

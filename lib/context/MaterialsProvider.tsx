@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import { getAllMaterials } from '../database/db'
+import { getAllMaterials } from '../database/queries'
 import type { Material } from '@/lib/types'
 
 type MaterialsContextType = {

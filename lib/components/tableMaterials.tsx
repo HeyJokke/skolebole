@@ -14,7 +14,8 @@ import {
   Tooltip
 } from "@heroui/react";
 import {useMaterials} from "@/lib/context/MaterialsProvider"
-import { removeFileFromBucket, removeRowFromDatabase, updateMaterialText, updateImage, updatePDF } from "../database/db";
+import { removeRowFromDatabase, updateMaterialText, updateImage, updatePDF } from "../database/server";
+import { removeFileFromBucket } from "../database/client";
 import type {Material} from '@/lib/types'
 import Image from 'next/image'
 
