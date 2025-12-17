@@ -67,6 +67,3 @@ export async function orderMaterialsByDate(limit:number):Promise<MaterialsRespon
         return {data: null, error: (error as Error).message}
     }
 }
-
-
-

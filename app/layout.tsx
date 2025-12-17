@@ -1,11 +1,12 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import type { Metadata } from "next"
+import { Geist, Geist_Mono } from "next/font/google"
 import "./globals.css";
 import Image from "next/image"
 import Link from "next/link"
 import SearchForm from "@/lib/components/searchForm"
 import React from 'react'
-import { MaterialsProvider } from "@/lib/context/MaterialsProvider";
+import { MaterialsProvider } from "@/lib/context/MaterialsProvider"
+import DonationPopup from '@/lib/components/donationPopup'
 
 export const metadata: Metadata = {
   title: 'Skolebole - Læringsmaterialer til danske skoler',
@@ -39,7 +40,7 @@ export default function RootLayout({
               <nav className="flex justify-center w-full m-auto max-w-2xl">
                 <ul className="md:flex sm:block justify-center space-x-6">
                   <Link href="/materialer"><li className="px-6 py-2 m-auto text-center rounded-full bg-red-100 hover:bg-red-200 transition-colors duration-300 cursor-pointer font-medium text-red-800">Materialer</li></Link>
-                  <Link href="/materialer"><li className="px-6 py-2 m-auto text-center rounded-full bg-red-100 hover:bg-red-200 transition-colors duration-300 cursor-pointer font-medium text-red-800">Om os</li></Link>
+                  <Link href="/om_os"><li className="px-6 py-2 m-auto text-center rounded-full bg-red-100 hover:bg-red-200 transition-colors duration-300 cursor-pointer font-medium text-red-800">Om os</li></Link>
                 </ul>
               </nav>
               <React.Suspense fallback={<div />}> 
@@ -54,6 +55,9 @@ export default function RootLayout({
             {children}
           </div>
         </main>
+
+        <DonationPopup />
+        
         <footer className="mt-12 bg-white/80 border-t border-gray-100 py-6">
           <div className="max-w-6xl mx-auto px-4 text-center text-gray-600">
             <p>© {new Date().getFullYear()} Skolebole - Danske læringsmaterialer til danske skoler</p>

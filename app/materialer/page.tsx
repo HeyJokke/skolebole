@@ -8,7 +8,7 @@ export default function Materialer():React.ReactElement {
     
     return (
         <main className="flex flex-col items-center">
-            <h1 className="text-3xl font-bold mb-10">Vælg et fag</h1>
+            <h1 className="text-4xl font-bold mb-10">Vælg et fag</h1>
             <div className="m-auto grid lg:grid-cols-2 lg:grid-cols-1 gap-6 lg:w-130 sm:w-100">
               <Link className={`bg-[url(/images/dansk_flag.jpg)] ${linkClass}`} href="materialer/dansk">
                 <p className={pFlagClass}>Dansk</p>
