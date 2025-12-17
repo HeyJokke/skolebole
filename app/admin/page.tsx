@@ -90,7 +90,7 @@ export default function AdminPage() {
                         hover:file:bg-blue-200 hover:file:cursor-pointer hover:cursor-pointer" 
                         type="file" multiple={false} name="input-img" accept="image/*" required /><br/>
                     <div className="flex w-full justify-end pr-5">
-                        <button className="bg-green-200 rounded-md px-5 py-2 w-25 hover:bg-green-300 text-green-800 font-semibold hover:cursor-pointer disabled:bg-gray-100 disabled:text-gray-800 disabled:cursor-not-allowed" disabled={loading} type="submit">Upload</button>
+                        <button className="bg-green-200 rounded-md px-5 py-2 w-25 hover:bg-green-300 text-green-800 font-semibold hover:cursor-pointer disabled:bg-gray-100 disabled:text-gray-800 disabled:cursor-not-allowed" disabled={loading} type="submit">{loading ? "..." : "Upload"}</button>
                     </div>
                 </form>
                 

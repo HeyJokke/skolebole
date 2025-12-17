@@ -28,17 +28,13 @@ export default function Filters({filteredMaterials}: FilterProps):React.ReactEle
     }
 
     if (!filteredMaterials && materials) {
-        materials.map(m => m.categories_array.map((cat) => {
-            if (!uniqueCategories.includes(cat)) {
-                uniqueCategories.push(cat)
-            }
-        }))
+        filteredMaterials = materials
     }
 
     if (filteredMaterials) {
         filteredMaterials.map(m => m.categories_array.map((cat) => {
-            if (!uniqueCategories.includes(cat)) {
-                uniqueCategories.push(cat)
+            if (!uniqueCategories.includes(cat.toLowerCase())) {
+                uniqueCategories.push(cat.toLowerCase())
             }
         }))
     }

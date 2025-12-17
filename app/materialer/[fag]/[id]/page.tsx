@@ -6,15 +6,15 @@ import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { IncrementDownload } from './action'
+import { usePathname } from 'next/navigation'
 
 export default function ProductPage({ params }:
     {params: Promise<{id: number}>}
 ) {
     const {materials} = useMaterials()
-
     const [m, setM] = React.useState<Material>()
     const [materialId, setMaterialId] = React.useState<number | null>(null)
-    
+    const pathName = usePathname()
     const categoryClasses = {
         dansk: "bg-blue-100 text-blue-700",
         matematik: "bg-green-100 text-green-700",
@@ -34,10 +34,14 @@ export default function ProductPage({ params }:
 
         identifyMaterial()
     })
-
+    
     function pdfRedirect(m:Material) {
         IncrementDownload(m)
         window.open(m.pdf_path, '_blank', 'noopener,noreferrer')
+    }
+
+    if (pathName.includes('/materialer/search')) {
+
     }
 
     return (
@@ -51,7 +55,7 @@ export default function ProductPage({ params }:
                             <p className="italic mr-2">{m.short_description}</p>
 
                             <div className="flex flex-wrap gap-1 mt-3 lg:mt-0">
-                                {m.categories_array.map((cat:string) => (
+                                {m.categories_array.sort((a:string,b:string) => a.localeCompare(b)).map((cat:string) => (
                                     <span 
                                         key={cat} 
                                         className={`w-fit h-fit mr-1 px-2 py-1 text-xs font-medium rounded-full ${categoryClasses[cat.toLowerCase() as keyof typeof categoryClasses] ?? 'bg-orange-100 text-orange-700'}`}
