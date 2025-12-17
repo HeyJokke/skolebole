@@ -20,15 +20,15 @@ export default function Materialer():React.ReactElement {
                 <p className={pFlagClass}>Matematik</p>
               </Link>
 
-              <Link className={`bg-[url(/images/engelsk_flag.png)] ${linkClass}`} href="materialer/engelsk">
+              <Link className={`bg-[url(/images/engelsk_flag.png)] ${linkClass} hidden`} href="materialer/engelsk">
                 <p className={pFlagClass}>Engelsk</p>
               </Link>
 
-              <Link className={`bg-[url(/images/naturteknik_flag.png)] ${linkClass}`} href="materialer/naturteknik">
+              <Link className={`bg-[url(/images/naturteknik_flag.png)] ${linkClass} hidden`} href="materialer/naturteknik">
                 <p className={pFlagClass}>Natur & Teknik</p>
               </Link>
 
-              <Link className={`bg-[url(/images/historie_flag.png)] ${linkClass}`} href="materialer/historie">
+              <Link className={`bg-[url(/images/historie_flag.png)] ${linkClass} hidden`} href="materialer/historie">
                 <p className={pFlagClass}>Historie</p>
               </Link>
             </div>
