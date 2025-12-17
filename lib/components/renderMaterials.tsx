@@ -21,7 +21,7 @@ export default function RenderMaterials({materials, error, loading}: Props) {
 
     if (materials.length === 0) return <h1 className="text-2xl font-bold"> Ingen resultater... </h1>
 
-    const html = materials.map((m:Material) => <MaterialCard key={m.id} m={m}/>)
+    const html = materials.sort((a:Material, b:Material) => a.name.localeCompare(b.name, undefined, {numeric: true, sensitivity: 'base'})).map((m:Material) => <MaterialCard key={m.id} m={m}/>)
 
     return (
         <main className="md:flex">

@@ -36,7 +36,7 @@ export default function MaterialCard({m}: CardProps) {
                         <p className="text-sm text-gray-600 mb-3 min-h-[40]">{m.short_description}</p>
                         {m.categories_array && (
                             <div className="flex flex-wrap gap-2 min-h-[56]">
-                                {m.categories_array.map((cat:string) => (
+                                {m.categories_array.sort((a:string, b:string) => a.localeCompare(b)).map((cat:string) => (
                                     <span 
                                         key={cat} 
                                         className={`h-fit px-2 py-1 text-xs font-medium rounded-full ${categoryClasses[cat.toLowerCase() as keyof typeof categoryClasses] ?? 'bg-orange-100 text-orange-700'}`}
