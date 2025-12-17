@@ -33,8 +33,8 @@ export default function Filters({filteredMaterials}: FilterProps):React.ReactEle
 
     if (filteredMaterials) {
         filteredMaterials.map(m => m.categories_array.map((cat) => {
-            if (!uniqueCategories.includes(cat.toLowerCase())) {
-                uniqueCategories.push(cat.toLowerCase())
+            if (!uniqueCategories.includes(cat[0].toLowerCase() + cat.slice(1))) {
+                uniqueCategories.push(cat[0].toLowerCase() + cat.slice(1))
             }
         }))
     }
@@ -46,7 +46,7 @@ export default function Filters({filteredMaterials}: FilterProps):React.ReactEle
                 <li onClick={() => handleClick(null)} className={`text-xl lg:text-base cursor-pointer ml-3 mt-1 hover:underline`}>
                     Nulstil
                 </li>
-                {uniqueCategories.map(cat => (
+                {uniqueCategories.sort((a,b) => a.localeCompare(b)).map(cat => (
                         <li onClick={() => handleClick(cat)} className={`cursor-pointer ml-3 mt-1 hover:underline text-xl lg:text-base ${params.get('kategori') === cat ? 'font-bold text-2xl lg:text-xl' : null}`} key={cat}>
                             {cat[0].toUpperCase() + cat.slice(1)}
                         </li>
