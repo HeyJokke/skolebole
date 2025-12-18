@@ -64,7 +64,7 @@ export default function AdminClient() {
 
     return (
         <main>
-            <div className="flex">
+            <div className="flex bg-white/90 rounded-lg shadow-xl p-8">
                 <form className="w-1/2" onSubmit={uploadMaterial}>
                     <input className="rounded-md bg-slate-200 font-semibold mb-3 py-1 px-3" type="text" placeholder="Navn" name="input-name"  required /><br/>
                     <input className="rounded-md bg-slate-200 font-semibold mb-3 py-1 px-3" type="text" placeholder="Kort beskrivelse (65)" name="input-shortdesc" maxLength={65} required /><br/>
@@ -105,7 +105,7 @@ export default function AdminClient() {
                 </div>
             </div>
 
-            <div className="border-1 border-gray-300 rounded-lg mt-10">
+            <div className="border-1 border-gray-300 bg-white/90 rounded-lg mt-10">
                 <TableMaterials />
             </div>
         </main>
