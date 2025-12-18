@@ -16,7 +16,7 @@ export default function DonationPopup() {
                     setDonationPopup(false)
                 }} className="flex items-center">
                 <Image className="ml-[-10] mb-10 mr-[-15] w-24 h-24" alt="Billede af en kop kaffe" src="/images/coffee.png" width={256} height={256} />
-                <p className="text-sm font-bold text-gray-800 text-shadow-md">{"Gi'"} en <br/> kop kaffe</p>
+                <p className="text-sm font-bold text-gray-800 text-shadow-md">Støt med <br/> en kaffe ❤️</p>
             </div>
         </div>
     )

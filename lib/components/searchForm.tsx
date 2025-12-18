@@ -36,7 +36,7 @@ export default function SearchForm() {
 
     return (
         <form className="flex justify-center lg:mt-0 mt-5" onSubmit={onSubmit}>
-            <div className="flex items-center pl-2 pt-1 pb-1 bg-gray-100 text-black rounded-lg">
+            <div className="flex items-center pl-2 pt-1 pb-1 bg-white text-black rounded-lg">
                 <button className="cursor-pointer" type="submit">
                     <svg 
                         className="w-6 h-7 text-body text-gray-500" 

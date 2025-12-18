@@ -39,8 +39,8 @@ export default function RootLayout({
               <Link href="/"><Image className="m-auto mb-5 lg:mb-0" alt="Skolebole logo" src="/images/skolebole_logo_lrg.png" width={1421} height={747} style={{width: "160px"}}/></Link>
               <nav className="flex justify-center w-full m-auto max-w-2xl">
                 <ul className="md:flex sm:block justify-center space-x-6">
-                  <Link href="/materialer"><li className="px-6 py-2 m-auto text-center rounded-full cursor-pointer text-slate-700 font-extrabold text-xl underline decoration-3 hover:scale-105 transform-size duration-200">Materialer</li></Link>
-                  <Link href="/om_os"><li className="px-6 py-2 m-auto text-center rounded-full cursor-pointer text-slate-700 font-extrabold text-xl underline decoration-3 hover:scale-105 transform-size duration-200">Om os</li></Link>
+                  <Link href="/materialer"><li className="px-6 py-2 m-auto text-center rounded-full cursor-pointer text-slate-700 font-extrabold text-xl underline decoration-3 hover:scale-105 transform-size duration-200 text-shadow-md text-shadow-white">Materialer</li></Link>
+                  <Link href="/om_os"><li className="px-6 py-2 m-auto text-center rounded-full cursor-pointer text-slate-700 font-extrabold text-xl underline decoration-3 hover:scale-105 transform-size duration-200 text-shadow-md text-shadow-white">Om os</li></Link>
                 </ul>
               </nav>
               <React.Suspense fallback={<div />}> 
