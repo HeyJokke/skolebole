@@ -33,14 +33,14 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} bg-[url(/wallpapers/skolebole-wallpaper.jpg)] bg-cover bg-fixed min-h-screen`}>
         <MaterialsProvider>
-        <header className="bg-blue-100/80 shadow-md">
+        <header className="bg-amber-50/80 shadow-md">
           <div className="max-w-6xl mx-auto px-4">
             <div className="lg:flex sm:block justify-between items-center py-6">
               <Link href="/"><Image className="m-auto mb-5 lg:mb-0" alt="Skolebole logo" src="/images/skolebole_logo_lrg.png" width={1421} height={747} style={{width: "160px"}}/></Link>
               <nav className="flex justify-center w-full m-auto max-w-2xl">
                 <ul className="md:flex sm:block justify-center space-x-6">
-                  <Link href="/materialer"><li className="px-6 py-2 m-auto text-center rounded-full bg-red-100 hover:bg-red-200 transition-colors duration-300 cursor-pointer font-medium text-red-800">Materialer</li></Link>
-                  <Link href="/om_os"><li className="px-6 py-2 m-auto text-center rounded-full bg-red-100 hover:bg-red-200 transition-colors duration-300 cursor-pointer font-medium text-red-800">Om os</li></Link>
+                  <Link href="/materialer"><li className="px-6 py-2 m-auto text-center rounded-full cursor-pointer text-slate-700 font-extrabold text-xl underline decoration-3 hover:scale-105 transform-size duration-200">Materialer</li></Link>
+                  <Link href="/om_os"><li className="px-6 py-2 m-auto text-center rounded-full cursor-pointer text-slate-700 font-extrabold text-xl underline decoration-3 hover:scale-105 transform-size duration-200">Om os</li></Link>
                 </ul>
               </nav>
               <React.Suspense fallback={<div />}> 
@@ -51,14 +51,14 @@ export default function RootLayout({
         </header>
 
         <main className="max-w-7xl mx-auto px-4 py-8">
-          <div className="h-full min-h-screen bg-blue-100/80 rounded-2xl shadow-lg p-6">
+          <div className="h-full min-h-screen bg-amber-50/80 rounded-2xl shadow-lg p-6">
             {children}
           </div>
         </main>
 
         <DonationPopup />
         
-        <footer className="mt-12 bg-blue-100/80 border-t border-gray-100 py-6">
+        <footer className="mt-12 bg-amber-50/80 border-t border-gray-100 py-6">
           <div className="max-w-6xl mx-auto px-4 text-center text-gray-600">
             <p>© {new Date().getFullYear()} Skolebole - Danske læringsmaterialer til danske skoler</p>
           </div>

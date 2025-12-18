@@ -18,8 +18,10 @@ export default function ProductPage({ params }:
     const categoryClasses = {
         dansk: "bg-blue-100 text-blue-700",
         matematik: "bg-green-100 text-green-700",
-        engelsk: "bg-purple-100 text-purple-700",
-        naturteknik: "bg-yellow-100 text-yellow-700"
+        børnehaveklassen: "bg-purple-100 text-purple-700",
+        dsa: "bg-yellow-100 text-yellow-700",
+        specialundervisning: "bg-red-100 text-red-700",
+        sprog: "bg-gray-100 text-gray-700"
     }
 
     React.useEffect(() => {
