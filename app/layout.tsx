@@ -33,7 +33,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} bg-[url(/wallpapers/skolebole-wallpaper.jpg)] bg-cover bg-fixed min-h-screen`}>
         <MaterialsProvider>
-        <header className="bg-amber-50/80 shadow-md">
+        <header className="bg-yellow-100/80 shadow-md">
           <div className="max-w-6xl mx-auto px-4">
             <div className="lg:flex sm:block justify-between items-center py-6">
               <Link href="/"><Image className="m-auto mb-5 lg:mb-0" alt="Skolebole logo" src="/images/skolebole_logo_lrg.png" width={1421} height={747} style={{width: "160px"}}/></Link>
@@ -51,14 +51,14 @@ export default function RootLayout({
         </header>
 
         <main className="max-w-7xl mx-auto px-4 py-8">
-          <div className="h-full min-h-screen bg-amber-50/80 rounded-2xl shadow-lg p-6">
+          <div className="h-full min-h-screen bg-yellow-100/80 rounded-2xl shadow-lg p-6">
             {children}
           </div>
         </main>
 
         <DonationPopup />
         
-        <footer className="mt-12 bg-amber-50/80 border-t border-gray-100 py-6">
+        <footer className="mt-12 bg-yellow-100/80 border-t border-gray-100 py-6">
           <div className="max-w-6xl mx-auto px-4 text-center text-gray-600">
             <p>© {new Date().getFullYear()} Skolebole - Danske læringsmaterialer til danske skoler</p>
           </div>
