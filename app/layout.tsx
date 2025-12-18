@@ -9,7 +9,7 @@ import { MaterialsProvider } from "@/lib/context/MaterialsProvider"
 import DonationPopup from '@/lib/components/donationPopup'
 
 export const metadata: Metadata = {
-  title: 'Skolebole - Læringsmaterialer til danske skoler',
+  title: 'SkoleBole - Læringsmaterialer til danske skoler',
   description: 'Find gratis opgavesæt til dansk, matematik og engelsk',
 };
 
