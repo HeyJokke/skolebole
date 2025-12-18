@@ -9,8 +9,8 @@ import { MaterialsProvider } from "@/lib/context/MaterialsProvider"
 import DonationPopup from '@/lib/components/donationPopup'
 
 export const metadata: Metadata = {
-  title: 'SkoleBole - Læringsmaterialer til danske skoler',
-  description: 'Find gratis opgavesæt til dansk, matematik og engelsk',
+  title: 'SkoleBole - Læringsmaterialer til indskolingen',
+  description: 'SkoleBole har særligt fokus på barnets læseudvikling, den første læsning samt sproglig opmærksomhed og fonologisk opmærksomhed.',
 };
 
 const geistSans = Geist({
