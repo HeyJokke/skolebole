@@ -47,7 +47,7 @@ export default function Filters({filteredMaterials}: FilterProps):React.ReactEle
                     Nulstil
                 </li>
                 {uniqueCategories.sort((a,b) => a.localeCompare(b)).map(cat => (
-                        <li onClick={() => handleClick(cat)} className={`cursor-pointer ml-1 mt-1 p-2 text-slate-700 font-extrabold text-lg hover:scale-105 transform-size duration-200 rounded-xl w-fit ${params.get('kategori') === cat ? 'bg-green-200 shadow-md' : "bg-white/70 hover:bg-white"}`} key={cat}>
+                        <li onClick={() => handleClick(cat)} className={`cursor-pointer ml-1 mt-1 p-2 text-slate-700 font-extrabold text-lg hover:scale-105 transform-size duration-200 rounded-xl w-fit ${params.get('kategori') === cat ? 'bg-blue-200 shadow-md' : "bg-white/70 hover:bg-white"}`} key={cat}>
                             {cat[0].toUpperCase() + cat.slice(1)}
                         </li>
                 ))}
