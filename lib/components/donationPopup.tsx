@@ -9,7 +9,7 @@ export default function DonationPopup() {
     const router = useRouter()
 
     return (
-        <div hidden={!donationPopup} className="ml-5 sticky w-45 h-12 bottom-4 right-4 z-50 bg-white/90 backdrop-blur-sm rounded-xl shadow-xl flex items-center hover:scale-105 transition-transform duration-200 cursor-pointer">
+        <div hidden={!donationPopup} className="ml-5 fixed w-45 h-12 bottom-4 left-1 z-50 bg-white/90 backdrop-blur-sm rounded-xl shadow-xl flex items-center hover:scale-105 transition-transform duration-200 cursor-pointer">
             <button onClick={() => setDonationPopup(false)} className="h-12 w-10 mr-[-15] z-60 font-bold rounded-xl hover:cursor-pointer hover:bg-red-600 hover:text-white">X</button>
             <div onClick={() => {
                     router.push('/support')

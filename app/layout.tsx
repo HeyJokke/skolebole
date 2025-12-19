@@ -7,6 +7,7 @@ import SearchForm from "@/lib/components/searchForm"
 import React from 'react'
 import { MaterialsProvider } from "@/lib/context/MaterialsProvider"
 import DonationPopup from '@/lib/components/donationPopup'
+import { FaFacebookSquare, FaInstagram, FaPinterest, FaYoutube } from "react-icons/fa"
 
 export const metadata: Metadata = {
   title: 'SkoleBole - Læringsmaterialer til indskolingen',
@@ -40,7 +41,7 @@ export default function RootLayout({
               <nav className="flex justify-center w-full m-auto max-w-2xl">
                 <ul className="md:flex sm:block justify-center space-x-6">
                   <Link href="/materialer"><li className="px-6 py-2 m-auto text-center rounded-full cursor-pointer text-slate-700 font-extrabold text-xl underline decoration-3 hover:scale-105 transform-size duration-200 text-shadow-md text-shadow-white">Materialer</li></Link>
-                  <Link href="/om_os"><li className="px-6 py-2 m-auto text-center rounded-full cursor-pointer text-slate-700 font-extrabold text-xl underline decoration-3 hover:scale-105 transform-size duration-200 text-shadow-md text-shadow-white">Om os</li></Link>
+                  <Link href="/kontakt"><li className="px-6 py-2 m-auto text-center rounded-full cursor-pointer text-slate-700 font-extrabold text-xl underline decoration-3 hover:scale-105 transform-size duration-200 text-shadow-md text-shadow-white">Kontakt os</li></Link>
                 </ul>
               </nav>
               <React.Suspense fallback={<div />}> 
@@ -59,8 +60,23 @@ export default function RootLayout({
         <DonationPopup />
         
         <footer className="mt-12 bg-yellow-50/80 border-t border-gray-100 py-6">
-          <div className="max-w-6xl mx-auto px-4 text-center text-gray-600">
-            <p>© {new Date().getFullYear()} Skolebole - Danske læringsmaterialer til danske skoler</p>
+          <div className="flex flex-col max-w-6xl mx-auto px-4 text-center text-gray-600">
+            <p className="text-sm">Billederne her på hjemmesiden, og i alle øvrige materialer af Forlaget Kluddermor, er royaltyfree fra enten Pixabay, Dall.E, Shutterstock, Freepik og OpenAI. Al kopiering, analogt og digitalt, af Forlaget Kluddermors materialer eller dele deraf er tilladt i henhold til undervisningsinstitutionens aftale med Tekst & Node. Kopiering, der går ud over begrænsningsreglerne i aftalen med Tekst & Node, kan alene finde sted efter forudgående aftale med Forlaget Kluddermor.</p>
+            <a href="https://www.forlagetkluddermor.com" target="_blank" className="mt-5 mb-5 m-auto bg-red-600 w-fit p-4 rounded-full font-extrabold text-white">Besøg Forlaget Kluddermor</a>
+            <p>©2020 by Forlaget Kluddermor</p>
+            <div className="flex mt-2 mb-2 w-30 justify-between m-auto">
+              <a href="https://www.facebook.com/forlagetkluddermor/" target="_blank"><FaFacebookSquare /></a>
+              <a href="https://www.instagram.com/forlagetkluddermor/" target="_blank"><FaInstagram /></a>
+              <a href="https://www.pinterest.dk/forlagetkluddermor/_saved/" target="_blank"><FaPinterest /></a>
+              <a href="https://www.youtube.com/channel/UCk4maKwrZGy97RbU3fgyJvg/videos" target="_blank"><FaYoutube /></a>
+            </div>
+            <p>
+              Hannevej 16 <br/>
+              3060 Espergærde <br/>
+              forlagetkluddermor@gmail.com<br/>
+              Tlf. 20 91 56 27<br/>
+              CVR 42724505
+            </p>
           </div>
         </footer>
         </MaterialsProvider>
