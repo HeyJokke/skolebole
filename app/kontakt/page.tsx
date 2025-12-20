@@ -1,4 +1,4 @@
-export default async function OmOs() {
+export default async function ContactPage() {
   return (
     <main className="h-full min-h-screen flex m-5">
       <div className="w-full bg-white/90 rounded-lg shadow-xl mr-0 lg:mr-10 p-8">
@@ -14,7 +14,7 @@ export default async function OmOs() {
             </p>
             <p className="flex flex-col mt-5 font-extrabold">
               Send gerne feedback, ønsker af nye materialer eller bare et spørgsmål!
-              <a className="bg-blue-300 p-4 rounded-full w-fit m-auto text-sky-900 mt-5" href="mailto:forlagetkluddermor@gmail.com?subject=Ang. SkoleBole: Indsæt tekst">Send en mail</a>
+              <a className="bg-blue-300 p-4 rounded-full w-fit m-auto text-sky-900 mt-5" href="mailto:forlagetkluddermor@gmail.com?subject=Ang. SkoleBole: &body=%0D%0A%0D%0AMail sendt fra SkoleBoles hjemmeside">Send en mail</a>
             </p>
         </div>
       </div>
