@@ -40,8 +40,8 @@ export default function RootLayout({
               <Link href="/"><Image className="m-auto mb-5 lg:mb-0" alt="Skolebole logo" src="/images/skolebole_logo_lrg.png" width={1421} height={747} style={{width: "160px"}}/></Link>
               <nav className="flex justify-center w-full m-auto max-w-2xl">
                 <ul className="md:flex sm:block justify-center space-x-6">
-                  <Link href="/materialer"><li className="px-6 py-2 m-auto text-center rounded-full cursor-pointer text-slate-700 font-extrabold text-xl underline decoration-3 hover:scale-105 transform-size duration-200 text-shadow-md text-shadow-white">Materialer</li></Link>
-                  <Link href="/kontakt"><li className="px-6 py-2 m-auto text-center rounded-full cursor-pointer text-slate-700 font-extrabold text-xl underline decoration-3 hover:scale-105 transform-size duration-200 text-shadow-md text-shadow-white">Kontakt os</li></Link>
+                  <Link href="/materialer"><li className="bg-sky-600 w-fit p-3 rounded-full font-extrabold text-white text-xl hover:scale-105 hover:bg-sky-500 transform-size duration-200">Materialer</li></Link>
+                  <Link href="/kontakt"><li className="bg-sky-600 w-fit p-3 rounded-full font-extrabold text-white text-xl hover:scale-105 hover:bg-sky-500 transform-size duration-200">Kontakt os</li></Link>
                 </ul>
               </nav>
               <React.Suspense fallback={<div />}> 
@@ -62,7 +62,7 @@ export default function RootLayout({
         <footer className="mt-12 bg-yellow-50/80 border-t border-gray-100 py-6">
           <div className="flex flex-col max-w-6xl mx-auto px-4 text-center text-gray-600">
             <p className="text-sm">Billederne her på hjemmesiden, og i alle øvrige materialer af Forlaget Kluddermor, er royaltyfree fra enten Pixabay, Dall.E, Shutterstock, Freepik og OpenAI. Al kopiering, analogt og digitalt, af Forlaget Kluddermors materialer eller dele deraf er tilladt i henhold til undervisningsinstitutionens aftale med Tekst & Node. Kopiering, der går ud over begrænsningsreglerne i aftalen med Tekst & Node, kan alene finde sted efter forudgående aftale med Forlaget Kluddermor.</p>
-            <a href="https://www.forlagetkluddermor.com" target="_blank" className="mt-5 mb-5 m-auto bg-red-600 w-fit p-4 rounded-full font-extrabold text-white">Besøg Forlaget Kluddermor</a>
+            <a href="https://www.forlagetkluddermor.com" target="_blank" className="mt-5 mb-5 m-auto bg-red-600 w-fit p-4 rounded-full font-extrabold text-white hover:bg-red-500 hover:scale-105 transform-size duration-200">Besøg Forlaget Kluddermor</a>
             <p>©2020 by Forlaget Kluddermor</p>
             <div className="flex mt-2 mb-2 w-30 justify-between m-auto">
               <a href="https://www.facebook.com/forlagetkluddermor/" target="_blank"><FaFacebookSquare /></a>
