@@ -61,7 +61,16 @@ export default function RootLayout({
         
         <footer className="mt-12 bg-yellow-50/80 border-t border-gray-100 py-6">
           <div className="flex flex-col max-w-6xl mx-auto px-4 text-center text-gray-600">
-            <p className="text-sm">Billederne her på hjemmesiden, og i alle øvrige materialer af Forlaget Kluddermor, er royaltyfree fra enten Pixabay, Dall.E, Shutterstock, Freepik og OpenAI. Al kopiering, analogt og digitalt, af Forlaget Kluddermors materialer eller dele deraf er tilladt i henhold til undervisningsinstitutionens aftale med Tekst & Node. Kopiering, der går ud over begrænsningsreglerne i aftalen med Tekst & Node, kan alene finde sted efter forudgående aftale med Forlaget Kluddermor.</p>
+            <p className="text-sm">
+              Illustrationer og billeder anvendt på denne hjemmeside, og i SkoleBoles materialer i øvrigt, er enten skabt af forfatter Liselotte Ring Kryger/
+              Forlaget Kluddermor (herunder AI-genererede illustrationer via OpenAI/DALL·E) eller anvendt i henhold til gældende billedlicenser fra lovlige 
+              billeddatabaser som Pixabay, Freepik og Shutterstock. Der er ingen eksterne illustratorer eller billedkunstnere, som skal vederlægges, 
+              i forbindelse med brugen af disse billeder.
+              <br/><br/>
+              Al kopiering, analogt og digitalt, af Forlaget Kluddermors materialer eller dele deraf er tilladt i henhold til undervisningsinstitutionens aftale med Tekst & Node.
+              <br/>
+              Kopiering, der går ud over begrænsningsreglerne i aftalen med Tekst & Node, kan alene finde sted efter forudgående aftale med Forlaget Kluddermor.
+            </p>
             <a href="https://www.forlagetkluddermor.com" target="_blank" className="mt-5 mb-5 m-auto bg-red-600 w-fit p-4 rounded-full font-extrabold text-white hover:bg-red-500 hover:scale-105 transform-size duration-200">Besøg Forlaget Kluddermor</a>
             <p>©2020 by Forlaget Kluddermor</p>
             <div className="flex mt-2 mb-2 w-30 justify-between m-auto">

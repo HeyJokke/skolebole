@@ -1,36 +1,52 @@
 "use client"
+import RenderMaterials from '@/lib/components/renderMaterials'
+import Filters from '@/lib/components/filters'
+import {useMaterials} from "@/lib/context/MaterialsProvider"
+import React from 'react'
+import PreviousPage from '@/lib/components/PreviousPage'
 
-import Link from 'next/link'
+export default function MaterialerPage():React.ReactElement {
+    const {materials, error, loading} = useMaterials()
+    /*
+    const pathName = usePathname()
+    const [query, setQuery] = React.useState<string>("")
+    const fag = pathName.split('/').pop()
 
-export default function Materialer():React.ReactElement {
-    const linkClass = "bg-[url(/images/dansk_flag.jpg)] bg-cover overflow-hidden h-50 w-50 m-auto flex justify-center items-center border-2 border-red-500 rounded-full text-center font-bold hover:border-red-400 hover:bg-gray-100 transition duration-250 hover:scale-102"
-    const pFlagClass = "backdrop-blur-xs transition duration-100 hover:backdrop-blur-none flex w-full h-full justify-center items-center text-3xl"
+    let filteredMaterialsByFag:Material[] | null = []
+    let filteredMaterialsByFilter:Material[] | null = []
+
+    if (materials && fag) {
+        filteredMaterialsByFag = materials.filter(m => m.categories_array.some(cat => cat.toLowerCase().includes(fag)))
+
+        if (query) {
+            filteredMaterialsByFilter = filteredMaterialsByFag.filter(m => m.categories_array.some(cat => cat.toLowerCase().includes(query.toLowerCase())))
+        }
+    } else {
+        filteredMaterialsByFag = materials
+    }
     
+    React.useEffect(() => {
+        async function getQuery() {
+            const params = await searchParams
+            const query = params.kategori ? params.kategori : ""
+            
+            setQuery(query)
+        } 
+        
+        getQuery()
+    },[searchParams])
+    */
+
     return (
-        <main className="flex flex-col items-center">
-            <h1 className="text-4xl font-bold mb-10">Vælg et fag</h1>
-            <div className="m-auto grid lg:grid-cols-2 lg:grid-cols-1 gap-6 lg:w-130 sm:w-100">
-              <Link className={`bg-[url(/images/dansk_flag.jpg)] ${linkClass}`} href="materialer/dansk">
-                <p className={pFlagClass}>Dansk</p>
-              </Link>
-              
-              <Link className={`bg-[url(/images/matematik_flag.png)] ${linkClass}`} href="materialer/matematik">
-                <p className={pFlagClass}>Matematik</p>
-              </Link>
-
-              <Link className={`bg-[url(/images/engelsk_flag.png)] ${linkClass} hidden`} href="materialer/engelsk">
-                <p className={pFlagClass}>Engelsk</p>
-              </Link>
-
-              <Link className={`bg-[url(/images/naturteknik_flag.png)] ${linkClass} hidden`} href="materialer/naturteknik">
-                <p className={pFlagClass}>Natur & Teknik</p>
-              </Link>
-
-              <Link className={`bg-[url(/images/historie_flag.png)] ${linkClass} hidden`} href="materialer/historie">
-                <p className={pFlagClass}>Historie</p>
-              </Link>
+        <main className="pl-3 pr-3">
+            <PreviousPage />
+            <div className="block md:flex">
+                
+                <React.Suspense fallback={<div/>}>
+                    <Filters filteredMaterials={materials} />
+                </React.Suspense>
+                <RenderMaterials materials={materials} error={error} loading={loading} />
             </div>
         </main>
-
     )
 }
