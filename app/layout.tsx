@@ -8,6 +8,7 @@ import React from 'react'
 import { MaterialsProvider } from "@/lib/context/MaterialsProvider"
 import DonationPopup from '@/lib/components/donationPopup'
 import { FaFacebookSquare, FaInstagram, FaPinterest, FaYoutube } from "react-icons/fa"
+import ForlagetLink from "@/lib/components/forlagetLink";
 
 export const metadata: Metadata = {
   title: 'SkoleBole - Læringsmaterialer til indskolingen',
@@ -71,7 +72,7 @@ export default function RootLayout({
               <br/>
               Kopiering, der går ud over begrænsningsreglerne i aftalen med <span className="font-bold">Tekst & Node</span>, kan alene finde sted efter forudgående aftale med SkoleBole / Forlaget Kluddermor.
             </p>
-            <a href="https://www.forlagetkluddermor.com" target="_blank" className="mt-5 mb-5 m-auto bg-orange-600 w-fit p-4 rounded-full font-extrabold text-white hover:bg-orange-500 hover:scale-105 transform-size duration-200">Besøg Forlaget Kluddermor</a>
+            <ForlagetLink />
             <p>©2026 by Forlaget Kluddermor</p>
             <div className="flex mt-2 mb-2 w-30 justify-between m-auto">
               <a href="https://www.facebook.com/forlagetkluddermor/" target="_blank"><FaFacebookSquare /></a>

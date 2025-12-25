@@ -42,7 +42,7 @@ export default function ProductPage({ params }:
     }
 
     return (
-        <main className="bg-white/90 shadow-xl rounded-lg p-8 m-5">
+        <main className="bg-white/90 shadow-xl rounded-lg p-4 md:p-8 m-2 md:m-5">
             {m ? 
                 <>  
                     <PreviousPage />
@@ -63,7 +63,7 @@ export default function ProductPage({ params }:
                             </div>
                         </div>
                     </header>
-                    <div className="lg:flex sm:block mt-8 p-8">
+                    <div className="lg:flex sm:block mt-4 p-4 md:p-8">
                         <div className="block lg:w-1/3 sm:w-full m-auto">
                             <Image 
                                 alt={`Produktbillede for ${m.name}`} 
@@ -75,7 +75,7 @@ export default function ProductPage({ params }:
                             
                         </div>
                         <div className="lg:w-2/3 sm:w-full">
-                            <p className="lg:ml-10 text-base/6 text-clip mt-3">{m.long_description}</p>
+                            <p className="lg:ml-10 text-base/7 text-clip mt-3">{m.long_description}</p>
                             <button onClick={() => pdfRedirect(m)} className="flex items-center justify-center lg:ml-10 mt-10 w-40 rounded-lg h-15 bg-green-300 text-green-900 font-bold hover:cursor-pointer hover:text-white hover:bg-green-500">
                                 <IoMdDownload className="mr-1 text-xl"/> 
                                 Download

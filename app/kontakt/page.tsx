@@ -1,8 +1,9 @@
 import Image from 'next/image'
+import ForlagetLink from '@/lib/components/forlagetLink'
 
 export default async function ContactPage() {
   return (
-    <main className="h-full min-h-screen flex m-5">
+    <main className="h-full min-h-screen flex m-2 md:m-5">
       <div className="w-full bg-white/90 rounded-lg shadow-xl p-8">
         <h1 className="text-4xl font-bold text-center mb-5">Kontakt Forlaget Kluddermor</h1>
       
@@ -35,9 +36,7 @@ export default async function ContactPage() {
             </div>
             <div className="md:w-2/5 w-full">
             <Image alt="Billede af Forlaget Kluddermor forfatter" src="/images/forlaget_forfatter.JPG" width={1462} height={1793} className="h-fit m-auto" />
-            <div className="flex items-center mt-5 mb-5">
-                <a href="https://www.forlagetkluddermor.com" target="_blank" className=" m-auto bg-orange-600 w-fit p-4 rounded-full font-extrabold text-white hover:bg-orange-500 hover:scale-105 transform-size duration-200">Besøg Forlaget Kluddermor</a>
-              </div>
+            <ForlagetLink />
             </div>
         </div>
       </div>

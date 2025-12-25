@@ -35,7 +35,7 @@ export default function SearchPage():React.ReactElement {
     if (!query) return <h1 className="text-2xl font-bold">Søg efter et materiale...</h1>
 
     return (
-        <main className="pl-3 pr-3">
+        <main className="pl-3 pr-3 sm:m-2 md:m-5">
             <PreviousPage />
             {
                 (filteredMaterials ?? []).length > 0 && 
