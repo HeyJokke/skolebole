@@ -67,12 +67,12 @@ export default function RootLayout({
               billeddatabaser som Pixabay, Freepik og Shutterstock. Der er ingen eksterne illustratorer eller billedkunstnere, som skal vederlægges, 
               i forbindelse med brugen af disse billeder.
               <br/><br/>
-              Al kopiering, analogt og digitalt, af Forlaget Kluddermors materialer eller dele deraf er tilladt i henhold til undervisningsinstitutionens aftale med Tekst & Node.
+              Al kopiering, analogt og digitalt, af SkoleBoles materialer eller dele deraf er tilladt i henhold til undervisningsinstitutionens aftale med <span className="font-bold">Tekst & Node</span>.
               <br/>
-              Kopiering, der går ud over begrænsningsreglerne i aftalen med Tekst & Node, kan alene finde sted efter forudgående aftale med Forlaget Kluddermor.
+              Kopiering, der går ud over begrænsningsreglerne i aftalen med <span className="font-bold">Tekst & Node</span>, kan alene finde sted efter forudgående aftale med SkoleBole / Forlaget Kluddermor.
             </p>
             <a href="https://www.forlagetkluddermor.com" target="_blank" className="mt-5 mb-5 m-auto bg-red-600 w-fit p-4 rounded-full font-extrabold text-white hover:bg-red-500 hover:scale-105 transform-size duration-200">Besøg Forlaget Kluddermor</a>
-            <p>©2020 by Forlaget Kluddermor</p>
+            <p>©2026 by Forlaget Kluddermor</p>
             <div className="flex mt-2 mb-2 w-30 justify-between m-auto">
               <a href="https://www.facebook.com/forlagetkluddermor/" target="_blank"><FaFacebookSquare /></a>
               <a href="https://www.instagram.com/forlagetkluddermor/" target="_blank"><FaInstagram /></a>

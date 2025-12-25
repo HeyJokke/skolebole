@@ -38,6 +38,10 @@ export default async function Home() {
               Forlægger & forfatter på<br/>
               SkoleBole og Forlaget Kluddermor
             </p>
+            <br/><br/>
+            <span className="italic">Al kopiering, analogt og digitalt, af SkoleBoles materialer eller dele deraf er tilladt i henhold til undervisningsinstitutionens aftale med <span className="font-bold">Tekst & Node</span>.
+            <br/>
+            Kopiering, der går ud over begrænsningsreglerne i aftalen med <span className="font-bold">Tekst & Node</span>, kan alene finde sted efter forudgående aftale med SkoleBole / Forlaget Kluddermor.</span>
           </div>
           <HighlightMaterials title={"Tilføjet for nyligt"} vertical={true} amount={4}/>
         </div>

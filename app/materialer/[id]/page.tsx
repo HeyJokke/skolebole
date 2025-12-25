@@ -6,6 +6,7 @@ import React from 'react'
 import Image from 'next/image'
 import { IncrementDownload } from './action'
 import PreviousPage from '@/lib/components/PreviousPage'
+import { IoMdDownload } from "react-icons/io";
 
 export default function ProductPage({ params }:
     {params: Promise<{id: number}>}
@@ -75,7 +76,10 @@ export default function ProductPage({ params }:
                         </div>
                         <div className="lg:w-2/3 sm:w-full">
                             <p className="lg:ml-10 text-base/6 text-clip mt-3">{m.long_description}</p>
-                            <button onClick={() => pdfRedirect(m)} className="lg:ml-10 mt-10 w-40 rounded-lg h-15 bg-green-300 text-green-900 font-bold hover:cursor-pointer hover:text-white hover:bg-green-500">Download</button>
+                            <button onClick={() => pdfRedirect(m)} className="flex items-center justify-center lg:ml-10 mt-10 w-40 rounded-lg h-15 bg-green-300 text-green-900 font-bold hover:cursor-pointer hover:text-white hover:bg-green-500">
+                                <IoMdDownload className="mr-1 text-xl"/> 
+                                Download
+                            </button>
                         </div>
                     </div>
                 </>
