@@ -13,6 +13,7 @@ import ForlagetLink from "@/lib/components/forlagetLink";
 export const metadata: Metadata = {
   title: 'SkoleBole - Læringsmaterialer til indskolingen',
   description: 'SkoleBole har særligt fokus på barnets læseudvikling, den første læsning samt sproglig opmærksomhed og fonologisk opmærksomhed.',
+  icons: "/icon.png"
 };
 
 const geistSans = Geist({
