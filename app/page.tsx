@@ -5,12 +5,37 @@ export default async function Home() {
     <main className="h-full min-h-screen flex m-5">
       <div className="w-full">
       
-        <div className="lg:flex md:block">
+        <div className="lg:flex md:block text-slate-700">
           <div className="bg-white/90 rounded-lg shadow-xl mr-0 lg:mr-10 p-8">
-            <h1 className="text-5xl font-bold text-center text-slate-700 mb-5">Velkommen til <br/> SkoleBole</h1>
-            <p className="lg:mr-5 mb-10">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque porttitor nibh ipsum, ac tempus risus pharetra in. Morbi venenatis tincidunt quam et viverra. Sed ut magna vel arcu interdum ultrices vel ac nunc. Donec id turpis metus. Praesent suscipit placerat mollis. Vivamus ut bibendum elit. Nunc ut commodo urna. Pellentesque nec sodales velit. Mauris ac ornare mi, non vestibulum arcu. Vestibulum accumsan, libero id pellentesque tincidunt, tellus eros pretium dui, convallis sagittis nisl urna quis nisl.
-              Sed sagittis vitae velit pellentesque commodo. Cras lacus leo, commodo nec ex nec, auctor mattis enim. Donec at sem at ante finibus convallis quis a tellus. Phasellus commodo posuere magna, sit amet commodo ipsum sodales quis. Etiam et nisi neque. Pellentesque vitae nulla a odio congue egestas. Proin eu felis vitae sem pellentesque dignissim vitae vel lacus. Donec ut eros at metus hendrerit posuere. Etiam ut nisi id urna vestibulum fermentum. Aenean metus sem, aliquam eu turpis id, hendrerit aliquet ex. Vestibulum blandit erat justo, eget tristique libero condimentum et. Pellentesque viverra eros elit, nec tempor nisl euismod eget. Morbi odio felis, venenatis a quam in, dapibus imperdiet mi.
+            <h1 className="text-5xl font-bold text-center mb-5">Velkommen til <br/> SkoleBole</h1>
+            <p className="lg:mr-5 mb-10 text-base/7">
+              Tak fordi du kigger forbi hos Forlaget Kluddermors nye lillebror SkoleBole, som er en enkel og overskuelig materialeplatform med printklare kopisider til de yngste elever. Her finder du små opgaver, der kan bruges enkeltvis og tages i brug med det samme – særligt på de dage, hvor dagens program ændrer sig, der er færre voksne, eller en vikar har brug for en klar og enkel opgave her og nu.
+              Materialerne hos SkoleBole er skabt som et supplement til undervisningen. Opgaverne står alene, kræver ingen forberedelse og egner sig godt som morgenopgaver, ekstraopgaver og til repetition, hvor eleverne genøver kendte færdigheder i deres eget tempo.
+              SkoleBole er samtidig et uforpligtende og legende udviklingsrum. Her eksperimenteres med opgavetyper, udtryk og formater, og der er plads til oldschool kopisider, hvor ikke alt behøver indgå i et større system. Nogle af materialerne er ligeledes forenklede udpluk inspireret af Kluddermors mest anvendte opgavetyper.
+            </p>
+            <h2 className="text-2xl mb-2 font-bold">Det får du hos SkoleBole:</h2>
+              <ul className="list-disc list-inside text-base/7">
+                <li>Små, selvstændige kopisider i PDF-format</li>
+                <li>Opgaver, der kan bruges her og nu</li>
+                <li>Velegnet til morgenstart, ekstra tid, vikar og repetition</li>
+                <li>Et kreativt rum med lav kompleksitet og høj tilgængelighed</li>
+              </ul>
+            <br/>
+            <h2 className="text-2xl mb-2 font-bold">Det får du <span className="text-italic">ikke</span> hos SkoleBole:</h2>
+              <ul className="list-disc list-inside text-base/7">
+                <li>Et samlet læseprogram</li>
+                <li>Materialer med fast progression og trin-for-trin-opbygning</li>
+                <li>Forløb med differentiering og lærervejledninger</li>
+                <li>Lamineringsmaterialer, større kopimapper eller spil</li>
+              </ul>
+            <br/>
+            <p className="lg:mr-5 mb-10 text-base/7">
+              Har dine elever brug for et gennemarbejdet læseprogram med tydelig progression, struktur og differentiering, finder du det stadig hos Forlaget Kluddermor, der samler det hele i ét sammenhængende system. SkoleBole er stedet for de små opgaver, der skal ligge klar, når noget opstår – og til de idéer, der gerne må prøves af uden store krav eller bindinger.
+              <br/><br/>
+              De bedste hilsner<br/>
+              Liselotte Ring Kryger<br/>
+              Forlægger & Forfatter på<br/>
+              SkoleBole og Forlaget Kluddermor
             </p>
           </div>
           <HighlightMaterials title={"Tilføjet for nyligt"} vertical={true} amount={4}/>
