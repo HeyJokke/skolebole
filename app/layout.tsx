@@ -39,7 +39,7 @@ export default function RootLayout({
             <div className="lg:flex sm:block justify-between items-center py-6">
               <Link href="/"><Image className="m-auto mb-5 lg:mb-0" alt="Skolebole logo" src="/images/skolebole_logo_lrg.png" width={1421} height={747} style={{width: "160px"}}/></Link>
               <nav className="flex justify-center w-full m-auto max-w-2xl">
-                <ul className="md:flex sm:block justify-center space-x-6">
+                <ul className="flex justify-center space-x-6">
                   <Link href="/materialer"><li className="bg-sky-600 w-fit p-3 rounded-full font-extrabold text-white text-xl hover:scale-105 hover:bg-sky-500 transform-size duration-200">Materialer</li></Link>
                   <Link href="/kontakt"><li className="bg-sky-600 w-fit p-3 rounded-full font-extrabold text-white text-xl hover:scale-105 hover:bg-sky-500 transform-size duration-200">Kontakt os</li></Link>
                 </ul>
@@ -52,7 +52,7 @@ export default function RootLayout({
         </header>
 
         <main className="max-w-6xl mx-auto px-4 py-8 text-slate-700">
-          <div className="h-full min-h-screen bg-yellow-50/80 rounded-2xl shadow-lg p-6">
+          <div className="h-full min-h-screen bg-yellow-50/80 rounded-2xl shadow-lg lg:p-6 md:p-3 p-2">
             {children}
           </div>
         </main>

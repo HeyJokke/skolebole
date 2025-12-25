@@ -3,7 +3,7 @@ import Image from 'next/image'
 export default async function ContactPage() {
   return (
     <main className="h-full min-h-screen flex m-5">
-      <div className="w-full bg-white/90 rounded-lg shadow-xl mr-0 lg:mr-10 p-8">
+      <div className="w-full bg-white/90 rounded-lg shadow-xl p-8">
         <h1 className="text-4xl font-bold text-center mb-5">Kontakt Forlaget Kluddermor</h1>
       
         <div className="justify-center text-center">

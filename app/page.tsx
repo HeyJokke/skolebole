@@ -6,7 +6,7 @@ export default async function Home() {
       <div className="w-full">
       
         <div className="md:flex sm:block text-slate-700">
-          <div className="bg-white/90 rounded-lg shadow-xl mr-0 md:mr-10 p-8 mb-5 lg:mb-0">
+          <div className="bg-white/90 rounded-lg shadow-xl mr-0 lg:mr-10 md:mr-8 p-8 mb-5 lg:mb-0">
             <h1 className="text-4xl font-bold text-center mb-5">Velkommen til SkoleBole</h1>
             <p className="lg:mr-5 mb-10 text-lg/7">
               Tak fordi du kigger forbi hos Forlaget Kluddermors nye lillebror SkoleBole, som er en enkel og overskuelig materialeplatform med printklare kopisider til de yngste elever. Her finder du små opgaver, der kan bruges enkeltvis og tages i brug med det samme – særligt på de dage, hvor dagens program ændrer sig, der er færre voksne, eller en vikar har brug for en klar og enkel opgave her og nu.
