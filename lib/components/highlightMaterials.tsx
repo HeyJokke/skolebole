@@ -15,7 +15,7 @@ export default function HighlightMaterials({title, vertical, amount}:Props) {
     if (materials) {
         const items:Material[] = materials.sort((a,b) => -1 * a.created_at.toString().localeCompare(b.created_at.toString(), undefined, {numeric: true})) ?? []
 
-        const mainClasses =  vertical ? `flex-col w-60` : `flex grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5`
+        const mainClasses =  vertical ? `flex-col md:w-60 w-full` : `flex grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5`
        
         return (
             <main>

@@ -51,7 +51,7 @@ export default function RootLayout({
           </div>
         </header>
 
-        <main className="max-w-6xl mx-auto px-4 py-8">
+        <main className="max-w-6xl mx-auto px-4 py-8 text-slate-700">
           <div className="h-full min-h-screen bg-yellow-50/80 rounded-2xl shadow-lg p-6">
             {children}
           </div>
@@ -71,7 +71,7 @@ export default function RootLayout({
               <br/>
               Kopiering, der går ud over begrænsningsreglerne i aftalen med <span className="font-bold">Tekst & Node</span>, kan alene finde sted efter forudgående aftale med SkoleBole / Forlaget Kluddermor.
             </p>
-            <a href="https://www.forlagetkluddermor.com" target="_blank" className="mt-5 mb-5 m-auto bg-red-600 w-fit p-4 rounded-full font-extrabold text-white hover:bg-red-500 hover:scale-105 transform-size duration-200">Besøg Forlaget Kluddermor</a>
+            <a href="https://www.forlagetkluddermor.com" target="_blank" className="mt-5 mb-5 m-auto bg-orange-600 w-fit p-4 rounded-full font-extrabold text-white hover:bg-orange-500 hover:scale-105 transform-size duration-200">Besøg Forlaget Kluddermor</a>
             <p>©2026 by Forlaget Kluddermor</p>
             <div className="flex mt-2 mb-2 w-30 justify-between m-auto">
               <a href="https://www.facebook.com/forlagetkluddermor/" target="_blank"><FaFacebookSquare /></a>

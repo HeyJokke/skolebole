@@ -18,7 +18,7 @@ export default async function Home() {
               <ul className="list-disc list-inside text-lg/7">
                 <li>Små, selvstændige kopisider i PDF-format</li>
                 <li>Opgaver, der kan bruges her og nu</li>
-                <li>Velegnet til morgenstart, ekstra tid, vikar og repetition</li>
+                <li>Velegnet til morgenstart, ekstra tid, vikarer og repetition</li>
                 <li>Et kreativt rum med lav kompleksitet og høj tilgængelighed</li>
               </ul>
             <br/>
@@ -29,7 +29,9 @@ export default async function Home() {
                 <li>Forløb med differentiering og lærervejledninger</li>
                 <li>Lamineringsmaterialer, større kopimapper eller spil</li>
               </ul>
-            <br/>
+              <div className="flex items-center mt-5 mb-5">
+                <a href="https://www.forlagetkluddermor.com" target="_blank" className=" m-auto bg-orange-600 w-fit p-4 rounded-full font-extrabold text-white hover:bg-orange-500 hover:scale-105 transform-size duration-200">Besøg Forlaget Kluddermor</a>
+              </div>
             <p className="lg:mr-5 mb-10 text-lg/7">
               Har dine elever brug for et gennemarbejdet læseprogram med tydelig progression, struktur og differentiering, finder du det stadig hos Forlaget Kluddermor, der samler det hele i ét sammenhængende system. SkoleBole er stedet for de små opgaver, der skal ligge klar, når noget opstår – og til de idéer, der gerne må prøves af uden store krav eller bindinger.
               <br/><br/>

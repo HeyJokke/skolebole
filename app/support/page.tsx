@@ -5,16 +5,16 @@ export default function SupportPage() {
         <main className="h-full min-h-screen flex items-center justify-center p-6">
             <div className="w-full max-w-4xl bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl p-8 md:p-12">
                 <div className="text-center">
-                    <h1 className="text-4xl md:text-5xl font-bold text-red-900 mb-6">Støt med en kaffe</h1>
+                    <h1 className="text-4xl md:text-5xl font-bold text-red-900 mb-6">Støt gerne med en kaffe</h1>
                     
                     <div className="mb-8">
                         <p className="text-lg md:text-xl text-gray-700 leading-relaxed max-w-2xl mx-auto mb-6">
                             Hvis du har lyst til at støtte mit arbejde, må du meget gerne købe mig en kop kaffe ☺️
-                            Det kan være en helt almindelig sort filterkaffe - eller en stor, luksus grande macchiato med ekstra flødeskum.
+                            Det kan være en helt almindelig sort filterkaffe - eller en stor, luksus grande Macchiato med ekstra flødeskum.
                             <br/>
                             Jeg bliver glad uanset størrelsen.
-                            Dit bidrag går direkte til det, jeg elsker allermest:
-                            at udvikle praksisnære materialer, der gør læsning mere overskuelig, mere legende - og mere mulig for alle børn 💛
+                            Dit bidrag går direkte til det, jeg elsker allermest, nemlig at udvikle praksisnære materialer, 
+                            der gør læsning mere overskuelig, mere legende - og mere mulig for alle børn ❤️
                         </p>
                         
                         <div className="flex justify-center mb-8">
