@@ -3,7 +3,6 @@ import RenderMaterials from '@/lib/components/renderMaterials'
 import Filters from '@/lib/components/filters'
 import {useMaterials} from "@/lib/context/MaterialsProvider"
 import React from 'react'
-import PreviousPage from '@/lib/components/PreviousPage'
 
 export default function MaterialerPage():React.ReactElement {
     const {materials, error, loading} = useMaterials()

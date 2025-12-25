@@ -16,7 +16,7 @@ export default async function ContactPage() {
               CVR 42724505<br/>
             </p>
             <p className="flex flex-col mt-5 font-extrabold">
-              Send gerne feedback, ønsker af nye materialer eller bare et spørgsmål!
+              Send gerne feedback, ønsker til nye materialer eller bare et spørgsmål!
               <a className="m-auto mt-5 bg-sky-600 w-fit p-3 rounded-full font-extrabold text-white text-lg hover:scale-105 hover:bg-sky-500 transform-size duration-200" href="mailto:forlagetkluddermor@gmail.com?subject=Ang. SkoleBole: &body=%0D%0A%0D%0AMail sendt fra SkoleBoles hjemmeside">Send en mail</a>
             </p>
             <br/>

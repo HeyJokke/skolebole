@@ -2,7 +2,7 @@ import Image from 'next/image'
 
 export default function SupportPage() {
     return (
-        <main className="h-full min-h-screen flex items-center justify-center p-6">
+        <main className="h-full min-h-screen flex m-2 md:m-5">
             <div className="w-full max-w-4xl bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl p-8 md:p-12">
                 <div className="text-center">
                     <h1 className="text-4xl md:text-5xl font-bold text-red-900 mb-6">Støt gerne med en kaffe</h1>
