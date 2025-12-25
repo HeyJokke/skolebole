@@ -42,11 +42,11 @@ export default function ProductPage({ params }:
     }
 
     return (
-        <main className="pl-3 pr-3">
+        <main className="bg-white/90 shadow-xl rounded-lg p-8 m-5">
             {m ? 
                 <>  
                     <PreviousPage />
-                    <header className="bg-white/90 rounded-lg shadow-xl mr-0 lg:mr-10 p-8">
+                    <header>
                         <h1 className="text-3xl font-bold">{m.name}</h1>
                         <div className='lg:flex sm:overflow-wrap'>
                             <p className="italic mr-2">{m.short_description}</p>
@@ -63,7 +63,7 @@ export default function ProductPage({ params }:
                             </div>
                         </div>
                     </header>
-                    <div className="lg:flex sm:block mt-8 bg-white/90 rounded-lg shadow-xl mr-0 lg:mr-10 p-8">
+                    <div className="lg:flex sm:block mt-8 p-8">
                         <div className="block lg:w-1/3 sm:w-full m-auto">
                             <Image 
                                 alt={`Produktbillede for ${m.name}`} 

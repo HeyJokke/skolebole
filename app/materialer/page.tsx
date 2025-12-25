@@ -38,8 +38,7 @@ export default function MaterialerPage():React.ReactElement {
     */
 
     return (
-        <main className="pl-3 pr-3">
-            <PreviousPage />
+        <main className="m-5">
             <div className="block md:flex">
                 
                 <React.Suspense fallback={<div/>}>
