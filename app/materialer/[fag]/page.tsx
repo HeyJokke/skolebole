@@ -4,7 +4,7 @@ import Filters from '@/lib/components/filters'
 import type { Material } from '@/lib/types'
 import {useMaterials} from "@/lib/context/MaterialsProvider"
 import React from 'react'
-import Link from 'next/link'
+import PreviousPage from '@/lib/components/PreviousPage'
 import { usePathname } from 'next/navigation'
 
 export default function FagPage({ searchParams }: { searchParams:Promise<{ kategori?: string }> }):React.ReactElement {
@@ -39,7 +39,7 @@ export default function FagPage({ searchParams }: { searchParams:Promise<{ kateg
 
     return (
         <main className="pl-3 pr-3">
-            <Link href="." className="inline-block mb-5 hover:underline">{'<-- '}Tilbage til fag</Link>
+            <PreviousPage />
             <div className="block md:flex">
                 
                 <React.Suspense fallback={<div/>}>

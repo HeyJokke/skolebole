@@ -3,10 +3,9 @@
 import { useMaterials } from '@/lib/context/MaterialsProvider'
 import type { Material } from '@/lib/types'
 import React from 'react'
-import Link from 'next/link'
 import Image from 'next/image'
 import { IncrementDownload } from './action'
-import { usePathname } from 'next/navigation'
+import PreviousPage from '@/lib/components/PreviousPage'
 
 export default function ProductPage({ params }:
     {params: Promise<{id: number}>}
@@ -14,7 +13,6 @@ export default function ProductPage({ params }:
     const {materials} = useMaterials()
     const [m, setM] = React.useState<Material>()
     const [materialId, setMaterialId] = React.useState<number | null>(null)
-    const pathName = usePathname()
     const categoryClasses = {
         dansk: "bg-blue-100 text-blue-700",
         matematik: "bg-green-100 text-green-700",
@@ -42,15 +40,11 @@ export default function ProductPage({ params }:
         window.open(m.pdf_path, '_blank', 'noopener,noreferrer')
     }
 
-    if (pathName.includes('/materialer/search')) {
-
-    }
-
     return (
         <main className="pl-3 pr-3">
             {m ? 
                 <>  
-                    <Link href="." className="inline-block mb-5 hover:underline">{'<-- '}Tilbage til katalog</Link>
+                    <PreviousPage />
                     <header className="bg-white/90 rounded-lg shadow-xl mr-0 lg:mr-10 p-8">
                         <h1 className="text-3xl font-bold">{m.name}</h1>
                         <div className='lg:flex sm:overflow-wrap'>

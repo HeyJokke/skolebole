@@ -4,8 +4,8 @@ import { useMaterials } from "@/lib/context/MaterialsProvider"
 import React from 'react'
 import RenderMaterials from "@/lib/components/renderMaterials"
 import type { Material } from '@/lib/types'
-import Link from 'next/link'
 import {useSearchParams} from 'next/navigation'
+import PreviousPage from "@/lib/components/PreviousPage"
 
 export default function SearchPage():React.ReactElement {
     const searchParam = useSearchParams()
@@ -36,7 +36,7 @@ export default function SearchPage():React.ReactElement {
 
     return (
         <main className="pl-3 pr-3">
-            <Link href="." className="inline-block mb-5 hover:underline">{'<-- '}Tilbage til katalog</Link>
+            <PreviousPage />
             {
                 (filteredMaterials ?? []).length > 0 && 
                 <h1 className="text-2xl font-bold mb-10">Søgeresultater for {`'${query}'`} </h1>
