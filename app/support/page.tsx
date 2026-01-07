@@ -3,7 +3,7 @@ import Image from 'next/image'
 export default function SupportPage() {
     return (
         <main className="h-full min-h-screen flex m-2 md:m-5">
-            <div className="w-full max-w-4xl bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl p-8 md:p-12">
+            <div className="w-full max-w-4xl bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl p-8 md:p-12 m-auto">
                 <div className="text-center">
                     <h1 className="text-4xl md:text-5xl font-bold text-red-900 mb-6">Støt gerne med en kaffe</h1>
                     
@@ -21,7 +21,7 @@ export default function SupportPage() {
                             <Image 
                                 className="h-auto" 
                                 src='/images/coffee_swipe.png' 
-                                alt="Billede af en kaffe der bliver sendt afsted" 
+                                alt="Billede af en kaffe der bliver skudt afsted med et swipe på telefonen" 
                                 height={500} 
                                 width={500}
                             />

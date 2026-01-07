@@ -46,7 +46,7 @@ export default function RootLayout({
                   <Link href="/kontakt"><li className="bg-sky-600 w-fit p-3 rounded-full font-extrabold text-white text-xl hover:scale-105 hover:bg-sky-500 transform-size duration-200">Kontakt os</li></Link>
                 </ul>
               </nav>
-              <React.Suspense fallback={<div />}> 
+              <React.Suspense fallback={<div/>}> 
                 <SearchForm />
               </React.Suspense>
             </div>
@@ -55,7 +55,9 @@ export default function RootLayout({
 
         <main className="max-w-6xl mx-auto px-4 py-8 text-slate-700">
           <div className="h-full min-h-screen bg-yellow-50/80 rounded-2xl shadow-lg lg:p-6 md:p-3 p-2">
-            {children}
+            <React.Suspense fallback={<div/>}>
+              {children}
+            </React.Suspense>
           </div>
         </main>
 

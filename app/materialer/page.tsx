@@ -30,7 +30,6 @@ export default function MaterialerPage():React.ReactElement {
     return (
         <main className="m-2 lg:m-5">
             <div className="block md:flex">
-                
                 <React.Suspense fallback={<div/>}>
                     <Filters filteredMaterials={materials} />
                 </React.Suspense>
