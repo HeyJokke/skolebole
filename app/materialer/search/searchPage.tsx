@@ -5,7 +5,6 @@ import React from 'react'
 import RenderMaterials from "@/lib/components/renderMaterials"
 import type { Material } from '@/lib/types'
 import {useSearchParams} from 'next/navigation'
-import PreviousPage from "@/lib/components/PreviousPage"
 
 export default function SearchPage():React.ReactElement {
     const searchParam = useSearchParams()
@@ -32,11 +31,8 @@ export default function SearchPage():React.ReactElement {
         getQuery()
     }, [searchParam])  
 
-    if (!query) return <h1 className="text-2xl font-bold">Søg efter et materiale...</h1>
-
     return (
         <main className="pl-3 pr-3 sm:m-2 md:m-5">
-            <PreviousPage />
             {
                 (filteredMaterials ?? []).length > 0 && 
                 <h1 className="text-2xl font-bold mb-10">Søgeresultater for {`'${query}'`} </h1>
