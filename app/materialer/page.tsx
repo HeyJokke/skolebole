@@ -14,7 +14,7 @@ export default function Materialer():React.ReactElement {
               
               <Link className={`bg-[url(/images/matematik_boble.png)] ${linkClass}`} href="materialer/matematik" />
 
-              <Link className={`bg-[url(/images/bhkl_boble.png)] ${linkClass}`} href="materialer/børnehaveklasse" />
+              <Link className={`bg-[url(/images/bhkl_boble.png)] ${linkClass}`} href="materialer/børnehaveklassen" />
 
               <Link className={`bg-[url(/images/1klasse_boble.png)] ${linkClass}`} href="materialer/1.klasse" />
               
