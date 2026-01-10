@@ -36,9 +36,9 @@ export default function MaterialCard({m}: CardProps) {
                     />
                 </div>
                 <div className="p-4 flex flex-col">
-                    <h3 className="text-lg font-semibold text-gray-800 mb-2">{m.name}</h3>
-                    <div className="overflow-y-auto max-h-48 pr-2">
-                        <p className="text-sm text-gray-600 mb-3 min-h-[40]">{m.short_description}</p>
+                    <h3 className="text-lg font-semibold text-gray-800 mb-2 text-pretty">{m.name}</h3>
+                    <div className="overflow-y-auto h-full justify-between">
+                        <p className="text-sm text-gray-600 mb-3 min-h-[40] line-clamp-2">{m.short_description[0].toUpperCase() + m.short_description.slice(1)}</p>
                         {m.categories_array && (
                             <div className="flex flex-wrap gap-2 min-h-[56]">
                                 {m.categories_array.sort((a:string, b:string) => a.localeCompare(b)).map((cat:string) => (

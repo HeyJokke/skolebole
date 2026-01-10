@@ -4,7 +4,6 @@ import Link from 'next/link'
 
 export default function Materialer():React.ReactElement {
     const linkClass = "bg-cover overflow-hidden h-[250px] w-[250px] m-auto flex justify-center items-center border-2 border-red-500 rounded-full text-center font-bold hover:border-red-400 hover:bg-gray-100 transition duration-250 hover:scale-102"
-    //const pFlagClass = "backdrop-blur-xs transition duration-100 hover:backdrop-blur-none flex w-full h-full justify-center items-center text-xl"
     
     return (
         <main className="flex flex-col items-center">
@@ -14,7 +13,7 @@ export default function Materialer():React.ReactElement {
               
               <Link className={`bg-[url(/images/matematik_boble.png)] ${linkClass}`} href="materialer/matematik" />
 
-              <Link className={`bg-[url(/images/bhkl_boble.png)] ${linkClass}`} href="materialer/børnehaveklassen" />
+              <Link className={`bg-[url(/images/bhkl_boble.png)] ${linkClass}`} href="materialer/boernehaveklassen" />
 
               <Link className={`bg-[url(/images/1klasse_boble.png)] ${linkClass}`} href="materialer/1.klasse" />
               
