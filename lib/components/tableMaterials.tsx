@@ -18,6 +18,7 @@ import { removeRowFromDatabase, updateMaterialText, updateImage, updatePDF } fro
 import { removeFileFromBucket } from "../database/client";
 import type {Material} from '@/lib/types'
 import Image from 'next/image'
+import Link from 'next/link'
 
 export type IconSvgProps = SVGProps<SVGSVGElement> & {
   size?: number;
@@ -176,12 +177,14 @@ export default function TableMaterials() {
             case "materials":
                 return (
                   <div className="flex justify-start items-center">
-                    <User
-                        avatarProps={{className: "w-24 h-24 border-3 border-gray-400 rounded", src: material.image_path}}
-                        description={""}
-                        name={""}
-                    >
-                    </User>
+                    <Link className="hover:scale-105" href={`materialer/search/${material.id}`}>
+                      <User
+                          avatarProps={{className: "w-24 h-24 border-3 border-gray-400 rounded", src: material.image_path}}
+                          description={""}
+                          name={""}
+                          >
+                      </User>
+                    </Link>
                       {<div className="flex-col ml-5">
                         <p className="font-bold">{material.name}</p>
                         <p className="text-gray-500 text-xs">{material.created}</p>
