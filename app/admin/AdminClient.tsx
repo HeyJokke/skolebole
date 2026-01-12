@@ -59,12 +59,16 @@ export default function AdminClient() {
                 setError(error)
             }        
         }
+
+        if (storageError) {
+            setError(storageError.message)
+        }
         setLoading(false)
     }
 
     return (
         <main>
-            <div className="flex bg-white/90 rounded-lg shadow-xl p-8">
+            <div className="block lg:flex bg-white/90 rounded-lg shadow-xl p-8">
                 <form className="w-1/2" onSubmit={uploadMaterial}>
                     <input className="rounded-md bg-slate-200 font-semibold mb-3 py-1 px-3" type="text" placeholder="Navn" name="input-name"  required /><br/>
                     <input className="rounded-md bg-slate-200 font-semibold mb-3 py-1 px-3" type="text" placeholder="Kort beskrivelse (65)" name="input-shortdesc" maxLength={65} required /><br/>
@@ -94,13 +98,13 @@ export default function AdminClient() {
                     </div>
                 </form>
                 
-                <span className="border-1"></span>
+                <span className="border-1 w-full h-full flex mt-5 mb-5 lg:block lg:w-auto lg:h-auto lg:mb-0 lg:mt-0"></span>
 
                 <div className="flex w-1/2 w-60 m-auto">
                     <div className="m-auto">
-                        {(!material && !error) && <MaterialCard m={basicMaterial} /> }
-                        {(material && !error) && <MaterialCard m={material} /> }
-                        {error && <p className="text-white bg-red-500 rounded-md p-2"> {error} </p>}
+                        {error && <p className="text-white bg-red-500 rounded-md p-2 mb-5"> {error} </p>}
+                        {!material && <MaterialCard m={basicMaterial} /> }
+                        {material && <MaterialCard m={material} /> }
                     </div>
                 </div>
             </div>

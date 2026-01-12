@@ -26,7 +26,7 @@ export default function Filters({filteredMaterials, section}: FilterProps):React
             router.push(pathName)
         }
     }
-
+    
     if (!filteredMaterials && materials) {
         filteredMaterials = materials
     }

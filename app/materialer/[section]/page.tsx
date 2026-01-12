@@ -54,7 +54,7 @@ export default function MaterialerPage():React.ReactElement {
                     </React.Suspense>
                 </div>
                 <div className="">
-                    {section && <h1 className="text-3xl font-bold mb-5">{"' " + (section[0].toUpperCase() + section.slice(1)).replace('oe', 'ø').replace('aa', 'å').replace('ae', 'æ') + " '"}</h1>}
+                    {section && <h1 className="text-3xl font-bold mb-5">{(section[0].toUpperCase() + section.slice(1)).replace('oe', 'ø').replace('aa', 'å').replace('ae', 'æ')}</h1>}
                     <RenderMaterials materials={filteredMaterials} error={error} loading={loading} />
                 </div>
             </div>
