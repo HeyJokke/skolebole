@@ -53,7 +53,7 @@ export default function MaterialerPage():React.ReactElement {
                         <Filters filteredMaterials={materials} section={section} />
                     </React.Suspense>
                 </div>
-                <div className="">
+                <div className="w-full">
                     {section && <h1 className="text-3xl font-bold mb-5">{(section[0].toUpperCase() + section.slice(1)).replace('oe', 'ø').replace('aa', 'å').replace('ae', 'æ')}</h1>}
                     <RenderMaterials materials={filteredMaterials} error={error} loading={loading} />
                 </div>

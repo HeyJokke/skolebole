@@ -9,13 +9,13 @@ type Props = {
 }
 
 const Spinner = () => (
-    <div className="flex justify-center items-center py-12">
+    <div className="flex m-auto justify-center py-12">
         <div className="animate-spin rounded-full h-12 w-12 border-b-5 border-blue-500"></div>
     </div>
 )
 
 export default function RenderMaterials({materials, error, loading}: Props) {
-    if (loading || !materials) return <main className="m-auto"><Spinner /></main>
+    if (loading || !materials) return <Spinner />
 
     if (error) return <p className="mx-auto text-white bg-red-500 rounded-md p-2 h-full"> Der skete en fejl </p>
 
