@@ -13,44 +13,42 @@ export default function MaterialerPage():React.ReactElement {
     const searchParams = useSearchParams()
     const pathName = usePathname()
     const section = pathName.split('/').pop() ?? null
+    const query = searchParams.get('kategori') ? searchParams.get('kategori') : ""
 
     React.useEffect(() => {
         async function getQuery() {
-                const query = searchParams.get('kategori') ? searchParams.get('kategori') : ""
-
+                let filteredMaterialsBySection:Material[] = []
+                
                 if (materials && section) {
-                    setFilteredMaterials(materials.filter(m => m.categories_array.some(cat => cat.toLowerCase().replace(/[ø]/gi, 'oe').replace(/[å]/gi, 'aa').replace(/[æ]/gi, 'ae') === section.toLowerCase())))
+                    filteredMaterialsBySection = materials.filter(m => m.categories_array.some(cat => cat.toLowerCase().replace(/[ø]/gi, 'oe').replace(/[å]/gi, 'aa').replace(/[æ]/gi, 'ae') === section.toLowerCase()))
+                    setFilteredMaterials(filteredMaterialsBySection)
 
-                    if (query) {
-                        const filteredMaterialsBySection = materials.filter(m => m.categories_array.some(cat => 
-                            cat
-                                .toLowerCase().replace(/[ø]/gi, 'oe').replace(/[å]/gi, 'aa').replace(/[æ]/gi, 'ae')
-                                .includes(section.toLowerCase()) 
-                        ))
-
+                    if (query && filteredMaterialsBySection) {
                         setFilteredMaterials(filteredMaterialsBySection.filter(m => 
-                                    m.categories_array.some(cat => (
-                                        cat
-                                            .toLowerCase().replace(/[ø]/gi, 'oe').replace(/[å]/gi, 'aa').replace(/[æ]/gi, 'ae')
-                                            .includes(query.toLowerCase()) 
-                                    )
+                        m.categories_array.some(cat =>
+                                    cat
+                                        .toLowerCase().replace(/[ø]/gi, 'oe').replace(/[å]/gi, 'aa').replace(/[æ]/gi, 'ae')
+                                        .includes(query.toLowerCase()) 
                                 )
                             )
                         )
                     }
                 }
-        } 
-        
-        getQuery()
-    },[searchParams, materials, section])
-   
+            } 
+            
+            getQuery()
+        },[materials, section, query])
+    
     return (
         <main className="m-2 lg:m-5">
             <div className="block md:flex">
-                <div>
+                <div className="h-fit min-w-[200] w-auto">
                     <PreviousPage />
                     <React.Suspense fallback={<div/>}>
-                        <Filters filteredMaterials={materials} section={section} />
+                        {section ? 
+                            <Filters section={section} /> :
+                            <div></div>
+                        }
                     </React.Suspense>
                 </div>
                 <div className="w-full">

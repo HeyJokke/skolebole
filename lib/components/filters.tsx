@@ -1,15 +1,14 @@
 "use client"
 
-import type {Material} from '@/lib/types'
 import {useSearchParams, useRouter, usePathname} from 'next/navigation'
 import {useMaterials} from '@/lib/context/MaterialsProvider'
+import React from 'react'
 
 type FilterProps = {
-    filteredMaterials: Material[] | null
-    section: string | null
+    section: string
 }
 
-export default function Filters({filteredMaterials, section}: FilterProps):React.ReactElement | null {
+export default function Filters({section}: FilterProps):React.ReactElement | null {
     const searchParams = useSearchParams()
     const pathName = usePathname()
     const params = new URLSearchParams(searchParams)
@@ -26,24 +25,22 @@ export default function Filters({filteredMaterials, section}: FilterProps):React
             router.push(pathName)
         }
     }
-    
-    if (!filteredMaterials && materials) {
-        filteredMaterials = materials
-    }
 
-    if (filteredMaterials) {
-        filteredMaterials.map(m => m.categories_array.map((cat) => {
-            if (!uniqueCategories.includes(cat[0].toLowerCase() + cat.slice(1))) {
-                if (section) {
+    if (materials) {
+        const filteredMaterials = materials.filter(m => m.categories_array.some(cat => cat.toLowerCase().replace(/[ø]/gi, 'oe').replace(/[å]/gi, 'aa').replace(/[æ]/gi, 'ae') === section.toLowerCase()))
+
+        if (filteredMaterials) {
+            filteredMaterials.map(m => m.categories_array.map((cat) => {
+                if (!uniqueCategories.includes(cat[0].toLowerCase() + cat.slice(1))) {
                     if (cat.toLowerCase().replace(/[ø]/gi, 'oe').replace(/[å]/gi, 'aa').replace(/[æ]/gi, 'ae') != section.toLowerCase()) {
                         uniqueCategories.push(cat[0].toLowerCase() + cat.slice(1))
                     }
-                } else {
-                    uniqueCategories.push(cat[0].toLowerCase() + cat.slice(1))
                 }
-            }
-        }))
+            }))
+        }
     }
+
+    
 
     return (
         <main className='mb-10 md:mr-5 min-w-[200]'>
