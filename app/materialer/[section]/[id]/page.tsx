@@ -55,8 +55,8 @@ export default function ProductPage({ params }:
                 <>  
                     <header>
                         <h1 className="text-3xl font-bold">{m.name}</h1>
-                        <div className='lg:flex sm:overflow-wrap'>
-                            <p className="italic mr-2">{m.short_description}</p>
+                        <div className='sm:overflow-wrap'>
+                            <p className="italic mr-2 mb-2">{m.short_description}</p>
 
                             <div className="flex flex-wrap gap-1 mt-3 lg:mt-0">
                                 {m.categories_array.sort((a:string,b:string) => a.localeCompare(b)).map((cat:string) => (

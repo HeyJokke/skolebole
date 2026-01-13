@@ -10,7 +10,7 @@ export default function PreviousPage() {
     const pathArr = pathName.split('/')
     pathArr.pop()
     const lastPath = pathArr.join('/')
-
+    
     return (
         <button 
             onClick={() => lastPath.includes('search') ? router.back() : router.push(lastPath ? lastPath : "/")} 

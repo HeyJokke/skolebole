@@ -42,7 +42,7 @@ export default async function Home() {
               </ul>
             <br/>
             <h2 className="text-2xl mb-2 font-bold">Det får du <span className="italic">ikke</span> hos SkoleBole:</h2>
-              <ul className="list-disc list-inside text-lg/7">
+              <ul className="list-disc list-inside text-lg/7 mb-10">
                 <li>Et samlet læseprogram</li>
                 <li>Materialer med fast progression og trin-for-trin-opbygning</li>
                 <li>Forløb med differentiering og lærervejledninger</li>
@@ -50,7 +50,7 @@ export default async function Home() {
                 <li>De resterende 98% af Forlaget Kluddermors materialer</li>
               </ul>
               <ForlagetLink />
-            <p className="lg:mr-5 mb-10 text-lg/7">
+            <p className="lg:mr-5 mb-10 text-lg/7 mt-10">
               Har dine elever brug for et gennemarbejdet læseprogram med tydelig progression, struktur og differentiering, finder du det stadig hos Forlaget Kluddermor, der samler det hele i ét sammenhængende system. SkoleBole er stedet for de små opgaver, der skal ligge klar, når noget opstår – og til de idéer, der gerne må prøves af uden store krav eller bindinger.
               <br/><br/>
               De bedste hilsner<br/>
@@ -58,10 +58,9 @@ export default async function Home() {
               Forlægger & forfatter på<br/>
               SkoleBole og Forlaget Kluddermor
             </p>
-            <br/><br/>
-            <span className="italic">Al kopiering, analogt og digitalt, af SkoleBoles materialer eller dele deraf er tilladt i henhold til undervisningsinstitutionens aftale med <span className="font-bold">Tekst & Node</span>.
             <br/>
-            Kopiering, der går ud over begrænsningsreglerne i aftalen med <span className="font-bold">Tekst & Node</span>, kan alene finde sted efter forudgående aftale med SkoleBole / Forlaget Kluddermor.</span>
+            <p><span className="italic">Al kopiering, analogt og digitalt, af SkoleBoles materialer eller dele deraf er tilladt i henhold til undervisningsinstitutionens aftale med <span className="font-bold">Tekst & Node</span>.
+            Kopiering, der går ud over begrænsningsreglerne i aftalen med <span className="font-bold">Tekst & Node</span>, kan alene finde sted efter forudgående aftale med SkoleBole / Forlaget Kluddermor.</span></p>
       </div>
     </main>
   )
