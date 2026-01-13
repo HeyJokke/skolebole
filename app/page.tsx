@@ -8,7 +8,7 @@ export default async function Home() {
       <div className="w-full text-slate-700">
             <h1 className="text-4xl font-bold text-center mb-5 mt-5 lg:mt-0">Velkommen til SkoleBole</h1>
             <p className="lg:mr-5 mb-5 text-lg/7">
-              Tak fordi du kigger forbi hos Forlaget Kluddermors nye lillebror SkoleBole, som er en enkel og overskuelig materialeplatform med printklare kopisider til de yngste elever. Her finder du små opgaver, der kan bruges enkeltvis og tages i brug med det samme – særligt på de dage, hvor dagens program ændrer sig, der er færre voksne, eller en vikar har brug for en klar og enkel opgave her og nu.
+              Tak fordi du kigger forbi hos Forlaget Kluddermors nye lillebror SkoleBole, som er en enkel og overskuelig materialeplatform med printklare kopisider til de yngste elever. Her finder du små opgaver, der kan bruges enkeltvis og tages i brug med det samme, særligt på de dage, hvor dagens program ændrer sig eller en vikar har brug for en klar og enkel opgave her og nu.
             </p>
             <div className="m-auto grid lg:grid-cols-4 md:grid-cols-3 gap-5 md:w-full w-100">
               <Link className={`bg-[url(/images/dansk_boble.png)] ${linkClass}`} href="materialer/dansk" />
