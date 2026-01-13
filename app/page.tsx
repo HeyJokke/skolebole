@@ -1,17 +1,34 @@
-import HighlightMaterials from "@/lib/components/highlightMaterials"
 import ForlagetLink from "@/lib/components/forlagetLink"
+import Link from "next/link"
 
 export default async function Home() {
+  const linkClass = "bg-cover overflow-hidden h-[230px] w-[230px] m-auto flex justify-center items-center border-2 border-red-500 rounded-full text-center font-bold hover:border-red-400 hover:bg-gray-100 transition duration-250 hover:scale-102"
   return (
-    <main className="h-full min-h-screen flex m-2 md:m-5">
-      <div className="w-full">
-      
-        <div className="md:flex sm:block text-slate-700">
-          <div className="bg-white/90 rounded-lg shadow-xl mr-0 lg:mr-10 md:mr-8 p-8 mb-5 lg:mb-0">
-            <h1 className="text-4xl font-bold text-center mb-5">Velkommen til SkoleBole</h1>
-            <p className="lg:mr-5 mb-10 text-lg/7">
+    <main className="h-full min-h-screen flex m-5">
+      <div className="w-full text-slate-700">
+            <h1 className="text-4xl font-bold text-center mb-5 mt-5 lg:mt-0">Velkommen til SkoleBole</h1>
+            <p className="lg:mr-5 mb-5 text-lg/7">
               Tak fordi du kigger forbi hos Forlaget Kluddermors nye lillebror SkoleBole, som er en enkel og overskuelig materialeplatform med printklare kopisider til de yngste elever. Her finder du små opgaver, der kan bruges enkeltvis og tages i brug med det samme – særligt på de dage, hvor dagens program ændrer sig, der er færre voksne, eller en vikar har brug for en klar og enkel opgave her og nu.
-              <br/>
+            </p>
+            <div className="m-auto grid lg:grid-cols-4 md:grid-cols-3 gap-5 md:w-full w-100">
+              <Link className={`bg-[url(/images/dansk_boble.png)] ${linkClass}`} href="materialer/dansk" />
+              
+              <Link className={`bg-[url(/images/matematik_boble.png)] ${linkClass}`} href="materialer/matematik" />
+
+              <Link className={`bg-[url(/images/morgenopgaver_boble.png)] ${linkClass}`} href="materialer/morgenopgaver" />
+
+              <Link className={`bg-[url(/images/demo_boble.png)] ${linkClass}`} href="materialer/demoopgaver" />
+
+              <Link className={`bg-[url(/images/bhkl_boble.png)] ${linkClass}`} href="materialer/boernehaveklassen" />
+
+              <Link className={`bg-[url(/images/1klasse_boble.png)] ${linkClass}`} href="materialer/1.klasse" />
+              
+              <Link className={`bg-[url(/images/DSA_boble.png)] ${linkClass}`} href="materialer/dsa" />
+
+              <Link className={`bg-[url(/images/specunderv_boble.png)] ${linkClass}`} href="materialer/specialundervisning" />
+
+            </div>
+            <p className="lg:mr-5 mb-10 mt-5 text-lg/7">
               Materialerne hos SkoleBole er skabt som et supplement til undervisningen. Opgaverne står alene, kræver ingen forberedelse og egner sig godt som morgenopgaver, ekstraopgaver og til repetition, hvor eleverne genøver kendte færdigheder i deres eget tempo.
               SkoleBole er samtidig et uforpligtende og legende udviklingsrum. Her eksperimenteres med opgavetyper, udtryk og formater, og der er plads til oldschool kopisider, hvor ikke alt behøver indgå i et større system. Nogle af materialerne er ligeledes forenklede udpluk inspireret af Kluddermors mest anvendte opgavetyper.
             </p>
@@ -21,6 +38,7 @@ export default async function Home() {
                 <li>Opgaver, der kan bruges her og nu</li>
                 <li>Velegnet til morgenstart, ekstra tid, vikarer og repetition</li>
                 <li>Et kreativt rum med lav kompleksitet og høj tilgængelighed</li>
+                <li>Smagsprøver og demoversioner af udvalgte materialer fra Kluddermor</li>
               </ul>
             <br/>
             <h2 className="text-2xl mb-2 font-bold">Det får du <span className="italic">ikke</span> hos SkoleBole:</h2>
@@ -29,6 +47,7 @@ export default async function Home() {
                 <li>Materialer med fast progression og trin-for-trin-opbygning</li>
                 <li>Forløb med differentiering og lærervejledninger</li>
                 <li>Lamineringsmaterialer, større kopimapper eller spil</li>
+                <li>De resterende 98% af Forlaget Kluddermors materialer</li>
               </ul>
               <ForlagetLink />
             <p className="lg:mr-5 mb-10 text-lg/7">
@@ -43,9 +62,6 @@ export default async function Home() {
             <span className="italic">Al kopiering, analogt og digitalt, af SkoleBoles materialer eller dele deraf er tilladt i henhold til undervisningsinstitutionens aftale med <span className="font-bold">Tekst & Node</span>.
             <br/>
             Kopiering, der går ud over begrænsningsreglerne i aftalen med <span className="font-bold">Tekst & Node</span>, kan alene finde sted efter forudgående aftale med SkoleBole / Forlaget Kluddermor.</span>
-          </div>
-          <HighlightMaterials title={"Tilføjet for nyligt"} vertical={true} amount={4}/>
-        </div>
       </div>
     </main>
   )

@@ -5,7 +5,7 @@ import {useMaterials} from '@/lib/context/MaterialsProvider'
 import React from 'react'
 
 type FilterProps = {
-    section: string
+    section: string | null
 }
 
 export default function Filters({section}: FilterProps):React.ReactElement | null {
@@ -26,10 +26,10 @@ export default function Filters({section}: FilterProps):React.ReactElement | nul
         }
     }
 
-    if (materials) {
+    if (materials && section) {
         const filteredMaterials = materials.filter(m => m.categories_array.some(cat => cat.toLowerCase().replace(/[ø]/gi, 'oe').replace(/[å]/gi, 'aa').replace(/[æ]/gi, 'ae') === section.toLowerCase()))
 
-        if (filteredMaterials) {
+        if (filteredMaterials && section) {
             filteredMaterials.map(m => m.categories_array.map((cat) => {
                 if (!uniqueCategories.includes(cat[0].toLowerCase() + cat.slice(1))) {
                     if (cat.toLowerCase().replace(/[ø]/gi, 'oe').replace(/[å]/gi, 'aa').replace(/[æ]/gi, 'ae') != section.toLowerCase()) {
@@ -38,6 +38,17 @@ export default function Filters({section}: FilterProps):React.ReactElement | nul
                 }
             }))
         }
+    } else {
+        const filteredMaterials = materials
+
+        if (filteredMaterials) {
+            filteredMaterials.map(m => m.categories_array.map((cat) => {
+                if (!uniqueCategories.includes(cat[0].toLowerCase() + cat.slice(1))) {
+                    uniqueCategories.push(cat[0].toLowerCase() + cat.slice(1))
+                }
+            }))
+        }
+
     }
 
     

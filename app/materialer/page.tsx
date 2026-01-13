@@ -1,29 +1,50 @@
 "use client"
+import RenderMaterials from '@/lib/components/renderMaterials'
+import Filters from '@/lib/components/filters'
+import {useMaterials} from "@/lib/context/MaterialsProvider"
+import React from 'react'
+import {useSearchParams} from 'next/navigation'
+import type { Material } from '@/lib/types'
+import PreviousPage from '@/lib/components/PreviousPage'
 
-import Link from 'next/link'
+export default function Materialer():React.ReactElement {    
+    const [filteredMaterials, setFilteredMaterials] = React.useState<Material[] | null>(null)
+    const {materials, loading, error} = useMaterials()
+    const searchParams = useSearchParams()
+    const query = searchParams.get('kategori') ? searchParams.get('kategori') : ""
 
-export default function Materialer():React.ReactElement {
-    const linkClass = "bg-cover overflow-hidden h-[250px] w-[250px] m-auto flex justify-center items-center border-2 border-red-500 rounded-full text-center font-bold hover:border-red-400 hover:bg-gray-100 transition duration-250 hover:scale-102"
-    
+    React.useEffect(() => {
+        async function getQuery() {
+                if (query && materials) {
+                    setFilteredMaterials(materials.filter(m => 
+                    m.categories_array.some(cat =>
+                                cat
+                                    .toLowerCase().replace(/[ø]/gi, 'oe').replace(/[å]/gi, 'aa').replace(/[æ]/gi, 'ae')
+                                    .includes(query.toLowerCase()) 
+                            )
+                        )
+                    )
+                } else {
+                    setFilteredMaterials(materials)
+                }
+            }
+            
+            getQuery()
+        },[materials, query])
+
     return (
-        <main className="flex flex-col items-center">
-            <h1 className="text-4xl font-bold mb-10">HVAD SKAL DER STÅ HER?</h1>
-            <div className="m-auto grid lg:grid-cols-2 lg:grid-cols-1 gap-6 lg:w-130 sm:w-100">
-              <Link className={`bg-[url(/images/dansk_boble.png)] ${linkClass}`} href="materialer/dansk" />
-              
-              <Link className={`bg-[url(/images/matematik_boble.png)] ${linkClass}`} href="materialer/matematik" />
-
-              <Link className={`bg-[url(/images/bhkl_boble.png)] ${linkClass}`} href="materialer/boernehaveklassen" />
-
-              <Link className={`bg-[url(/images/1klasse_boble.png)] ${linkClass}`} href="materialer/1.klasse" />
-              
-              <Link className={`bg-[url(/images/DSA_boble.png)] ${linkClass}`} href="materialer/dsa" />
-
-              <Link className={`bg-[url(/images/specunderv_boble.png)] ${linkClass}`} href="materialer/specialundervisning" />
-
-              <Link className={`bg-[url(/images/morgenopgaver_boble.png)] ${linkClass}`} href="materialer/morgenopgaver" />
-
-              <Link className={`bg-[url(/images/demo_boble.png)] ${linkClass}`} href="materialer/demoopgaver" />
+        <main className="m-2 lg:m-5">
+            <div className="block md:flex">
+                <div className="h-fit min-w-[200] w-auto">
+                    <PreviousPage />
+                    <React.Suspense fallback={<div/>}>
+                        <Filters section={null} />
+                    </React.Suspense>
+                </div>
+                <div className="w-full">
+                    <h1 className="text-3xl font-bold mb-5">Alle materialer</h1>
+                    <RenderMaterials materials={filteredMaterials} error={error} loading={loading} />
+                </div>
             </div>
         </main>
     )

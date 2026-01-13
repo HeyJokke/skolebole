@@ -19,7 +19,7 @@ export default function MaterialCard({m}: CardProps) {
         sprog: "bg-gray-100 text-gray-700"
     }
 
-    if (pathName === '/' || pathName.includes('/search') || pathName.includes('/admin')) {
+    if (pathName === '/' || pathName.includes('/search') || pathName.includes('/admin') || pathName === '/materialer') {
         pathName = '/materialer/search'
     }
 
