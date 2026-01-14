@@ -12,7 +12,7 @@ import ForlagetLink from "@/lib/components/forlagetLink";
 
 export const metadata: Metadata = {
   title: 'SkoleBole - Læringsmaterialer til indskolingen',
-  description: 'SkoleBole har særligt fokus på den første læsning, sproglig og fonologisk opmærksomhed samt matematisk logisk tænkning.',
+  description: 'Hos SkoleBole finder du printklare kopisider til den første læsning, sproglig og fonologisk opmærksomhed samt matematisk logisk tænkning.',
   icons: "/icon.png"
 };
 
