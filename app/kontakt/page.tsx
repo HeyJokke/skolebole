@@ -31,6 +31,8 @@ export default async function ContactPage() {
                 SkoleBole er ejet af Forlaget Kluddermor. Hvor forlagets materialer rummer de længere, strukturerede forløb og den tydelige progression, tilbyder SkoleBole små, overskuelige opgaver, der hurtigt kan tages i brug i hverdagen – som morgenopgaver, repetition, stillearbejde eller ekstra træning. Her er fokus på genkendelige opgavetyper, ro og gentagelse, så børnene kan arbejde selvstændigt og opbygge faglig tryghed. SkoleBole er udviklet med udgangspunkt i klasseværelsets virkelighed og er skabt til lærere, pædagoger og andre fagprofessionelle, der har brug for materialer, der er nemme at bruge – også når tiden er knap. 
                 <br/>
                 Fælles for både SkoleBole og Forlaget Kluddermor er ønsket om at gøre læsning tilgængelig for alle børn og give dem de bedst mulige forudsætninger for at få en god start på skolelivet.
+                <br/><br/>
+                Forlaget Kluddermors hjemmeside er skabt af webdesigner og udvikler Joakim Ring Kryger
               </p>
               
             </div>

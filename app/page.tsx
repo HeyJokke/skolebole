@@ -34,7 +34,7 @@ export default async function Home() {
             </p>
             <h2 className="text-2xl mb-2 font-bold">Det får du hos SkoleBole:</h2>
               <ul className="list-disc list-inside text-lg/7">
-                <li>Små, selvstændige kopisider i PDF-format</li>
+                <li>Små, gratis kopisider i PDF-format</li>
                 <li>Opgaver, der kan bruges her og nu</li>
                 <li>Velegnet til morgenstart, ekstra tid, vikarer og repetition</li>
                 <li>Et kreativt rum med lav kompleksitet og høj tilgængelighed</li>
