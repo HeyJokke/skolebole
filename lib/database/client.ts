@@ -52,7 +52,7 @@ export async function removeFileFromBucket(bucketName:string, fileName: string):
 }
 
 export async function uploadFileToBucket(bucketName:string, file:File):Promise<{error: Error | null}> {
-    const fileName = file.name.replace('ø', 'oe').replace('æ', 'ae').replace('å', 'aa')
+    const fileName = file.name.normalize('NFC').replace(/[ø]/gi, 'oe').replace(/[æ]/gi, 'ae').replace(/[å]/gi, 'aa')
 
     const {error} = await supabase.storage
         .from(bucketName)
@@ -72,8 +72,8 @@ export async function uploadFileToBucket(bucketName:string, file:File):Promise<{
 export async function insertMaterialStorage(formData:FormData):Promise<{data: {image: {image_path: string, image_name: string}, pdf: {pdf_path: string, pdf_name: string}} | null, error: Error | null}> {
     const image = formData.get('input-img') as File
     const pdf = formData.get('input-pdf') as File
-    const imageName = image.name.replace('ø', 'oe').replace('æ', 'ae').replace('å', 'aa')
-    const pdfName = pdf.name.replace('ø', 'oe').replace('æ', 'ae').replace('å', 'aa')
+    const imageName = image.name.normalize('NFC').replace(/[ø]/gi, 'oe').replace(/[æ]/gi, 'ae').replace(/[å]/gi, 'aa')
+    const pdfName = pdf.name.normalize('NFC').replace(/[ø]/gi, 'oe').replace(/[æ]/gi, 'ae').replace(/[å]/gi, 'aa')
 
     try {
         // Upload image

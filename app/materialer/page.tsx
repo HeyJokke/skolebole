@@ -38,11 +38,11 @@ export default function Materialer():React.ReactElement {
                 <div className="h-fit min-w-[200] w-auto">
                     <PreviousPage />
                     <React.Suspense fallback={<div/>}>
-                        <Filters section={null} />
+                        <Filters section={null} month={null} />
                     </React.Suspense>
                 </div>
                 <div className="w-full">
-                    <h1 className="text-3xl font-bold mb-5">Alle materialer</h1>
+                    <h1 className="text-4xl font-bold mb-5 font-bubblegum-sans">Alle materialer</h1>
                     <RenderMaterials materials={filteredMaterials} error={error} loading={loading} />
                 </div>
             </div>

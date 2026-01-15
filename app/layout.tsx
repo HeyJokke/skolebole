@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import { Geist, Geist_Mono } from "next/font/google"
+import { Geist, Geist_Mono, Bubblegum_Sans } from "next/font/google"
 import "./globals.css";
 import Image from "next/image"
 import Link from "next/link"
@@ -26,6 +26,30 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const bubbleGum = Bubblegum_Sans({
+  weight: ['400'],
+  variable: "--font-bubblegum-sans",
+  subsets: ["latin"]
+})
+
+const nMonth = (new Date).getMonth()
+const months = [
+  "Januar",
+  "Februar",
+  "Marts",
+  "April",
+  "Maj",
+  "Juni",
+  "Juli",
+  "August",
+  "September",
+  "Oktober",
+  "November",
+  "December"
+]
+
+const currentMonth = months[nMonth]
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -34,7 +58,7 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} bg-[url(/wallpapers/skolebole-wallpaper.jpg)] bg-cover bg-fixed min-h-screen`}>
+      <body className={`${geistSans.variable} ${geistMono.variable} ${bubbleGum.variable} bg-[url(/wallpapers/skolebole-wallpaper.jpg)] bg-cover bg-fixed min-h-screen`}>
         <MaterialsProvider>
         <header className="bg-yellow-50/80 shadow-md">
           <div className="max-w-6xl mx-auto px-4">
@@ -43,6 +67,7 @@ export default function RootLayout({
               <nav className="flex justify-center w-full m-auto max-w-2xl">
                 <ul className="flex justify-center space-x-6">
                   <Link href="/materialer"><li className="bg-sky-600 w-fit p-3 rounded-full font-extrabold text-white text-xl hover:scale-105 hover:bg-sky-500 transform-size duration-200">Alle materialer</li></Link>
+                  <Link href="/maanedsside"><li className="bg-sky-600 w-fit p-3 rounded-full font-extrabold text-white text-xl hover:scale-105 hover:bg-sky-500 transform-size duration-200">{currentMonth} månedsside</li></Link>
                   <Link href="/kontakt"><li className="bg-sky-600 w-fit p-3 rounded-full font-extrabold text-white text-xl hover:scale-105 hover:bg-sky-500 transform-size duration-200">Kontakt os</li></Link>
                 </ul>
               </nav>

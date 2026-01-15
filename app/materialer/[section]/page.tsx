@@ -20,14 +20,14 @@ export default function MaterialerPage():React.ReactElement {
                 let filteredMaterialsBySection:Material[] = []
                 
                 if (materials && section) {
-                    filteredMaterialsBySection = materials.filter(m => m.categories_array.some(cat => cat.toLowerCase().replace(/[ø]/gi, 'oe').replace(/[å]/gi, 'aa').replace(/[æ]/gi, 'ae') === section.toLowerCase()))
+                    filteredMaterialsBySection = materials.filter(m => m.categories_array.some(cat => cat.toLowerCase().normalize('NFC').replace(/[ø]/gi, 'oe').replace(/[æ]/gi, 'ae').replace(/[å]/gi, 'aa') === section.toLowerCase()))
                     setFilteredMaterials(filteredMaterialsBySection)
 
                     if (query && filteredMaterialsBySection) {
                         setFilteredMaterials(filteredMaterialsBySection.filter(m => 
                         m.categories_array.some(cat =>
                                     cat
-                                        .toLowerCase().replace(/[ø]/gi, 'oe').replace(/[å]/gi, 'aa').replace(/[æ]/gi, 'ae')
+                                        .toLowerCase().normalize('NFC').replace(/[ø]/gi, 'oe').replace(/[æ]/gi, 'ae').replace(/[å]/gi, 'aa')
                                         .includes(query.toLowerCase()) 
                                 )
                             )
@@ -46,13 +46,13 @@ export default function MaterialerPage():React.ReactElement {
                     <PreviousPage />
                     <React.Suspense fallback={<div/>}>
                         {section ? 
-                            <Filters section={section} /> :
+                            <Filters section={section} month={null} /> :
                             <div></div>
                         }
                     </React.Suspense>
                 </div>
                 <div className="w-full">
-                    {section && <h1 className="text-3xl font-bold mb-5">{(section[0].toUpperCase() + section.slice(1)).replace('oe', 'ø').replace('aa', 'å').replace('ae', 'æ')}</h1>}
+                    {section && <h1 className="text-4xl font-bold mb-5 font-bubblegum-sans">{(section[0].toUpperCase() + section.slice(1)).replace('oe', 'ø').replace('aa', 'å').replace('ae', 'æ')}</h1>}
                     <RenderMaterials materials={filteredMaterials} error={error} loading={loading} />
                 </div>
             </div>

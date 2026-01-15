@@ -6,7 +6,7 @@ export default async function Home() {
   return (
     <main className="h-full min-h-screen flex m-5">
       <div className="w-full text-slate-700">
-            <h1 className="text-4xl font-bold text-center mb-5 mt-5 lg:mt-0">Velkommen til SkoleBole</h1>
+            <h1 className="text-5xl font-bold text-center mb-5 mt-5 lg:mt-0 font-bubblegum-sans">Velkommen til SkoleBole</h1>
             <p className="lg:mr-5 mb-5 text-lg/7">
               Tak fordi du kigger forbi hos Forlaget Kluddermors nye lillebror SkoleBole, som er en enkel og overskuelig materialeplatform med printklare kopisider til de yngste elever. Her finder du små opgaver, der kan bruges enkeltvis og tages i brug med det samme, særligt på de dage, hvor dagens program ændrer sig eller en vikar har brug for en klar og enkel opgave her og nu.
             </p>
@@ -34,7 +34,7 @@ export default async function Home() {
             </p>
             <h2 className="text-2xl mb-2 font-bold">Det får du hos SkoleBole:</h2>
               <ul className="list-disc list-inside text-lg/7">
-                <li>Gratis kopisider i PDF-format</li>
+                <li>Printklare kopisider i PDF-format</li>
                 <li>Opgaver, der kan bruges her og nu</li>
                 <li>Velegnet til morgenstart, ekstra tid, vikarer og repetition</li>
                 <li>Et kreativt rum med lav kompleksitet og høj tilgængelighed</li>

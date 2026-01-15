@@ -6,9 +6,10 @@ import React from 'react'
 
 type FilterProps = {
     section: string | null
+    month: string | null
 }
 
-export default function Filters({section}: FilterProps):React.ReactElement | null {
+export default function Filters({section, month}: FilterProps):React.ReactElement | null {
     const searchParams = useSearchParams()
     const pathName = usePathname()
     const params = new URLSearchParams(searchParams)
@@ -26,18 +27,31 @@ export default function Filters({section}: FilterProps):React.ReactElement | nul
         }
     }
 
-    if (materials && section) {
-        const filteredMaterials = materials.filter(m => m.categories_array.some(cat => cat.toLowerCase().replace(/[ø]/gi, 'oe').replace(/[å]/gi, 'aa').replace(/[æ]/gi, 'ae') === section.toLowerCase()))
-
-        if (filteredMaterials && section) {
-            filteredMaterials.map(m => m.categories_array.map((cat) => {
-                if (!uniqueCategories.includes(cat[0].toLowerCase() + cat.slice(1))) {
-                    if (cat.toLowerCase().replace(/[ø]/gi, 'oe').replace(/[å]/gi, 'aa').replace(/[æ]/gi, 'ae') != section.toLowerCase()) {
+    if (materials && (section || month)) {
+        if (section) {
+            const filteredMaterials = materials.filter(m => m.categories_array.some(cat => cat.toLowerCase().replace(/[ø]/gi, 'oe').replace(/[å]/gi, 'aa').replace(/[æ]/gi, 'ae') === section.toLowerCase()))
+            if (filteredMaterials) {
+                filteredMaterials.map(m => m.categories_array.map((cat) => {
+                    if (!uniqueCategories.includes(cat[0].toLowerCase() + cat.slice(1))) {
+                        if (cat.toLowerCase().replace(/[ø]/gi, 'oe').replace(/[å]/gi, 'aa').replace(/[æ]/gi, 'ae') != section.toLowerCase()) {
+                            uniqueCategories.push(cat[0].toLowerCase() + cat.slice(1))
+                        }
+                    }
+                }))
+            }
+        }
+        
+        if (month) {
+            const filteredMaterials = materials.filter(m => m.short_description.toLowerCase().includes(month.toLowerCase()))
+            if (filteredMaterials) {
+                filteredMaterials.map(m => m.categories_array.map((cat) => {
+                    if (!uniqueCategories.includes(cat[0].toLowerCase() + cat.slice(1))) {
                         uniqueCategories.push(cat[0].toLowerCase() + cat.slice(1))
                     }
-                }
-            }))
+                }))
+            }
         }
+
     } else {
         const filteredMaterials = materials
 
@@ -48,7 +62,6 @@ export default function Filters({section}: FilterProps):React.ReactElement | nul
                 }
             }))
         }
-
     }
 
     
