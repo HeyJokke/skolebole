@@ -1,6 +1,5 @@
 "use client"
 import RenderMaterials from '@/lib/components/renderMaterials'
-import Filters from '@/lib/components/filters'
 import {useMaterials} from "@/lib/context/MaterialsProvider"
 import React from 'react'
 import {useSearchParams} from 'next/navigation'

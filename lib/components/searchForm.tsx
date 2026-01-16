@@ -36,13 +36,13 @@ export default function SearchForm() {
     }
 
     return (
-        <form className="flex justify-center lg:mt-0 mt-5" onSubmit={onSubmit}>
-            <div className="flex items-center pl-2 pt-1 pb-1 bg-white text-black rounded-lg">
-                <button className="cursor-pointer" type="submit">
+        <form className="flex justify-center m-auto" onSubmit={onSubmit}>
+            <div className="flex bg-white text-black lg:rounded-lg rounded-full md:w-fit w-full lg:h-[50] lg:text-base text-xl p-4 h-fit">
+                <button className="cursor-pointer z-50" type="submit">
                     <FaSearch className="text-slate-500" />
                 </button>
                 <input
-                    className="ml-2 outline-none"  
+                    className="ml-[-20] outline-none w-full text-center md:text-left md:ml-2"  
                     placeholder="Søg..."
                     value={inputValue}
                     name="search"

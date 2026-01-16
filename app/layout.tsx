@@ -32,24 +32,6 @@ const bubbleGum = Bubblegum_Sans({
   subsets: ["latin"]
 })
 
-const nMonth = (new Date).getMonth()
-const months = [
-  "Januar",
-  "Februar",
-  "Marts",
-  "April",
-  "Maj",
-  "Juni",
-  "Juli",
-  "August",
-  "September",
-  "Oktober",
-  "November",
-  "December"
-]
-
-const currentMonth = months[nMonth]
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -63,17 +45,24 @@ export default function RootLayout({
         <header className="bg-yellow-50/80 shadow-md">
           <div className="max-w-6xl mx-auto px-4">
             <div className="lg:flex sm:block justify-between items-center py-6">
-              <Link href="/"><Image className="m-auto mb-5 lg:mb-0" alt="Skolebole logo" src="/images/skolebole_logo_lrg.png" width={1421} height={747} style={{width: "160px"}}/></Link>
-              <nav className="flex justify-center w-full m-auto max-w-2xl">
-                <ul className="flex justify-center space-x-6">
-                  <Link href="/materialer"><li className="bg-sky-600 w-fit p-3 rounded-full font-extrabold text-white text-xl hover:scale-105 hover:bg-sky-500 transform-size duration-200">Alle materialer</li></Link>
-                  <Link href="/maanedsside"><li className="bg-sky-600 w-fit p-3 rounded-full font-extrabold text-white text-xl hover:scale-105 hover:bg-sky-500 transform-size duration-200">{currentMonth} månedsside</li></Link>
-                  <Link href="/kontakt"><li className="bg-sky-600 w-fit p-3 rounded-full font-extrabold text-white text-xl hover:scale-105 hover:bg-sky-500 transform-size duration-200">Kontakt os</li></Link>
+              <Link href="/"><Image className="w-fit m-auto mb-5 lg:mb-0" alt="Skolebole logo" src="/images/skolebole_logo_lrg.png" width={1421} height={747} style={{width: "180px"}}/></Link>
+              <nav>
+                <ul className="md:flex block w-full justify-center space-x-6">
+                  <Link href="/materialer"><li className="bg-sky-600 text-nowrap md:w-fit w-full text-center p-4 rounded-full font-extrabold text-white text-xl hover:scale-105 hover:bg-sky-500 transform-size duration-200">Alle materialer</li></Link>
+                  <Link href="/maanedsside"><li className="bg-sky-600 text-nowrap md:w-fit w-full text-center p-4 rounded-full font-extrabold text-white text-xl hover:scale-105 hover:bg-sky-500 transform-size duration-200">Månedens materialer</li></Link>
+                  <Link href="/kontakt"><li className="bg-sky-600 text-nowrap md:w-fit w-full text-center p-4 rounded-full font-extrabold text-white text-xl hover:scale-105 hover:bg-sky-500 transform-size duration-200">Kontakt os</li></Link>
+                  <div className="m-auto block md:hidden lg:block">
+                    <React.Suspense fallback={<div/>}> 
+                      <SearchForm />
+                    </React.Suspense>
+                  </div>
                 </ul>
               </nav>
-              <React.Suspense fallback={<div/>}> 
-                <SearchForm />
-              </React.Suspense>
+              <div className="m-auto ml-0 mr-0 mt-5 lg:mt-auto hidden md:block lg:hidden">
+                <React.Suspense fallback={<div/>}> 
+                  <SearchForm />
+                </React.Suspense>
+              </div>
             </div>
           </div>
         </header>
