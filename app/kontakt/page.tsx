@@ -4,7 +4,7 @@ import ForlagetLink from '@/lib/components/forlagetLink'
 export default async function ContactPage() {
   return (
     <main className="h-full min-h-screen flex m-2 md:m-5">
-      <div className="w-full bg-white/90 rounded-lg shadow-xl p-8">
+      <div className="w-full bg-white/90 rounded-lg shadow-xl p-8 flex flex-col">
         <h1 className="text-5xl font-bold text-center mb-5 font-bubblegum-sans">Kontakt Forlaget Kluddermor</h1>
       
         <div className="justify-center text-center">
@@ -32,7 +32,7 @@ export default async function ContactPage() {
                 <br/>
                 Fælles for både SkoleBole og Forlaget Kluddermor er ønsket om at gøre læsning tilgængelig for alle børn og give dem de bedst mulige forudsætninger for at få en god start på skolelivet.
                 <br/><br/>
-                Forlaget Kluddermors hjemmeside er skabt af<br/> webdesigner og udvikler Joakim Ring Kryger
+                
               </p>
               
             </div>
@@ -40,6 +40,11 @@ export default async function ContactPage() {
             <Image alt="Billede af Forlaget Kluddermor forfatter" src="/images/forlaget_forfatter.JPG" width={1462} height={1793} className="h-fit m-auto" />
             <ForlagetLink />
             </div>
+        </div>
+        <div className="text-center h-max mt-auto">
+          <p>
+            <span className="italic text-sm">Forlaget Kluddermors hjemmeside er skabt af webdesigner og udvikler Joakim Ring Kryger</span>
+          </p>
         </div>
       </div>
     </main>
