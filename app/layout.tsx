@@ -6,7 +6,6 @@ import Link from "next/link"
 import SearchForm from "@/lib/components/searchForm"
 import React from 'react'
 import { MaterialsProvider } from "@/lib/context/MaterialsProvider"
-import DonationPopup from '@/lib/components/donationPopup'
 import { FaFacebookSquare, FaInstagram, FaPinterest, FaYoutube } from "react-icons/fa"
 import ForlagetLink from "@/lib/components/forlagetLink";
 
@@ -79,8 +78,6 @@ export default function RootLayout({
             </React.Suspense>
           </div>
         </main>
-
-        <DonationPopup />
         
         <footer className="mt-12 bg-yellow-50/80 border-t border-gray-100 py-6">
           <div className="flex flex-col max-w-6xl mx-auto px-4 text-center text-gray-600">
