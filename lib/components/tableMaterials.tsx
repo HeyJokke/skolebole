@@ -194,7 +194,7 @@ export default function TableMaterials() {
                 );
             case "categories":
                 return (
-                  <div className="flex flex-wrap gap-1 justify-center">
+                  <div className="flex flex-wrap gap-1 justify-center ">
                     {material.categories.map(cat => (
                       <Chip className={`w-fit capitalize text-center h-fit px-2 py-1 text-xs font-medium rounded-full mr-2 ${categoryClasses[cat.toLowerCase() as keyof typeof categoryClasses] ?? 'bg-orange-100 text-orange-700'}`} size="sm" variant="flat" key={cat}>
                         {cat}
@@ -307,7 +307,7 @@ export default function TableMaterials() {
         
         return (
           <>
-            <Table aria-label="Table of materials">
+            <Table className="overflow-scroll" aria-label="Table of materials">
             <TableHeader columns={columns}>
                 {(column) => (
                 <TableColumn className="bg-blue-300 text-blue-900 p-2" key={column.uid} align={column.uid === "actions" ? "center" : "start"}>

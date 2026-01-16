@@ -10,7 +10,7 @@ export default async function Home() {
             <p className="lg:mr-5 mb-5 text-lg/7">
               Tak fordi du kigger forbi hos Forlaget Kluddermors nye lillebror SkoleBole, som er en enkel og overskuelig materialeplatform med printklare kopisider til de yngste elever. Materialerne på SkoleBole kan anvendes fleksibelt i undervisningen og egner sig godt som morgenopgaver, ekstraopgaver, til repetition og andre tidspunkter, hvor eleverne arbejder selvstændigt og i deres eget tempo.
             </p>
-            <div className="m-auto grid lg:grid-cols-4 md:grid-cols-3 gap-5 md:w-full w-100">
+            <div className="m-auto grid lg:grid-cols-4 md:grid-cols-3 gap-5">
               <Link className={`bg-[url(/images/dansk_boble.png)] ${linkClass}`} href="materialer/dansk" />
               
               <Link className={`bg-[url(/images/matematik_boble.png)] ${linkClass}`} href="materialer/matematik" />
