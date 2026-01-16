@@ -69,7 +69,7 @@ export default function AdminClient() {
     return (
         <main>
             <div className="block lg:flex bg-white/90 rounded-lg shadow-xl p-8">
-                <form className="w-full lg:w-1/2" onSubmit={uploadMaterial}>
+                <form className="w-full lg:w-1/2 overflow-scroll" onSubmit={uploadMaterial}>
                     <input className="rounded-md bg-slate-200 font-semibold mb-3 py-1 px-3 w-full lg:w-100" type="text" placeholder="Navn" name="input-name"  required /><br/>
                     <input className="rounded-md bg-slate-200 font-semibold mb-3 py-1 px-3 w-full lg:w-100" type="text" placeholder="Kort beskrivelse" name="input-shortdesc" required /><br/>
                     <input className="rounded-md bg-slate-200 font-semibold mb-3 py-1 px-3 w-full lg:w-100" type="text" placeholder="Kategorier" name="input-cats"  required /><br/>
