@@ -61,7 +61,7 @@ export default function MaanedsPage() {
                 <div className="w-full">
                     <h1 className="text-4xl font-bold mb-5 font-bubblegum-sans">{currentMonth}</h1>
                     <p className="text-base/6 mb-5">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut lorem orci, tristique eget dui vitae, laoreet fermentum leo. Aliquam et sem sit amet nisi laoreet porttitor. Morbi porttitor iaculis nisi, sed iaculis nunc porta vitae. Donec condimentum porta orci, eu malesuada nisl viverra sit amet. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec eu malesuada urna. Pellentesque imperdiet dolor libero, pulvinar finibus ex finibus at. Nulla varius massa nisl, eu rutrum velit viverra vel. Fusce cursus consectetur diam eu vestibulum. Integer tincidunt nulla eu aliquam mattis. Ut non orci quis metus fringilla tempus. Etiam vitae est magna. Maecenas ultrices accumsan nibh, eget porta erat iaculis id.
+                        Her finder du en række månedsaktuelle opgaver, som passer til årstiden og det, der fylder lige nu i skolen. Materialerne er klar til print og kan bruges direkte - til morgenstart, ekstra tid, repetition eller som et lille pusterum i hverdagen. Hver måned opdateres siden med nyt indhold, så du altid har noget relevant og overskueligt lige ved hånden.
                     </p>
                     <RenderMaterials materials={filteredMaterials} error={error} loading={loading} />
                 </div>
