@@ -32,7 +32,7 @@ export default async function ContactPage() {
                 <br/>
                 Fælles for både SkoleBole og Forlaget Kluddermor er ønsket om at gøre læsning tilgængelig for alle børn og give dem de bedst mulige forudsætninger for at få en god start på skolelivet.
                 <br/><br/>
-                Forlaget Kluddermors hjemmeside er skabt af webdesigner og udvikler Joakim Ring Kryger
+                Forlaget Kluddermors hjemmeside er skabt af<br/> webdesigner og udvikler Joakim Ring Kryger
               </p>
               
             </div>

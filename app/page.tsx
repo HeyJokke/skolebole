@@ -29,14 +29,14 @@ export default async function Home() {
 
             </div>
             <p className="lg:mr-5 mb-10 mt-5 text-lg/7">
-              <span className="font-bold">SkoleBole</span> rummer både materialer, der er udviklet specifikt til siden, og udvalgte opgaver fra <span className="font-bold">Forlaget Kluddermor</span>. Materialerne er kendetegnet ved en intuitiv opbygning, som gør dem lette for eleverne at gå til og velegnede til selvstændigt arbejde uden lange forklaringer. Du vil møde genkendelige opgavetyper og faglige greb fra Kluddermors univers, men ønsker du et samlet og sammenhængende læseprogram med tydelig progression og en rød tråd i læseudviklingen, finder du det fortsat hos <span className="font-bold">Forlaget Kluddermor</span>.
+              <span className="font-bold">SkoleBole</span> rummer både materialer, der er udviklet specifikt til siden, og udvalgte opgaver fra <span className="font-bold">Forlaget Kluddermor</span>. Materialerne er kendetegnet ved en intuitiv opbygning, som gør dem lette for eleverne at gå til og velegnede til selvstændigt arbejde uden lange forklaringer. Du vil møde genkendelige opgavetyper og faglige greb fra <span className="font-bold">Kluddermors</span> univers, men ønsker du et samlet og sammenhængende læseprogram med tydelig progression og en rød tråd i læseudviklingen, finder du det fortsat hos <span className="font-bold">Forlaget Kluddermor</span>.
             </p>
             <h2 className="text-2xl mb-2 font-bold">Det får du hos SkoleBole:</h2>
               <ul className="list-disc list-inside text-lg/7">
                 <li>Printklare kopisider til direkte download</li>
                 <li>Små, overskuelige opgaver til morgenstart, ekstratid og repetition</li>
                 <li>Et lavpraktisk og kreativt opgaverum med fokus på tilgængelighed</li>
-                <li>Udvalgte smagsprøver og demomaterialer fra Kluddermors univers</li>
+                <li>Udvalgte smagsprøver og demomaterialer fra <span className="font-bold">Kluddermors</span> univers</li>
               </ul>
             <br/>
             <h2 className="text-2xl mb-2 font-bold">Det får du <span className="italic">ikke</span> hos SkoleBole:</h2>
@@ -45,7 +45,7 @@ export default async function Home() {
                 <li>Materialer bygget op i faste læsetrin og tydelig progression</li>
                 <li>Systematiske forløb med differentiering og lærervejledninger</li>
                 <li>Lamineringsmaterialer, spil, stationer eller større materialepakker</li>
-                <li>Adgang til de resterende 95% af Kluddermors materialer</li>
+                <li>Adgang til de resterende 95% af <span className="font-bold">Kluddermors</span> materialer</li>
               </ul>
               <ForlagetLink />
             <p className="lg:mr-5 mb-10 text-lg/7 mt-10">
