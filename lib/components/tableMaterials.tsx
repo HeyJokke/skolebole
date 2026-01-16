@@ -381,16 +381,16 @@ export default function TableMaterials() {
                   {pdfSuccess && <p className="bg-green-500 mb-3 rounded-lg text-center text-white font-bold p-3">{pdfSuccess}</p>}
                   {materialSuccess && <p className="bg-green-500 mb-3 rounded-lg text-center text-white font-bold p-3">{materialSuccess}</p>}
                   
-                  <div className="w-full">
+                  <div className="w-full flex lg:block">
                     {selectedMaterial &&
                     <>
                       {selectedMaterialImage && <Image alt="Billede af materiale" className="w-100 hidden lg:block" width={300} height={300} src={selectedMaterialImage} />}
                       {selectedMaterialImage && <button 
                         onClick={() => window.open(selectedMaterialImage, '_blank', 'noopener,noreferrer')} 
-                        className="w-full mb-5 rounded-md lg:rounded-bl-lg rounded-br-lg h-15 bg-green-300 text-green-900 font-bold hover:cursor-pointer hover:text-white hover:bg-green-500 block lg:hidden">Se tilhørende billede</button>}
+                        className="w-full mr-5 rounded-md lg:rounded-bl-lg rounded-br-lg h-15 bg-green-300 text-green-900 font-bold hover:cursor-pointer hover:text-white hover:bg-green-500 block lg:hidden">Se billede</button>}
                         {selectedMaterialPDF && <button 
                         onClick={() => pdfRedirect(selectedMaterialPDF)} 
-                        className="w-full rounded-md lg:rounded-bl-lg rounded-br-lg h-15 bg-green-300 text-green-900 font-bold hover:cursor-pointer hover:text-white hover:bg-green-500">Se tilhørende PDF</button>}
+                        className="w-full rounded-md lg:rounded-bl-lg rounded-br-lg h-15 bg-green-300 text-green-900 font-bold hover:cursor-pointer hover:text-white hover:bg-green-500">Se PDF</button>}
                     </>
                     }
                   </div>
