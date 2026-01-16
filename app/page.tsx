@@ -8,7 +8,7 @@ export default async function Home() {
       <div className="w-full text-slate-700">
             <h1 className="text-5xl font-bold text-center mb-5 mt-5 lg:mt-0 font-bubblegum-sans">Velkommen til SkoleBole</h1>
             <p className="lg:mr-5 mb-5 text-lg/7">
-              Tak fordi du kigger forbi hos Forlaget Kluddermors nye lillebror SkoleBole, som er en enkel og overskuelig materialeplatform med printklare kopisider til de yngste elever. Materialerne på SkoleBole kan anvendes fleksibelt i undervisningen og egner sig godt som morgenopgaver, ekstraopgaver, til repetition og andre tidspunkter, hvor eleverne arbejder selvstændigt og i deres eget tempo.
+              Tak fordi du kigger forbi hos <span className="font-bold">Forlaget Kluddermors</span> nye lillebror <span className="font-bold">SkoleBole</span>, som er en enkel og overskuelig materialeplatform med printklare kopisider til de yngste elever. Materialerne kan anvendes fleksibelt i undervisningen og egner sig godt som morgenopgaver, ekstraopgaver, til repetition og andre tidspunkter, hvor eleverne arbejder selvstændigt og i deres eget tempo.
             </p>
             <div className="m-auto grid lg:grid-cols-4 md:grid-cols-3 gap-5">
               <Link className={`bg-[url(/images/dansk_boble.png)] ${linkClass}`} href="materialer/dansk" />
@@ -29,7 +29,7 @@ export default async function Home() {
 
             </div>
             <p className="lg:mr-5 mb-10 mt-5 text-lg/7">
-              <span className="font-bold">SkoleBole</span> rummer både materialer, der er udviklet specifikt til siden, og udvalgte opgaver fra Forlaget Kluddermor. Materialerne er kendetegnet ved en intuitiv opbygning, som gør dem lette for eleverne at gå til og velegnede til selvstændigt arbejde uden lange forklaringer. Du vil møde genkendelige opgavetyper og faglige greb fra Kluddermors univers, men ønsker du et samlet og sammenhængende læseprogram med tydelig progression og en rød tråd i læseudviklingen, finder du det fortsat hos Forlaget Kluddermor.
+              <span className="font-bold">SkoleBole</span> rummer både materialer, der er udviklet specifikt til siden, og udvalgte opgaver fra <span className="font-bold">Forlaget Kluddermor</span>. Materialerne er kendetegnet ved en intuitiv opbygning, som gør dem lette for eleverne at gå til og velegnede til selvstændigt arbejde uden lange forklaringer. Du vil møde genkendelige opgavetyper og faglige greb fra Kluddermors univers, men ønsker du et samlet og sammenhængende læseprogram med tydelig progression og en rød tråd i læseudviklingen, finder du det fortsat hos <span className="font-bold">Forlaget Kluddermor</span>.
             </p>
             <h2 className="text-2xl mb-2 font-bold">Det får du hos SkoleBole:</h2>
               <ul className="list-disc list-inside text-lg/7">
@@ -49,7 +49,7 @@ export default async function Home() {
               </ul>
               <ForlagetLink />
             <p className="lg:mr-5 mb-10 text-lg/7 mt-10">
-              Har dine elever brug for et gennemarbejdet læseprogram med tydelig progression, struktur og differentiering, finder du det stadig hos Forlaget Kluddermor, der samler det hele i ét sammenhængende system. SkoleBole er stedet for de små opgaver, der skal ligge klar, når noget opstår – og til de idéer, der gerne må prøves af uden store krav eller bindinger.
+              Har dine elever brug for et gennemarbejdet læseprogram med tydelig progression, struktur og differentiering, finder du det stadig hos <span className="font-bold">Forlaget Kluddermor</span>, der samler det hele i ét sammenhængende system. SkoleBole er stedet for de små opgaver, der skal ligge klar, når noget opstår – og til de idéer, der gerne må prøves af uden store krav eller bindinger.
               <br/><br/>
               De bedste hilsner<br/>
               Liselotte Ring Kryger<br/>
@@ -57,8 +57,8 @@ export default async function Home() {
               Forlaget Kluddermor & SkoleBole
             </p>
             <br/>
-            <p><span className="italic">Al kopiering, analogt og digitalt, af SkoleBoles materialer eller dele deraf er tilladt i henhold til undervisningsinstitutionens aftale med <span className="font-bold">Tekst & Node</span>.
-            Kopiering, der går ud over begrænsningsreglerne i aftalen med <span className="font-bold">Tekst & Node</span>, kan alene finde sted efter forudgående aftale med SkoleBole / Forlaget Kluddermor.</span></p>
+            <p><span className="italic">Al kopiering, analogt og digitalt, af <span className="font-bold">SkoleBoles</span> materialer eller dele deraf er tilladt i henhold til undervisningsinstitutionens aftale med <span className="font-bold">Tekst & Node</span>.
+            Kopiering, der går ud over begrænsningsreglerne i aftalen med <span className="font-bold">Tekst & Node</span>, kan alene finde sted efter forudgående aftale med <span className="font-bold">SkoleBole / Forlaget Kluddermor</span>.</span></p>
       </div>
     </main>
   )
