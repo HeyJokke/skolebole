@@ -325,14 +325,14 @@ export default function TableMaterials() {
             </Table>
 
             {open && (
-              <div className="fixed inset-0 bg-gray-500/50 flex items-center justify-center z-50">
-                <div className="flex bg-white rounded-lg p-6 w-250">
-                  <form className="w1/2" onSubmit={uploadMaterial}>
-                    <input className="rounded-md bg-slate-200 font-semibold mb-3 py-1 px-3" type="text" placeholder="Navn" name="input-name" defaultValue={selectedMaterial?.name} required /><br/>
-                    <input className="rounded-md bg-slate-200 font-semibold mb-3 py-1 px-3" type="text" placeholder="Kort beskrivelse (65)" name="input-shortdesc" defaultValue={selectedMaterial?.short_description} maxLength={65} required /><br/>
-                    <input className="rounded-md bg-slate-200 font-semibold mb-3 py-1 px-3" type="text" placeholder="Kategorier" name="input-cats" defaultValue={selectedMaterial?.categories_array.join(' ')}  required /><br/>
-                    <input className="rounded-md bg-slate-200 font-semibold mb-3 py-1 px-3" type="text" placeholder="Skjulte tags" name="input-tags" defaultValue={selectedMaterial?.meta_tags?.join(' ')} /><br/>
-                    <textarea className="rounded-md bg-slate-200 font-semibold mb-3 py-1 px-3 resize-none w-100 h-100" placeholder="Lang beskrivelse (1800)" name="input-longdesc" defaultValue={selectedMaterial?.long_description} maxLength={1800} required></textarea><br/>
+              <div className="fixed inset-0 bg-gray-500/50 flex items-center justify-center z-50 p-12">
+                <div className="flex flex-col lg:flex-row bg-white rounded-lg p-6 w-full lg:w-fit">
+                  <form className="w-full mr-0 lg:w-1/2 lg:mr-10" onSubmit={uploadMaterial}>
+                    <input className="rounded-md bg-slate-200 font-semibold mb-3 py-1 px-3 w-full lg:w-100" type="text" placeholder="Navn" name="input-name" defaultValue={selectedMaterial?.name} required /><br/>
+                    <input className="rounded-md bg-slate-200 font-semibold mb-3 py-1 px-3 w-full lg:w-100" type="text" placeholder="Kort beskrivelse (65)" name="input-shortdesc" defaultValue={selectedMaterial?.short_description} maxLength={65} required /><br/>
+                    <input className="rounded-md bg-slate-200 font-semibold mb-3 py-1 px-3 w-full lg:w-100" type="text" placeholder="Kategorier" name="input-cats" defaultValue={selectedMaterial?.categories_array.join(' ')}  required /><br/>
+                    <input className="rounded-md bg-slate-200 font-semibold mb-3 py-1 px-3 w-full lg:w-100" type="text" placeholder="Skjulte tags" name="input-tags" defaultValue={selectedMaterial?.meta_tags?.join(' ')} /><br/>
+                    <textarea className="rounded-md bg-slate-200 font-semibold mb-3 py-1 px-3 resize-none w-full lg:w-100 h-50 md:h-100" placeholder="Lang beskrivelse (1800)" name="input-longdesc" defaultValue={selectedMaterial?.long_description} maxLength={1800} required></textarea><br/>
                     <label className="font-semibold" htmlFor="input-pdf">Upload ny PDF: </label>
                     <input 
                         className="  
@@ -352,7 +352,7 @@ export default function TableMaterials() {
                         hover:file:bg-blue-200 hover:file:cursor-pointer hover:cursor-pointer" 
                         type="file" multiple={false} name="input-img" accept="image/*" /><br/>
                     
-                    <div className="flex justify-between w-full pr-5">
+                    <div className="flex justify-between w-full">
                         <button 
                           onClick={() => {
                             setOpen(false)
@@ -363,17 +363,17 @@ export default function TableMaterials() {
                             setMaterialError(null)
                             setMaterialSuccess(null)
                           }}
-                          className="bg-blue-300 text-blue-800 px-4 py-2 rounded-md font-semibold hover:bg-blue-400 hover:cursor-pointer"
+                          className="bg-blue-300 text-blue-800 px-4 py-2 rounded-md font-semibold hover:bg-blue-400 hover:cursor-pointer mb-5 lg:mb-0"
                         >
                           Close
                         </button>
                         <button
-                          className="disabled:bg-gray-300 disabled:text-gray-800 disabled:cursor-not-allowed bg-green-200 text-green-800 px-4 py-2 rounded-md font-semibold hover:bg-green-300 hover:cursor-pointer"
+                          className="disabled:bg-gray-300 disabled:text-gray-800 disabled:cursor-not-allowed bg-green-200 text-green-800 px-4 py-2 rounded-md font-semibold hover:bg-green-300 hover:cursor-pointer mb-5 lg:mb-0"
                           type="submit">Update</button>
                     </div>
                   </form>
 
-                  <div className="flex flex-col w1/2 m-auto items-center">
+                  <div className="flex flex-col w-full lg:w-1/2 m-auto items-center">
                   {imageError && <p className="bg-red-500 mb-3 rounded-lg text-center text-white font-bold p-3">{imageError}</p>}
                   {pdfError && <p className="bg-red-500 mb-3 rounded-lg text-center text-white font-bold p-3">{pdfError}</p>}
                   {materialError && <p className="bg-red-500 mb-3 rounded-lg text-center text-white font-bold p-3">{materialError}</p>}
@@ -381,13 +381,16 @@ export default function TableMaterials() {
                   {pdfSuccess && <p className="bg-green-500 mb-3 rounded-lg text-center text-white font-bold p-3">{pdfSuccess}</p>}
                   {materialSuccess && <p className="bg-green-500 mb-3 rounded-lg text-center text-white font-bold p-3">{materialSuccess}</p>}
                   
-                  <div>
+                  <div className="w-full">
                     {selectedMaterial &&
                     <>
-                      {selectedMaterialImage && <Image alt="Billede af materiale" className="w-100" width={300} height={300} src={selectedMaterialImage} />}
-                      {selectedMaterialPDF && <button 
+                      {selectedMaterialImage && <Image alt="Billede af materiale" className="w-100 hidden lg:block" width={300} height={300} src={selectedMaterialImage} />}
+                      {selectedMaterialImage && <button 
+                        onClick={() => window.open(selectedMaterialImage, '_blank', 'noopener,noreferrer')} 
+                        className="w-full mb-5 rounded-md lg:rounded-bl-lg rounded-br-lg h-15 bg-green-300 text-green-900 font-bold hover:cursor-pointer hover:text-white hover:bg-green-500 block lg:hidden">Se tilhørende billede</button>}
+                        {selectedMaterialPDF && <button 
                         onClick={() => pdfRedirect(selectedMaterialPDF)} 
-                        className="w-100 rounded-bl-lg rounded-br-lg h-15 bg-green-300 text-green-900 font-bold hover:cursor-pointer hover:text-white hover:bg-green-500">Se tilhørende PDF</button>}
+                        className="w-full rounded-md lg:rounded-bl-lg rounded-br-lg h-15 bg-green-300 text-green-900 font-bold hover:cursor-pointer hover:text-white hover:bg-green-500">Se tilhørende PDF</button>}
                     </>
                     }
                   </div>

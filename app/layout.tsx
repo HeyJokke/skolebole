@@ -47,10 +47,15 @@ export default function RootLayout({
             <div className="lg:flex sm:block justify-between items-center py-6">
               <Link href="/"><Image className="w-fit m-auto mb-5 lg:mb-0" alt="Skolebole logo" src="/images/skolebole_logo_lrg.png" width={1421} height={747} style={{width: "180px"}}/></Link>
               <nav>
-                <ul className="md:flex block w-full justify-center space-x-6">
-                  <Link href="/materialer"><li className="bg-sky-600 text-nowrap md:w-fit w-full text-center p-4 rounded-full font-extrabold text-white text-xl hover:scale-105 hover:bg-sky-500 transform-size duration-200">Alle materialer</li></Link>
-                  <Link href="/maanedsside"><li className="bg-sky-600 text-nowrap md:w-fit w-full text-center p-4 rounded-full font-extrabold text-white text-xl hover:scale-105 hover:bg-sky-500 transform-size duration-200">Månedens materialer</li></Link>
-                  <Link href="/kontakt"><li className="bg-sky-600 text-nowrap md:w-fit w-full text-center p-4 rounded-full font-extrabold text-white text-xl hover:scale-105 hover:bg-sky-500 transform-size duration-200">Kontakt os</li></Link>
+                <ul className="md:flex block w-full justify-center space-y-6 space-x-0 md:space-x-6 md:space-y-0">
+                  {/* Large/medium screens navbar */}
+                  <Link className="hidden md:block" href="/materialer"><li className="bg-sky-600 text-nowrap w-fit text-center p-4 rounded-full font-extrabold text-white text-xl hover:scale-105 hover:bg-sky-500 transform-size duration-200">Alle materialer</li></Link>
+                  <Link className="hidden md:block" href="/maanedsside"><li className="bg-sky-600 text-nowrap w-fit text-center p-4 rounded-full font-extrabold text-white text-xl hover:scale-105 hover:bg-sky-500 transform-size duration-200">Månedens materialer</li></Link>
+                  <Link className="hidden md:block" href="/kontakt"><li className="bg-sky-600 text-nowrap w-fit text-center p-4 rounded-full font-extrabold text-white text-xl hover:scale-105 hover:bg-sky-500 transform-size duration-200">Kontakt os</li></Link>
+                  {/* Small screens navbar */}
+                  <Link className="block md:hidden" href="/materialer"><li className="bg-sky-600 text-nowrap w-full text-center p-4 rounded-full font-extrabold text-white text-xl">Alle materialer</li></Link>
+                  <Link className="block md:hidden" href="/maanedsside"><li className="bg-sky-600 text-nowrap w-full text-center p-4 rounded-full font-extrabold text-white text-xl">Månedens materialer</li></Link>
+                  <Link className="block md:hidden" href="/kontakt"><li className="bg-sky-600 text-nowrap w-full text-center p-4 rounded-full font-extrabold text-white text-xl">Kontakt os</li></Link>
                   <div className="m-auto block md:hidden lg:block">
                     <React.Suspense fallback={<div/>}> 
                       <SearchForm />
