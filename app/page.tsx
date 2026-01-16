@@ -49,7 +49,8 @@ export default async function Home() {
               </ul>
               <ForlagetLink />
             <p className="lg:mr-5 mb-10 text-lg/7 mt-10">
-              Har dine elever brug for et gennemarbejdet læseprogram med tydelig progression, struktur og differentiering, finder du det stadig hos <span className="font-bold">Forlaget Kluddermor</span>, der samler det hele i ét sammenhængende system. SkoleBole er stedet for de små opgaver, der skal ligge klar, når noget opstår – og til de idéer, der gerne må prøves af uden store krav eller bindinger.
+              Har dine elever brug for et gennemarbejdet læseprogram med tydelig progression, struktur og differentiering, finder du det stadig hos 
+              <span className="font-bold">Forlaget Kluddermor</span>, der samler det hele i ét sammenhængende system.
               <br/><br/>
               De bedste hilsner<br/>
               Liselotte Ring Kryger<br/>
