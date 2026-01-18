@@ -82,7 +82,7 @@ export default function ProductPage({ params }:
                             
                         </div>
                         <div className="lg:w-3/5 sm:w-full">
-                            <pre className="lg:ml-10 text-base/6 text-clip mt-5 lg:mt-0 text-wrap font-sans">{m.long_description}</pre>
+                            <pre className="lg:ml-10 text-base/6 text-clip mt-5 lg:mt-0 text-wrap w-full wrap-break-word font-sans">{m.long_description}</pre>
                             <button onClick={() => pdfRedirect(m)} className="flex items-center justify-center lg:ml-10 mt-10 w-40 rounded-lg h-15 bg-green-300 text-green-900 font-bold hover:cursor-pointer hover:text-white hover:bg-green-500">
                                 <IoMdDownload className="mr-1 text-xl"/> 
                                 Download

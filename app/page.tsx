@@ -2,7 +2,7 @@ import ForlagetLink from "@/lib/components/forlagetLink"
 import Link from "next/link"
 
 export default async function Home() {
-  const linkClass = "bg-cover overflow-hidden h-[230px] w-[230px] m-auto flex justify-center items-center border-2 border-red-500 rounded-full text-center font-bold hover:border-red-400 hover:bg-gray-100 transition duration-250 hover:scale-102"
+  const linkClass = "bg-cover overflow-hidden aspect-square w-full max-w-[230] m-auto flex justify-center items-center border-2 border-red-500 rounded-full text-center font-bold hover:border-red-400 hover:bg-gray-100 transition duration-250 hover:scale-102"
   return (
     <main className="h-full min-h-screen flex m-5">
       <div className="w-full text-slate-700">
@@ -11,6 +11,7 @@ export default async function Home() {
               Tak fordi du kigger forbi hos <span className="font-bold">Forlaget Kluddermors</span> nye lillebror <span className="font-bold">SkoleBole</span>, som er en enkel og overskuelig materialeplatform med printklare kopisider til de yngste elever. Materialerne kan anvendes fleksibelt i undervisningen og egner sig godt som morgenopgaver, ekstraopgaver, til repetition og andre tidspunkter, hvor eleverne arbejder selvstændigt og i deres eget tempo.
             </p>
             <div className="m-auto grid lg:grid-cols-4 md:grid-cols-3 gap-5">
+              
               <Link className={`bg-[url(/images/dansk_boble.png)] ${linkClass}`} href="materialer/dansk" />
               
               <Link className={`bg-[url(/images/matematik_boble.png)] ${linkClass}`} href="materialer/matematik" />
@@ -49,8 +50,7 @@ export default async function Home() {
               </ul>
               <ForlagetLink />
             <p className="lg:mr-5 mb-10 text-lg/7 mt-10">
-              Har dine elever brug for et gennemarbejdet læseprogram med tydelig progression, struktur og differentiering, finder du det stadig hos 
-              <span className="font-bold">Forlaget Kluddermor</span>, der samler det hele i ét sammenhængende system.
+              Har dine elever brug for et gennemarbejdet læseprogram med tydelig progression, struktur og differentiering, finder du det stadig hos <span className="font-bold">Forlaget Kluddermor</span>, der samler det hele i ét sammenhængende system.
               <br/><br/>
               De bedste hilsner<br/>
               Liselotte Ring Kryger<br/>
