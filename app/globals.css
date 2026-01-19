@@ -8,8 +8,13 @@
 .sticky-webkit {
   position: -webkit-sticky;
   position: sticky;
-  transform: translateZ(0);
-  -webkit-transform: translateZ(0);
+}
+
+@supports (-webkit-touch-callout: none) {
+  .sticky-webkit {
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+  }
 }
 
 @theme inline {
