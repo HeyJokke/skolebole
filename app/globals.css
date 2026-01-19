@@ -5,6 +5,13 @@
   --foreground: #0a1a2f;
 }
 
+.sticky-webkit {
+  position: -webkit-sticky;
+  position: sticky;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);

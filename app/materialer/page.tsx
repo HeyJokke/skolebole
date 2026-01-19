@@ -36,7 +36,7 @@ export default function Materialer():React.ReactElement {
         <main className="m-2 lg:m-5">
             <div className="block md:flex">
                 <div className="min-h-full">
-                    <div className="h-fit min-w-[200] w-auto sticky top-10">
+                    <div className="h-fit min-w-[200] w-auto sticky-webkit top-10">
                         <PreviousPage />
                         <React.Suspense fallback={<div/>}>
                             <Filters section={null} month={null} />
