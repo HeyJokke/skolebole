@@ -8,6 +8,7 @@ import React from 'react'
 import { MaterialsProvider } from "@/lib/context/MaterialsProvider"
 import { FaFacebookSquare, FaInstagram, FaPinterest, FaYoutube } from "react-icons/fa"
 import ForlagetLink from "@/lib/components/forlagetLink";
+import ScrollToTop from "@/lib/components/scrollToTop";
 
 export const metadata: Metadata = {
   title: 'SkoleBole - Læringsmaterialer til indskolingen',
@@ -71,11 +72,17 @@ export default function RootLayout({
           </div>
         </header>
 
-        <main className="max-w-6xl mx-auto px-4 py-8 text-slate-700">
-          <div className="h-full min-h-screen bg-yellow-50/90 rounded-2xl shadow-lg lg:p-6 md:p-3 p-2">
+        <main className="w-full flex justify-center px-4 lg:px-0 py-8 text-slate-700 gap-5">
+          <div className="hidden lg:flex fixed lg:static w-[75]">
+            <span className="h-[75] w-[75]"></span>
+          </div>
+          <div className="max-w-6xl w-full h-full min-h-screen bg-yellow-50/90 rounded-2xl shadow-lg lg:p-6 md:p-3 p-2">
             <React.Suspense fallback={<div/>}>
               {children}
             </React.Suspense>
+          </div>
+          <div className="lg:flex fixed lg:static w-[75]">
+            <ScrollToTop />
           </div>
         </main>
         

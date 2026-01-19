@@ -35,11 +35,13 @@ export default function Materialer():React.ReactElement {
     return (
         <main className="m-2 lg:m-5">
             <div className="block md:flex">
-                <div className="h-fit min-w-[200] w-auto">
-                    <PreviousPage />
-                    <React.Suspense fallback={<div/>}>
-                        <Filters section={null} month={null} />
-                    </React.Suspense>
+                <div className="min-h-full">
+                    <div className="h-fit min-w-[200] w-auto sticky top-10">
+                        <PreviousPage />
+                        <React.Suspense fallback={<div/>}>
+                            <Filters section={null} month={null} />
+                        </React.Suspense>
+                    </div>
                 </div>
                 <div className="w-full">
                     <h1 className="text-4xl font-bold mb-5 font-bubblegum-sans">Alle materialer</h1>
