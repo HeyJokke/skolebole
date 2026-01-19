@@ -13,6 +13,13 @@
   --font-bubblegum-sans: var(--font-bubblegum-sans);
 }
 
+html {
+  background-image: url(/wallpapers/skolebole-wallpaper.jpg);
+  background-attachment: fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
 body {
   /* background: var(--background); */ /* commented out to allow Tailwind bg-image */
   color: var(--foreground);
