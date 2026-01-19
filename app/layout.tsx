@@ -40,7 +40,7 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} ${bubbleGum.variable} bg-[url(/wallpapers/skolebole-wallpaper.jpg)] bg-cover bg-fixed`}>
+      <body className={`${geistSans.variable} ${geistMono.variable} ${bubbleGum.variable} bg-[url(/wallpapers/skolebole-wallpaper.jpg)] bg-cover bg-scroll lg:bg-fixed`}>
         <MaterialsProvider>
         <header className="bg-yellow-50/80 shadow-md">
           <div className="max-w-6xl mx-auto px-4">
