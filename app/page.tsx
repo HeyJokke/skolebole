@@ -2,7 +2,7 @@ import ForlagetLink from "@/lib/components/forlagetLink"
 import Link from "next/link"
 
 export default async function Home() {
-  const linkClass = "bg-cover overflow-hidden aspect-square w-full max-w-[230] m-auto flex justify-center items-center border-2 border-red-500 rounded-full text-center font-bold hover:border-red-400 hover:bg-gray-100 transition duration-250 hover:scale-102"
+  const linkClass = "bg-cover overflow-hidden aspect-square w-full max-w-[230] m-auto flex justify-center items-center border-2 border-orange-600 rounded-full text-center font-bold hover:border-red-400 hover:bg-gray-100 transition duration-250 hover:scale-102"
   return (
     <main className="h-full min-h-screen flex m-5">
       <div className="w-full text-slate-700">
