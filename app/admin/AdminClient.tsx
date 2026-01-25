@@ -8,10 +8,11 @@ import TableMaterials from '@/lib/components/tableMaterials'
 import { insertMaterialStorage, removeFileFromBucket } from '@/lib/database/client'
 
 export default function AdminClient() {
-    const {refreshMaterials} = useMaterials()
+    const {materials, refreshMaterials} = useMaterials()
     const [material, setMaterial] = React.useState<Material | null>(null)
     const [error, setError] = React.useState<string | null>(null)
     const [loading, setLoading] = React.useState<boolean>(false)
+    const [downloads, setDownloads] = React.useState<number | null>(0)
 
     const basicMaterial:Material = {
         id: 1, 
@@ -66,6 +67,13 @@ export default function AdminClient() {
         setLoading(false)
     }
 
+    React.useEffect(() => {
+        if (materials) {
+            const totalDownloads = materials.reduce((sum, m) => sum + m.nDownloads, 0)
+            setDownloads(totalDownloads)
+        }
+    }, [materials])
+
     return (
         <main>
             <div className="block lg:flex bg-white/90 rounded-lg shadow-xl p-8">
@@ -110,6 +118,7 @@ export default function AdminClient() {
             </div>
 
             <div className="border-1 border-gray-300 bg-white/90 rounded-lg mt-10">
+                <p className="font-bold text-xl p-[16] pb-0">Downloads Totalt: {downloads}</p>
                 <TableMaterials />
             </div>
         </main>
