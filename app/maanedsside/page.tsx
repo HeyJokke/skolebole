@@ -2,15 +2,12 @@
 import RenderMaterials from '@/lib/components/renderMaterials'
 import {useMaterials} from "@/lib/context/MaterialsProvider"
 import React from 'react'
-import {useSearchParams} from 'next/navigation'
 import type { Material } from '@/lib/types'
 import PreviousPage from '@/lib/components/PreviousPage'
 
 export default function MaanedsPage() {
     const [filteredMaterials, setFilteredMaterials] = React.useState<Material[] | null>(null)
     const {materials, loading, error} = useMaterials()
-    const searchParams = useSearchParams()
-    const query = searchParams.get('kategori') ? searchParams.get('kategori') : ""
     const nMonth = (new Date).getMonth()
     const months = [
     "januar",
@@ -40,22 +37,11 @@ export default function MaanedsPage() {
                         m.meta_tags?.some(tag => tag.toLowerCase().includes(currentMonth))
                     )
                     setFilteredMaterials(filteredMaterialsByMonth)
-
-                    if (query && filteredMaterialsByMonth) {
-                        setFilteredMaterials(filteredMaterialsByMonth.filter(m => 
-                        m.categories_array.some(cat =>
-                                    cat
-                                        .toLowerCase().replace(/[ø]/gi, 'oe').replace(/[å]/gi, 'aa').replace(/[æ]/gi, 'ae')
-                                        .includes(query.toLowerCase()) 
-                                )
-                            )
-                        )
-                    }
                 }
             } 
             
         getQuery()
-    },[materials, currentMonth, query])
+    },[materials, currentMonth])
 
     return (
         <main className="m-2 lg:m-5">
