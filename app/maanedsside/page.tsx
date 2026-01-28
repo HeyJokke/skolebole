@@ -13,18 +13,18 @@ export default function MaanedsPage() {
     const query = searchParams.get('kategori') ? searchParams.get('kategori') : ""
     const nMonth = (new Date).getMonth()
     const months = [
-    "Januar",
-    "Februar",
-    "Marts",
-    "April",
-    "Maj",
-    "Juni",
-    "Juli",
-    "August",
-    "September",
-    "Oktober",
-    "November",
-    "December"
+    "januar",
+    "februar",
+    "marts",
+    "april",
+    "maj",
+    "juni",
+    "juli",
+    "august",
+    "september",
+    "oktober",
+    "november",
+    "december"
     ]
     const currentMonth = months[nMonth]
     
@@ -33,7 +33,12 @@ export default function MaanedsPage() {
                 let filteredMaterialsByMonth:Material[] = []
                 
                 if (materials && currentMonth) {
-                    filteredMaterialsByMonth = materials.filter(m => m.short_description.toLowerCase().includes(currentMonth.toLowerCase()))
+                    filteredMaterialsByMonth = materials.filter(m => 
+                        m.name.toLowerCase().includes(currentMonth) || 
+                        m.short_description.toLowerCase().includes(currentMonth) ||
+                        m.categories_array.some(cat => cat.toLowerCase().includes(currentMonth)) ||
+                        m.meta_tags?.some(tag => tag.toLowerCase().includes(currentMonth))
+                    )
                     setFilteredMaterials(filteredMaterialsByMonth)
 
                     if (query && filteredMaterialsByMonth) {
