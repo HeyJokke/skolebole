@@ -1,26 +1,26 @@
 'use client'
 
 import React from 'react'
-import { getShownMaterials } from '../database/queries'
+import { getAllMaterials } from '../database/queries'
 import type { Material } from '@/lib/types'
 
 type MaterialsContextType = {
   materials: Material[] | null
   error: string | null
   loading: boolean
-  refreshMaterials: () => Promise<void>
+  refreshAdminMaterials: () => Promise<void>
 }
 
-const MaterialsContext = React.createContext<MaterialsContextType | null>(null)
+const MaterialsContextAdmin = React.createContext<MaterialsContextType | null>(null)
 
-export function MaterialsProvider({ children }: { children: React.ReactNode }) {
+export function MaterialsProviderAdmin({ children }: { children: React.ReactNode }) {
   const [materials, setMaterials] = React.useState<Material[] | null>(null)
   const [error, setError] = React.useState<string | null>(null)
   const [loading, setLoading] = React.useState(true)
 
   async function fetchData() {
       try {
-          const {data, error} = await getShownMaterials()
+          const {data, error} = await getAllMaterials()
   
           if (error) {
               throw new Error(error)
@@ -40,22 +40,22 @@ export function MaterialsProvider({ children }: { children: React.ReactNode }) {
     }, [])
     
     return (
-        <MaterialsContext.Provider value={{
+        <MaterialsContextAdmin.Provider value={{
             materials, 
             error, 
             loading, 
-            refreshMaterials: fetchData
+            refreshAdminMaterials: fetchData
         }}>
             {children}
-        </MaterialsContext.Provider>
+        </MaterialsContextAdmin.Provider>
     )
 }
 
-export function useMaterials() {
-    const context = React.useContext(MaterialsContext)
+export function useAdminMaterials() {
+    const context = React.useContext(MaterialsContextAdmin)
 
     if (!context) {
-        throw new Error('useMaterials must be used within a MaterialsProvider')
+        throw new Error('useAdminMaterials must be used within a MaterialsProvider')
     }
 
     return context

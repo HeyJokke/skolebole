@@ -2,7 +2,7 @@ import { supabase } from '@/lib/database/supabaseClient'
 import type {Material, MaterialResponse} from '@/lib/types'
 import { uploadFileToBucket, removeFileFromBucket, getMaterialImageUrl, getMaterialDownloadUrl } from '@/lib/database/client'
 
-export async function insertMaterial(name:FormDataEntryValue, shortdesc:FormDataEntryValue, cats:FormDataEntryValue, tags:FormDataEntryValue | null, longdesc:FormDataEntryValue, image: {image_path:string, image_name:string}, pdf: {pdf_path:string, pdf_name:string}):Promise<MaterialResponse> {    
+export async function insertMaterial(name:FormDataEntryValue, shortdesc:FormDataEntryValue, cats:FormDataEntryValue, tags:FormDataEntryValue | null, longdesc:FormDataEntryValue, showOnPage:boolean, image: {image_path:string, image_name:string}, pdf: {pdf_path:string, pdf_name:string}):Promise<MaterialResponse> {    
     try {
         // Insert material with image url and pdf download url
         const { data, error } = await supabase.from('materialer')
@@ -13,6 +13,7 @@ export async function insertMaterial(name:FormDataEntryValue, shortdesc:FormData
                     categories_array: cats.toString().split(' '), 
                     meta_tags: tags ? tags.toString().split(' ') : null, 
                     long_description: longdesc, 
+                    showOnPage: showOnPage,
                     image_path: image.image_path,
                     pdf_path: pdf.pdf_path,
                     image_name: image.image_name,
@@ -72,12 +73,13 @@ export async function incrementDownload(m:Material) {
     }
 }
 
-export async function updateMaterialText(formData:FormData, material:Material) {
+export async function updateMaterial(formData:FormData, material:Material) {
     const name = formData.get('input-name') as FormDataEntryValue
     const shortDesc = formData.get('input-shortdesc') as FormDataEntryValue
     const categories = formData.get('input-cats') as FormDataEntryValue
     const tags = formData.get('input-tags') as FormDataEntryValue
     const longDesc = formData.get('input-longdesc') as FormDataEntryValue
+    const showOnPage = formData.get('checkbox-show') !== null
     
     try {
         const {data, error} = await supabase
@@ -88,6 +90,7 @@ export async function updateMaterialText(formData:FormData, material:Material) {
                 categories_array: categories.toString().split(' '),
                 meta_tags: tags ? tags.toString().split(' ') : null,
                 long_description: longDesc,
+                showOnPage: showOnPage
             })
             .eq('id', material.id)
             .select()

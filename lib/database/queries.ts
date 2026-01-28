@@ -1,6 +1,20 @@
 import { supabase } from '@/lib/database/supabaseClient'
 import type {Material, MaterialsResponse} from '@/lib/types'
 
+export async function getShownMaterials():Promise<MaterialsResponse> {
+    try {
+        const {data, error} = await supabase.from("materialer").select("*").eq('showOnPage', 'true').order('created_at', {ascending: false,})
+    
+        if (error) throw new Error(error.message)
+
+        return {data: data as Material[], error: null}
+
+    } catch(error) {
+        console.error(`Error fetching from db: `, error)
+        return {data: null, error: (error as Error).message ?? 'Unknown error'}
+    }
+}
+
 export async function getAllMaterials():Promise<MaterialsResponse> {
     try {
         const {data, error} = await supabase.from("materialer").select("*").order('created_at', {ascending: false,})

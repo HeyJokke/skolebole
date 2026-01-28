@@ -10,7 +10,8 @@ export type Material = {
     pdf_name: string
     categories_array: string[]
     meta_tags: string[] | null
-    nDownloads: number
+    nDownloads: number,
+    showOnPage: boolean
 }
 
 export type MaterialsResponse = {

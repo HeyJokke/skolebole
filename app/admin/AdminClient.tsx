@@ -3,17 +3,19 @@ import MaterialCard from "@/lib/components/materialCard"
 import type { Material } from '@/lib/types'
 import React, { FormEvent } from 'react'
 import { insertMaterialAction } from "./action"
-import {useMaterials} from "@/lib/context/MaterialsProvider"
 import TableMaterials from '@/lib/components/tableMaterials'
 import { insertMaterialStorage, removeFileFromBucket } from '@/lib/database/client'
+import { useAdminMaterials } from "@/lib/context/MaterialsProviderAdmin"
+import { useMaterials } from "@/lib/context/MaterialsProvider"
 
 export default function AdminClient() {
-    const {materials, refreshMaterials} = useMaterials()
+    const {materials, refreshAdminMaterials} = useAdminMaterials()
+    const {refreshMaterials} = useMaterials()
+    const [downloads, setDownloads] = React.useState<number>(0)
     const [material, setMaterial] = React.useState<Material | null>(null)
     const [error, setError] = React.useState<string | null>(null)
-    const [loading, setLoading] = React.useState<boolean>(false)
-    const [downloads, setDownloads] = React.useState<number | null>(0)
-
+    const [loading, setLoading] = React.useState(true)
+    
     const basicMaterial:Material = {
         id: 1, 
         created_at: new Date, 
@@ -26,9 +28,18 @@ export default function AdminClient() {
         pdf_name: "", 
         categories_array: ["Kategori 1", "Kategori 2"], 
         meta_tags: [],
-        nDownloads: 0
+        nDownloads: 0,
+        showOnPage: true
     }
     
+    React.useEffect(() => {
+        if (materials) {
+            const totalDownloads = materials.reduce((sum, m) => sum + m.nDownloads, 0)
+            setLoading(false)
+            setDownloads(totalDownloads)
+        }
+    }, [materials])
+
     async function uploadMaterial(e:FormEvent<HTMLFormElement>) {
         e.preventDefault()
         setLoading(true)
@@ -43,7 +54,8 @@ export default function AdminClient() {
                 shortDesc: formData.get('input-shortdesc') as string,
                 cats: formData.get('input-cats') as string,
                 tags: formData.get('input-tags') as string | null,
-                longdesc: formData.get('input-longdesc') as string
+                longdesc: formData.get('input-longdesc') as string,
+                showOnPage: formData.get('checkbox-show') !== null
             }
 
             const {data, error} = await insertMaterialAction(payload, storageData.image, storageData.pdf)
@@ -51,6 +63,7 @@ export default function AdminClient() {
             if (!error) {
                 setMaterial(data)
                 setError(null)
+                refreshAdminMaterials()
                 refreshMaterials()
                 form.reset()
             } else {
@@ -67,13 +80,6 @@ export default function AdminClient() {
         setLoading(false)
     }
 
-    React.useEffect(() => {
-        if (materials) {
-            const totalDownloads = materials.reduce((sum, m) => sum + m.nDownloads, 0)
-            setDownloads(totalDownloads)
-        }
-    }, [materials])
-
     return (
         <main>
             <div className="block lg:flex bg-white/90 rounded-lg shadow-xl p-8">
@@ -83,6 +89,10 @@ export default function AdminClient() {
                     <input className="rounded-md bg-slate-200 font-semibold mb-3 py-1 px-3 w-full lg:w-100" type="text" placeholder="Kategorier" name="input-cats"  required /><br/>
                     <input className="rounded-md bg-slate-200 font-semibold mb-3 py-1 px-3 w-full lg:w-100" type="text" placeholder="Skjulte tags" name="input-tags" /><br/>
                     <textarea className="rounded-md bg-slate-200 font-semibold mb-3 py-1 px-3 resize-none w-full lg:w-100 h-100" placeholder="Lang beskrivelse (1800)" name="input-longdesc" maxLength={1800} required></textarea><br/>
+                    <div className="flex mb-3">
+                        <label htmlFor="checkbox-show" className="font-semibold mr-2">Vis på siden</label>
+                        <input name="checkbox-show" id="checkbox-show" type="checkbox" defaultChecked className="rounded-md bg-slate-200 font-semibold"/>
+                    </div>
                     <label className="font-semibold" htmlFor="input-pdf">Upload PDF: </label>
                     <input 
                         className="  
@@ -91,7 +101,7 @@ export default function AdminClient() {
                         file:border-0 file:text-sm file:font-semibold
                         file:bg-pink-100 file:text-pink-700
                         hover:file:bg-pink-200 hover:file:cursor-pointer hover:cursor-pointer" 
-                        type="file" multiple={false} name="input-pdf" accept=".pdf" required /><br/>
+                        type="file" multiple={false} name="input-pdf" id="input-pdf" accept=".pdf" required /><br/>
                     <label className="font-semibold" htmlFor="input-img">Upload billede: </label>
                     <input 
                         className="  
@@ -100,7 +110,7 @@ export default function AdminClient() {
                         file:border-0 file:text-sm file:font-semibold
                         file:bg-blue-100 file:text-blue-700
                         hover:file:bg-blue-200 hover:file:cursor-pointer hover:cursor-pointer" 
-                        type="file" multiple={false} name="input-img" accept="image/*" required /><br/>
+                        type="file" multiple={false} name="input-img" id="input-img" accept="image/*" required /><br/>
                     <div className="flex w-full justify-end pr-5">
                         <button className="bg-green-200 rounded-md px-5 py-2 w-25 hover:bg-green-300 text-green-800 font-semibold hover:cursor-pointer disabled:bg-gray-100 disabled:text-gray-800 disabled:cursor-not-allowed" disabled={loading} type="submit">{loading ? "..." : "Upload"}</button>
                     </div>

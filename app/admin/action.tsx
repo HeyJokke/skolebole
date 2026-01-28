@@ -10,6 +10,7 @@ type FormPayload = {
     cats: string,
     tags: string | null,
     longdesc: string,
+    showOnPage: boolean
 }
 
 export async function insertMaterialAction(payload: FormPayload, image: {image_path:string, image_name:string}, pdf: {pdf_path:string, pdf_name:string}):Promise<{data: Material | null, error: string | null}> {
@@ -17,7 +18,7 @@ export async function insertMaterialAction(payload: FormPayload, image: {image_p
         throw new Error("Unauthorized")
     }
     
-    const {data , error} = await insertMaterial(payload.name, payload.shortDesc, payload.cats, payload.tags, payload.longdesc, image, pdf)
+    const {data , error} = await insertMaterial(payload.name, payload.shortDesc, payload.cats, payload.tags, payload.longdesc, payload.showOnPage, image, pdf)
     return {data, error}
 }
 

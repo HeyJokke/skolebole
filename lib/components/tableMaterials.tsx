@@ -13,12 +13,13 @@ import {
   Chip,
   Tooltip
 } from "@heroui/react";
-import {useMaterials} from "@/lib/context/MaterialsProvider"
-import { removeRowFromDatabase, updateMaterialText, updateImage, updatePDF } from "../database/server";
+import { removeRowFromDatabase, updateMaterial, updateImage, updatePDF } from "../database/server";
 import { removeFileFromBucket } from "../database/client";
 import type {Material} from '@/lib/types'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useAdminMaterials } from "../context/MaterialsProviderAdmin";
+import { useMaterials } from "../context/MaterialsProvider";
 
 export type IconSvgProps = SVGProps<SVGSVGElement> & {
   size?: number;
@@ -116,7 +117,6 @@ export const EditIcon = (props: IconSvgProps) => {
 };
 
 export default function TableMaterials() {
-    const {materials, refreshMaterials} = useMaterials()
     const [open, setOpen] = React.useState<boolean>(false)
     const [selectedMaterial, setSelectedMaterial] = React.useState<Material>()
     const [selectedMaterialImage, setSelectedMaterialImage] = React.useState<string | null>(null)
@@ -128,6 +128,8 @@ export default function TableMaterials() {
     const [pdfSuccess, setPdfSuccess] = React.useState<string | null>(null)
     const [materialSuccess, setMaterialSuccess] = React.useState<string | null>(null)
     const [promptDelete, setPromptDelete] = React.useState<boolean>(false)
+    const {materials, error, loading, refreshAdminMaterials} = useAdminMaterials()
+    const {refreshMaterials} = useMaterials()
 
     function setMaterial(id:number) {
       if (materials) {
@@ -150,7 +152,8 @@ export default function TableMaterials() {
                     categories: m.categories_array,
                     image_name: m.image_name,
                     pdf_name: m.pdf_name,
-                    nDownloads: m.nDownloads
+                    nDownloads: m.nDownloads,
+                    showOnPage: m.showOnPage
                 }
             })
 
@@ -241,6 +244,7 @@ export default function TableMaterials() {
             const categories = formData.get('input-cats') as FormDataEntryValue
             const tags = formData.get('input-tags') as FormDataEntryValue
             const longDesc = formData.get('input-longdesc') as FormDataEntryValue
+            const showOnPage = formData.get('checkbox-show') !== null
 
             if (selectedMaterial) {
               if (
@@ -248,16 +252,17 @@ export default function TableMaterials() {
                 shortDesc != selectedMaterial.short_description ||
                 categories != selectedMaterial.categories_array.join(' ') ||
                 tags != (selectedMaterial.meta_tags?.join(' ') ?? "") ||
-                longDesc != selectedMaterial.long_description
+                longDesc != selectedMaterial.long_description ||
+                showOnPage != !showOnPage
               ) {
-                const {data, error} = await updateMaterialText(formData, selectedMaterial)
+                const {data, error} = await updateMaterial(formData, selectedMaterial)
                 setMaterialError(null)
 
                 if (error) {
-                  setMaterialError(`Materialets tekster fejlede ved opdatering - ${error}`)
+                  setMaterialError(`Materialet fejlede ved opdatering - ${error}`)
                 }
                 if (data){
-                  setMaterialSuccess(`🎉 Materialets tekster blev opdateret!`)
+                  setMaterialSuccess(`🎉 Materialet er blevet opdateret!`)
                   setSelectedMaterial(data[0])
                 }
               }
@@ -290,8 +295,8 @@ export default function TableMaterials() {
               }
             }
 
+            refreshAdminMaterials()
             refreshMaterials()
-            console.log("Refreshed materials")
           }
       
         function pdfRedirect(pdf_path:string) {
@@ -302,6 +307,7 @@ export default function TableMaterials() {
           await removeFileFromBucket('materials-images', m.image_name)
           await removeFileFromBucket('materials-pdfs', m.pdf_name)
           await removeRowFromDatabase('materialer', m.id)
+          refreshAdminMaterials()
           refreshMaterials()
         }
         
@@ -333,6 +339,10 @@ export default function TableMaterials() {
                     <input className="rounded-md bg-slate-200 font-semibold mb-3 py-1 px-3 w-full lg:w-100" type="text" placeholder="Kategorier" name="input-cats" defaultValue={selectedMaterial?.categories_array.join(' ')}  required /><br/>
                     <input className="rounded-md bg-slate-200 font-semibold mb-3 py-1 px-3 w-full lg:w-100" type="text" placeholder="Skjulte tags" name="input-tags" defaultValue={selectedMaterial?.meta_tags?.join(' ')} /><br/>
                     <textarea className="rounded-md bg-slate-200 font-semibold mb-3 py-1 px-3 resize-none w-full lg:w-100 h-50 md:h-100" placeholder="Lang beskrivelse (1800)" name="input-longdesc" defaultValue={selectedMaterial?.long_description} maxLength={1800} required></textarea><br/>
+                    <div className="flex mb-3">
+                        <label htmlFor="checkbox-show" className="font-semibold mr-2">Vis på siden</label>
+                        <input name="checkbox-show" id="checkbox-show" defaultChecked={selectedMaterial?.showOnPage} className="rounded-md bg-slate-200 font-semibold" type="checkbox" />
+                    </div>
                     <label className="font-semibold" htmlFor="input-pdf">Upload ny PDF: </label>
                     <input 
                         className="  
@@ -341,7 +351,7 @@ export default function TableMaterials() {
                         file:border-0 file:text-sm file:font-semibold
                         file:bg-pink-100 file:text-pink-700
                         hover:file:bg-pink-200 hover:file:cursor-pointer hover:cursor-pointer" 
-                        type="file" multiple={false} name="input-pdf" accept=".pdf" /><br/>
+                        type="file" multiple={false} name="input-pdf" id="input-pdf" accept=".pdf" /><br/>
                     <label className="font-semibold" htmlFor="input-img">Upload nyt billede: </label>
                     <input 
                         className="  
@@ -350,7 +360,7 @@ export default function TableMaterials() {
                         file:border-0 file:text-sm file:font-semibold
                         file:bg-blue-100 file:text-blue-700
                         hover:file:bg-blue-200 hover:file:cursor-pointer hover:cursor-pointer" 
-                        type="file" multiple={false} name="input-img" accept="image/*" /><br/>
+                        type="file" multiple={false} name="input-img" id="input-img" accept="image/*" /><br/>
                     
                     <div className="flex justify-between w-full">
                         <button 
