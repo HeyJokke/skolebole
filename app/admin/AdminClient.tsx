@@ -7,6 +7,13 @@ import TableMaterials from '@/lib/components/tableMaterials'
 import { insertMaterialStorage, removeFileFromBucket } from '@/lib/database/client'
 import { useAdminMaterials } from "@/lib/context/MaterialsProviderAdmin"
 import { useMaterials } from "@/lib/context/MaterialsProvider"
+import { FaSearch } from "react-icons/fa"
+
+const Spinner = () => (
+  <div className="flex m-auto justify-center py-12">
+      <div className="animate-spin rounded-full h-12 w-12 border-b-5 border-blue-500"></div>
+  </div>
+)
 
 export default function AdminClient() {
     const {materials, refreshAdminMaterials} = useAdminMaterials()
@@ -15,8 +22,9 @@ export default function AdminClient() {
     const [material, setMaterial] = React.useState<Material | null>(null)
     const [error, setError] = React.useState<string | null>(null)
     const [loading, setLoading] = React.useState(true)
+    const [inputValue, setInputValue] = React.useState<string>('')
     
-    const basicMaterial:Material = {
+    const previewMaterial:Material = {
         id: 1, 
         created_at: new Date, 
         name: "Navn", 
@@ -80,6 +88,14 @@ export default function AdminClient() {
         setLoading(false)
     }
 
+    function filterMaterialsBySearch(e: React.FormEvent<HTMLFormElement>) {
+        e.preventDefault()
+        const formData = new FormData(e.currentTarget)
+        const searchValue = formData.get('search') as string
+        
+        setInputValue(searchValue)
+    }
+
     return (
         <main>
             <div className="block lg:flex bg-white/90 rounded-lg shadow-xl p-8">
@@ -121,15 +137,30 @@ export default function AdminClient() {
                 <div className="flex w-1/2 w-60 m-auto">
                     <div className="m-auto">
                         {error && <p className="text-white bg-red-500 rounded-md p-2 mb-5"> {error} </p>}
-                        {!material && <MaterialCard m={basicMaterial} /> }
+                        {!material && <MaterialCard m={previewMaterial} /> }
                         {material && <MaterialCard m={material} /> }
                     </div>
                 </div>
             </div>
 
             <div className="border-1 border-gray-300 bg-white/90 rounded-lg mt-10">
-                <p className="font-bold text-xl p-[16] pb-0">Downloads Totalt: {downloads}</p>
-                <TableMaterials />
+                <div className="block lg:flex justify-between text-center">
+                    <form onSubmit={filterMaterialsBySearch}>
+                        <div className="flex w-[250] m-auto lg:m-0 lg:h-[50] lg:text-base text-xl h-fit p-[16]">
+                            <button className="cursor-pointer z-50" type="submit">
+                                <FaSearch className="text-slate-500" />
+                            </button>
+                            <input
+                                className="ml-[-20] outline-none w-full text-center md:text-left md:ml-2"  
+                                placeholder="Søg..."
+                                defaultValue={inputValue}
+                                name="search"
+                            />
+                        </div>
+                    </form>
+                    <p className="font-bold text-xl p-[16] pb-0">Downloads Totalt: {downloads}</p>
+                </div>
+                {loading ? <Spinner /> : <TableMaterials query={inputValue}/>}
             </div>
         </main>
     )

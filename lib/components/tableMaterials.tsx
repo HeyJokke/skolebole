@@ -116,7 +116,11 @@ export const EditIcon = (props: IconSvgProps) => {
   );
 };
 
-export default function TableMaterials() {
+type TableMaterialsParams = {
+  query: string | null
+}
+
+export default function TableMaterials({query}:TableMaterialsParams) {
     const [open, setOpen] = React.useState<boolean>(false)
     const [selectedMaterial, setSelectedMaterial] = React.useState<Material>()
     const [selectedMaterialImage, setSelectedMaterialImage] = React.useState<string | null>(null)
@@ -128,8 +132,9 @@ export default function TableMaterials() {
     const [pdfSuccess, setPdfSuccess] = React.useState<string | null>(null)
     const [materialSuccess, setMaterialSuccess] = React.useState<string | null>(null)
     const [promptDelete, setPromptDelete] = React.useState<boolean>(false)
-    const {materials, error, loading, refreshAdminMaterials} = useAdminMaterials()
+    const {materials, refreshAdminMaterials} = useAdminMaterials()
     const {refreshMaterials} = useMaterials()
+
 
     function setMaterial(id:number) {
       if (materials) {
@@ -143,19 +148,42 @@ export default function TableMaterials() {
     }
 
     if (materials) {
-        const rows = materials.map(m => {
-                return {
-                    id: m.id,
-                    created: m.created_at.toString().split('.')[0].split('T').join(' '),
-                    name: m.name,
-                    image_path: m.image_path,
-                    categories: m.categories_array,
-                    image_name: m.image_name,
-                    pdf_name: m.pdf_name,
-                    nDownloads: m.nDownloads,
-                    showOnPage: m.showOnPage
-                }
-            })
+      let rows
+      if (query) {
+        rows = materials.filter(
+          m => 
+            m.name.toLowerCase().includes(query.toLowerCase()) ||
+            m.short_description.toLowerCase().includes(query.toLowerCase()) ||
+            m.categories_array.some(cat => cat.toLowerCase().includes(query.toLowerCase())) ||
+            m.meta_tags?.some(tag => tag.toLowerCase().includes(query.toLowerCase()))
+        ).map(m => {
+            return {
+                id: m.id,
+                created: m.created_at.toString().split('.')[0].split('T').join(' '),
+                name: m.name,
+                image_path: m.image_path,
+                categories: m.categories_array,
+                image_name: m.image_name,
+                pdf_name: m.pdf_name,
+                nDownloads: m.nDownloads,
+                showOnPage: m.showOnPage
+            }
+        })
+      } else {
+        rows = materials.map(m => {
+            return {
+                id: m.id,
+                created: m.created_at.toString().split('.')[0].split('T').join(' '),
+                name: m.name,
+                image_path: m.image_path,
+                categories: m.categories_array,
+                image_name: m.image_name,
+                pdf_name: m.pdf_name,
+                nDownloads: m.nDownloads,
+                showOnPage: m.showOnPage
+            }
+        })
+      }
 
         const categoryClasses = {
             dansk: "bg-blue-100 text-blue-700",
@@ -310,7 +338,9 @@ export default function TableMaterials() {
           refreshAdminMaterials()
           refreshMaterials()
         }
-        
+
+        if (rows.length === 0) return <h1 className="text-2xl font-bold m-[16]"> Ingen resultater... </h1>
+
         return (
           <>
             <Table className="overflow-scroll" aria-label="Table of materials">
