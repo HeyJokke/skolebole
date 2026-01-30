@@ -20,6 +20,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useAdminMaterials } from "../context/MaterialsProviderAdmin";
 import { useMaterials } from "../context/MaterialsProvider";
+import { dbName, storageImgs, storagePdfs } from "@/lib/database/supabaseClient"
 
 export type IconSvgProps = SVGProps<SVGSVGElement> & {
   size?: number;
@@ -332,9 +333,9 @@ export default function TableMaterials({query}:TableMaterialsParams) {
         }
 
         async function handleDelete(m:Material):Promise<void> {
-          await removeFileFromBucket('materials-images', m.image_name)
-          await removeFileFromBucket('materials-pdfs', m.pdf_name)
-          await removeRowFromDatabase('materialer', m.id)
+          await removeFileFromBucket(storageImgs, m.image_name)
+          await removeFileFromBucket(storagePdfs, m.pdf_name)
+          await removeRowFromDatabase(dbName, m.id)
           refreshAdminMaterials()
           refreshMaterials()
         }

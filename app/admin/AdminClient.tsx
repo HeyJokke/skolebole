@@ -8,6 +8,7 @@ import { insertMaterialStorage, removeFileFromBucket } from '@/lib/database/clie
 import { useAdminMaterials } from "@/lib/context/MaterialsProviderAdmin"
 import { useMaterials } from "@/lib/context/MaterialsProvider"
 import { FaSearch } from "react-icons/fa"
+import { storageImgs, storagePdfs } from "@/lib/database/supabaseClient"
 
 const Spinner = () => (
   <div className="flex m-auto justify-center py-12">
@@ -75,8 +76,8 @@ export default function AdminClient() {
                 refreshMaterials()
                 form.reset()
             } else {
-                removeFileFromBucket('materials-images', storageData.image.image_name)
-                removeFileFromBucket('materials-pdfs', storageData.pdf.pdf_name)
+                removeFileFromBucket(storageImgs, storageData.image.image_name)
+                removeFileFromBucket(storagePdfs, storageData.pdf.pdf_name)
                 setMaterial(null)
                 setError(error)
             }        

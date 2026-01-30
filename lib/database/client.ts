@@ -1,8 +1,8 @@
-import { supabase } from '@/lib/database/supabaseClient'
+import { supabase, storagePdfs, storageImgs } from '@/lib/database/supabaseClient'
 
 export async function getMaterialImageUrl(imageFileName:string):Promise<{data: string | null, error: Error | null}> {
     try {
-        const {data: {publicUrl}} = supabase.storage.from('materials-images').getPublicUrl(imageFileName)
+        const {data: {publicUrl}} = supabase.storage.from(storageImgs).getPublicUrl(imageFileName)
         
         const res = await fetch(publicUrl, { method: "HEAD"})
 
@@ -24,7 +24,7 @@ export async function getMaterialDownloadUrl(pdfFileName:string):Promise<{data: 
     try {
         const {data: {publicUrl}} = supabase
             .storage
-            .from('materials-pdfs')
+            .from(storagePdfs)
             .getPublicUrl(pdfFileName)
         
         const res = await fetch(publicUrl, { method: "HEAD"})
@@ -77,17 +77,17 @@ export async function insertMaterialStorage(formData:FormData):Promise<{data: {i
 
     try {
         // Upload image
-        const { error: imageUploadError } = await uploadFileToBucket('materials-images', image)
+        const { error: imageUploadError } = await uploadFileToBucket(storageImgs, image)
 
         if (imageUploadError) {
             throw new Error(imageUploadError.message)
         }
 
         // Upload pdf
-        const { error: pdfUploadError } = await uploadFileToBucket('materials-pdfs', pdf)
+        const { error: pdfUploadError } = await uploadFileToBucket(storagePdfs, pdf)
 
         if (pdfUploadError) {
-            await removeFileFromBucket('materials-images', imageName)
+            await removeFileFromBucket(storageImgs, imageName)
 
             throw new Error(pdfUploadError.message)
         }
@@ -96,8 +96,8 @@ export async function insertMaterialStorage(formData:FormData):Promise<{data: {i
         const {data: imageUrl, error: imageError} = await getMaterialImageUrl(imageName)
 
         if (imageError) {
-            await removeFileFromBucket('materials-images', imageName)
-            await removeFileFromBucket('materials-pdfs', pdfName)
+            await removeFileFromBucket(storageImgs, imageName)
+            await removeFileFromBucket(storagePdfs, pdfName)
 
             throw new Error(imageError.message)
         }
@@ -106,8 +106,8 @@ export async function insertMaterialStorage(formData:FormData):Promise<{data: {i
         const {data: pdfDownloadUrl, error: pdfError} = await getMaterialDownloadUrl(pdfName)
 
         if (pdfError) {
-            await removeFileFromBucket('materials-images', imageName)
-            await removeFileFromBucket('materials-pdfs', pdfName)
+            await removeFileFromBucket(storageImgs, imageName)
+            await removeFileFromBucket(storagePdfs, pdfName)
 
             throw new Error(pdfError.message)
         }

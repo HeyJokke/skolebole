@@ -1,9 +1,9 @@
-import { supabase } from '@/lib/database/supabaseClient'
-import type {Material, MaterialsResponse} from '@/lib/types'
+import { supabase, dbName } from '@/lib/database/supabaseClient'
+import type { Material, MaterialsResponse } from '@/lib/types'
 
 export async function getShownMaterials():Promise<MaterialsResponse> {
     try {
-        const {data, error} = await supabase.from("materialer").select("*").eq('showOnPage', 'true').order('created_at', {ascending: false,})
+        const {data, error} = await supabase.from(dbName).select("*").eq('showOnPage', 'true').order('created_at', {ascending: false,})
     
         if (error) throw new Error(error.message)
 
@@ -17,7 +17,7 @@ export async function getShownMaterials():Promise<MaterialsResponse> {
 
 export async function getAllMaterials():Promise<MaterialsResponse> {
     try {
-        const {data, error} = await supabase.from("materialer").select("*").order('created_at', {ascending: false,})
+        const {data, error} = await supabase.from(dbName).select("*").order('created_at', {ascending: false,})
     
         if (error) throw new Error(error.message)
 
@@ -31,7 +31,7 @@ export async function getAllMaterials():Promise<MaterialsResponse> {
 
 export async function filterMaterials(name: string, description: string, category: string):Promise<MaterialsResponse> {
     try {
-        const { data, error } = await supabase.from('materialer')
+        const { data, error } = await supabase.from(dbName)
             .select('*')
             .ilike("name", `%${name}%`)
             .ilike("description", `%${description}%`)
@@ -52,7 +52,7 @@ export async function filterMaterials(name: string, description: string, categor
 
 export async function searchMaterials(search: string):Promise<MaterialsResponse> {
     try {
-        const { data, error } = await supabase.from('materialer')
+        const { data, error } = await supabase.from(dbName)
             .select('*')
             .ilike("name", `%${search}%`)
         

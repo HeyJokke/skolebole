@@ -1,11 +1,11 @@
-import { supabase } from '@/lib/database/supabaseClient'
+import { supabase, dbName, storageImgs, storagePdfs } from '@/lib/database/supabaseClient'
 import type {Material, MaterialResponse} from '@/lib/types'
 import { uploadFileToBucket, removeFileFromBucket, getMaterialImageUrl, getMaterialDownloadUrl } from '@/lib/database/client'
 
 export async function insertMaterial(name:FormDataEntryValue, shortdesc:FormDataEntryValue, cats:FormDataEntryValue, tags:FormDataEntryValue | null, longdesc:FormDataEntryValue, showOnPage:boolean, image: {image_path:string, image_name:string}, pdf: {pdf_path:string, pdf_name:string}):Promise<MaterialResponse> {    
     try {
         // Insert material with image url and pdf download url
-        const { data, error } = await supabase.from('materialer')
+        const { data, error } = await supabase.from(dbName)
             .insert(
                 {
                     name: name, 
@@ -47,7 +47,7 @@ export async function incrementDownload(m:Material) {
     try {
 
         const { data, error: selectDownloadsError } = await supabase
-            .from('materialer')
+            .from(dbName)
             .select('nDownloads')
             .eq('id', m.id)
 
@@ -58,7 +58,7 @@ export async function incrementDownload(m:Material) {
         const downloadCount = data[0].nDownloads
 
         const { error: updateDownloadsError } = await supabase
-            .from('materialer')
+            .from(dbName)
             .update({ nDownloads: downloadCount + 1})
             .eq('id', m.id)
 
@@ -83,7 +83,7 @@ export async function updateMaterial(formData:FormData, material:Material) {
     
     try {
         const {data, error} = await supabase
-            .from('materialer')
+            .from(dbName)
             .update({
                 name: name,
                 short_description: shortDesc,
@@ -112,7 +112,7 @@ export async function updateImage(formData:FormData, material:Material) {
 
     try {
         // Upload image
-        const { error: imageUploadError } = await uploadFileToBucket('materials-images', imageFile)
+        const { error: imageUploadError } = await uploadFileToBucket(storageImgs, imageFile)
     
         if (imageUploadError) {
             throw new Error(imageUploadError.message)
@@ -122,13 +122,13 @@ export async function updateImage(formData:FormData, material:Material) {
         const {data: imageUrl, error: imageError} = await getMaterialImageUrl(imageFile.name)
     
         if (imageError) {
-            await removeFileFromBucket('materials-images', imageFile.name)
+            await removeFileFromBucket(storageImgs, imageFile.name)
     
             throw new Error(imageError.message)
         }
     
         const {error} = await supabase
-            .from('materialer')
+            .from(dbName)
             .update({
                 image_path: imageUrl,
                 image_name: imageFile.name,
@@ -136,12 +136,12 @@ export async function updateImage(formData:FormData, material:Material) {
             .eq('id', material.id)
     
         if (error) {
-            await removeFileFromBucket('materials-images', imageFile.name)
+            await removeFileFromBucket(storageImgs, imageFile.name)
     
             throw new Error(error.message)
         }
     
-        removeFileFromBucket('materials-images', material.image_name)
+        removeFileFromBucket(storageImgs, material.image_name)
 
         return {data: imageUrl, error: null}
     } catch(error) {
@@ -157,7 +157,7 @@ export async function updatePDF(formData:FormData, material:Material) {
 
     try {
         // Upload pdf
-        const { error: pdfUploadError } = await uploadFileToBucket('materials-pdfs', pdfFile)
+        const { error: pdfUploadError } = await uploadFileToBucket(storagePdfs, pdfFile)
 
         if (pdfUploadError) {
             throw new Error(pdfUploadError.message)
@@ -167,13 +167,13 @@ export async function updatePDF(formData:FormData, material:Material) {
         const {data: pdfDownloadUrl, error: pdfError} = await getMaterialDownloadUrl(pdfFile.name)
 
         if (pdfError) {
-            await removeFileFromBucket('materials-pdfs', pdfFile.name)
+            await removeFileFromBucket(storagePdfs, pdfFile.name)
 
             throw new Error(pdfError.message)
         }
 
         const {error} = await supabase
-            .from('materialer')
+            .from(dbName)
             .update({
                 pdf_path: pdfDownloadUrl,
                 pdf_name: pdfFile.name
@@ -181,12 +181,12 @@ export async function updatePDF(formData:FormData, material:Material) {
             .eq('id', material.id)
 
         if (error) {
-            await removeFileFromBucket('materials-pdfs', pdfFile.name)
+            await removeFileFromBucket(storagePdfs, pdfFile.name)
 
             throw new Error(error.message)
         }
 
-        await removeFileFromBucket('materials-pdfs', material.pdf_name)
+        await removeFileFromBucket(storagePdfs, material.pdf_name)
 
         return {data: pdfDownloadUrl, error: null}
 
