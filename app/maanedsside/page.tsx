@@ -50,7 +50,7 @@ export default function MaanedsPage() {
                     <PreviousPage />
                 </div>
                 <div className="w-full">
-                    <h1 className="text-4xl font-bold mb-5 font-bubblegum-sans">{currentMonth}</h1>
+                    <h1 className="text-4xl font-bold mb-5 font-bubblegum-sans">{`${currentMonth[0].toUpperCase()}${currentMonth.slice(1).toLowerCase()}`}</h1>
                     <p className="text-base/6 mb-5">
                         Her finder du en række månedsaktuelle opgaver, som passer til årstiden og det, der fylder lige nu i skolen. Materialerne er klar til print og kan bruges direkte - til morgenstart, ekstra tid, repetition eller som et lille pusterum i hverdagen. Hver måned opdateres siden med nyt indhold, så du altid har noget relevant og overskueligt lige ved hånden.
                     </p>
