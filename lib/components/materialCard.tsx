@@ -35,12 +35,12 @@ export default function MaterialCard({m}: CardProps) {
                         className="w-full h-full object-cover"
                     />
                 </div>
-                <div className="p-4 flex flex-col min-h-[236]">
+                <div className="p-4 flex flex-col min-h-[180] md:min-h-[236]">
                     <h3 className="text-lg font-semibold text-gray-800 mb-2 text-pretty">{m.name}</h3>
                     <div className="flex flex-col flex-grow">
                         <p className="text-sm text-gray-600 mb-3 line-clamp-2">{m.short_description[0].toUpperCase() + m.short_description.slice(1)}</p>
                         {m.categories_array && (
-                            <div className="flex flex-wrap gap-2 min-h-[56] mt-auto">
+                            <div className="hidden md:flex flex-wrap gap-2 min-h-[56] mt-auto">
                                 {m.categories_array.sort((a:string, b:string) => a.localeCompare(b)).map((cat:string) => (
                                     <span 
                                         key={cat} 
