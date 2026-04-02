@@ -7,7 +7,7 @@ import {useSearchParams, usePathname} from 'next/navigation'
 import type { Material } from '@/lib/types'
 import PreviousPage from '@/lib/components/PreviousPage'
 
-export default function SectionPageClient():React.ReactElement {
+export default function SectionPageClient({sectionDescriptions}:{sectionDescriptions: Record<string, string>}):React.ReactElement {
     const {materials, error, loading} = useMaterials()
     const [filteredMaterials, setFilteredMaterials] = React.useState<Material[] | null>(null)
     const searchParams = useSearchParams()
@@ -55,6 +55,7 @@ export default function SectionPageClient():React.ReactElement {
                 </div>
                 <div className="w-full">
                     {section && <h1 className="text-4xl font-bold mb-5 font-bubblegum-sans">{section.toLowerCase() === 'dsa' ? section.replace('oe', 'ø').replace('aa', 'å').replace('ae', 'æ').toUpperCase() : (section[0].toUpperCase() + section.slice(1)).replace('oe', 'ø').replace('aa', 'å').replace('ae', 'æ')}</h1>}
+                    {(section && sectionDescriptions[section]) && <p className="text-base/6 mb-5">{sectionDescriptions[section]}</p>}
                     <RenderMaterials materials={filteredMaterials} error={error} loading={loading} />
                 </div>
             </div>

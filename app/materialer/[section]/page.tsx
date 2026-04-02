@@ -40,5 +40,5 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default function MaterialerSectionPage() {
-    return <SectionPageClient />
+    return <SectionPageClient sectionDescriptions={sectionDescriptions}/>
 }
