@@ -4,14 +4,14 @@ import SectionPageClient from './SectionPageClient'
 const BASE_URL = 'https://www.skolebole.dk'
 
 const sectionDescriptions: Record<string, string> = {
-    dansk: 'Printklare dansk materialer til indskolingen – øv læsning, skrivning og fonologisk opmærksomhed med SkoleBole.',
-    matematik: 'Printklare matematik materialer til indskolingen – øv tal, mængder og matematisk logisk tænkning med SkoleBole.',
-    morgenopgaver: 'Printklare morgenopgaver til indskolingen – giv eleverne en rolig og struktureret start på skoledagen med SkoleBole.',
-    demoopgaver: 'Printklare demoopgaver fra SkoleBole – prøv et udvalg af vores printklare læringsmaterialer til indskolingen.',
-    boernehaveklassen: 'Printklare materialer til børnehaveklassen – intuitive og overskuelige opgaver klar til print fra SkoleBole.',
-    '1.klasse': 'Printklare materialer til 1. klasse – øv faglige færdigheder med strukturerede opgaver klar til print fra SkoleBole.',
-    dsa: 'Printklare DSA materialer til indskolingen – støttende opgaver til dansk som andetsprog fra SkoleBole.',
-    specialundervisning: 'Printklare materialer til specialundervisning – differentierede opgaver klar til print fra SkoleBole.',
+    dansk: 'Undervisningsmaterialer til dansk i indskolingen - styrk læsning, skrivning og fonologisk opmærksomhed.',
+    matematik: 'Matematikmaterialer til indskolingen - fokus på talforståelse, mængder og logisk tænkning.',
+    morgenopgaver: 'Morgenopgaver til indskolingen - små overskuelige opgaver til en rolig start på dagen med fokus på repetitioen, selvstændigt arbejde og faglig træning.',
+    demoopgaver: 'Printklare demoopgaver til indskolingen - prøv udvalgte undervisningsmaterialer fra Forlaget Kluddermor.',
+    boernehaveklassen: 'Undervisningsmaterialer til børnehaveklassen - legende og strukturerede opgaver, der styrker sproglig udvikling og skoleparathed',
+    '1.klasse': 'Undervisningsmaterialer til 1. klasse - styrk læsning, skrivning og talforståelse med strukturerede og differentierede opgaver til begynderundervisning.',
+    dsa: 'Materiale til dansk som andetsprog i indskolingen - støttende opgaver til sprogsforståelse og begrebsudvikling.',
+    specialundervisning: 'Differentierede undervisningsmaterialer til specialundervisning - strukturerede opgaver, der hjælper alle elever med at lykkes.',
 }
 
 function slugToDisplayName(section: string): string {
