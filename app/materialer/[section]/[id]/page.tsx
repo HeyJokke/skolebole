@@ -26,6 +26,16 @@ export async function generateMetadata({ params }: { params: Promise<{ section: 
         alternates: {
             canonical: `${BASE_URL}/materialer/${section}/${id}`,
         },
+        openGraph: material ? {
+        title: material.name,
+        description: material.short_description,
+        url: `${BASE_URL}/materialer/${section}/${id}`,
+        images: [
+            {
+                url: material.image_path || `${BASE_URL}/images/skolebole_fallback.png`,
+            }
+        ],
+        } : undefined
     }
 }
 
