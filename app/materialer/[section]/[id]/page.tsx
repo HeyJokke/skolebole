@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: { params: Promise<{ section: 
     const material = await getMaterialById(Number(id))
 
     return {
-        title: material ? `${material.name} - Printklare opgaver | SkoleBole` : 'Materiale ikke fundet | SkoleBole',
+        title: material ? `${material.name} | SkoleBole` : 'Materiale ikke fundet | SkoleBole',
         description: material ? `${material.short_description} – Printklart læringsmateriale til indskolingen fra SkoleBole.` : undefined,
         alternates: {
             canonical: `${BASE_URL}/materialer/${section}/${id}`,
