@@ -3,13 +3,17 @@
 import { FaArrowLeft } from "react-icons/fa";
 
 export default function PreviousPage() {
-    const hasPreviousPage = typeof window !== 'undefined' && window.history.length > 1
-
-    if (!hasPreviousPage) return null
+    function handleBack() {
+        if (document.referrer.startsWith('https://skolebole.dk') || document.referrer.startsWith('https://www.skolebole.dk')) {
+            window.history.back()
+        } else {
+            window.location.href = '/'
+        }
+    }
 
     return (
         <button 
-            onClick={() => window.history.back()} 
+            onClick={handleBack} 
             className="flex mt-3 items-center mb-5 hover:underline hover:cursor-pointer hover:scale-105">
             <FaArrowLeft className="mr-2"/> 
             Tilbage
