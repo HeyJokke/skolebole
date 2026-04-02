@@ -19,8 +19,15 @@ export default function MaterialCard({m}: CardProps) {
         sprog: "bg-gray-100 text-gray-700"
     }
 
-    if (pathName === '/' || pathName.includes('/search') || pathName.includes('/admin') || pathName === '/materialer' || pathName === '/maanedsside') {
-        pathName = '/materialer/search'
+    const primaryCategory = m.categories_array[0]
+        .toLowerCase()
+        .normalize('NFC')
+        .replace(/[ø]/gi, 'oe')
+        .replace(/[æ]/gi, 'ae')
+        .replace(/[å]/gi, 'aa')
+
+    if (pathName === '/' || pathName.includes('/search') || pathName === '/materialer' || pathName === '/maanedsside') {
+        pathName = `/materialer/${primaryCategory}`
     }
 
     return (
