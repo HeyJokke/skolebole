@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 import SectionPageClient from './SectionPageClient'
 
-const BASE_URL = 'https://www.skolebole.dk'
+const BASE_URL = 'https://skolebole.dk'
 
 const sectionDescriptions: Record<string, string> = {
     dansk: 'Undervisningsmaterialer til dansk i indskolingen - styrk læsning, skrivning og fonologisk opmærksomhed.',
