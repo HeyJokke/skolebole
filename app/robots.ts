@@ -6,11 +6,11 @@ export default function robots(): MetadataRoute.Robots {
             {
                 userAgent: '*',
                 allow: '/',
-                disallow: '/admin',
+                disallow: ['/admin', '/materialer/search/'],
             },
             {
                 userAgent: 'facebookexternalhit',
-                allow: '/',
+                allow: ['/admin', '/materialer/search/'],
             }
         ],
         sitemap: 'https://www.skolebole.dk/sitemap.xml',

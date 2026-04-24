@@ -43,7 +43,7 @@ export default async function ContactPage() {
         </div>
         <div className="text-center h-max mt-auto">
           <p>
-            <span className="italic text-sm">Forlaget Kluddermors hjemmeside er skabt af webdesigner og udvikler Joakim Ring Kryger</span>
+            <span className="italic text-sm">SkoleBoles hjemmeside er skabt af webdesigner og udvikler Joakim Ring Kryger</span>
           </p>
         </div>
       </div>
