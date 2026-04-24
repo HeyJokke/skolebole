@@ -13,6 +13,6 @@ export default function robots(): MetadataRoute.Robots {
                 allow: ['/admin', '/materialer/search/'],
             }
         ],
-        sitemap: 'https://www.skolebole.dk/sitemap.xml',
+        sitemap: 'https://skolebole.dk/sitemap.xml',
     }
 }

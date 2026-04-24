@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next'
 import { getShownMaterials } from '@/lib/database/queries'
 
-const BASE_URL = 'https://www.skolebole.dk'
+const BASE_URL = 'https://skolebole.dk'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const { data: materials } = await getShownMaterials()
