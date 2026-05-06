@@ -19,7 +19,6 @@ export default function ProductPageClient({ params }:
 ) {
     const {materials, loading} = useMaterials()
     const [m, setM] = React.useState<Material>()
-    const [materialId, setMaterialId] = React.useState<number | null>(null)
     const categoryClasses = {
         dansk: "bg-blue-100 text-blue-700",
         matematik: "bg-green-100 text-green-700",
@@ -33,15 +32,14 @@ export default function ProductPageClient({ params }:
     React.useEffect(() => {
         async function identifyMaterial() {
             const { id } = await params
-            setMaterialId(Number(id))
+            const numericId = Number(id)
 
             if (materials) {
-                setM(materials.filter((m) => m.id === materialId)[0])
+                setM(materials.find((m) => m.id === numericId))
             }
         }
-
         identifyMaterial()
-    })
+    }, [materials, params])
     
     function pdfRedirect(m:Material) {
         IncrementDownload(m)

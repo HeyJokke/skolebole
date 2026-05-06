@@ -40,7 +40,7 @@ export default function RootLayout({
 }>) {
 
   return (
-    <html lang="dk">
+    <html lang="da">
       <body className={`${geistSans.variable} ${geistMono.variable} ${bubbleGum.variable}`}>
         <MaterialsProviderAdmin>
           <MaterialsProvider>

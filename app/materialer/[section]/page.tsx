@@ -1,6 +1,8 @@
 import { Metadata } from 'next'
 import SectionPageClient from './SectionPageClient'
 
+export const dynamic = 'force-dynamic'
+
 const BASE_URL = 'https://skolebole.dk'
 
 const sectionDescriptions: Record<string, string> = {

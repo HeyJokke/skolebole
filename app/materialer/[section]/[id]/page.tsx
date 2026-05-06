@@ -3,6 +3,8 @@ import { supabase, dbName } from '@/lib/database/supabaseClient'
 import type { Material } from '@/lib/types'
 import ProductPageClient from './ProductPageClient'
 
+export const dynamic = 'force-dynamic'
+
 const BASE_URL = 'https://skolebole.dk'
 
 async function getMaterialById(id: number): Promise<Material | null> {
